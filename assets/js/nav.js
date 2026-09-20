@@ -2,12 +2,12 @@
 
 (function () {
   var BRAND = "Haoran Cao";
-  var BRAND_HREF = "/";
+  var BRAND_HREF = "/README/";
 
   var LINKS = [
-    { label: "Projects", href: "/projects/", match: "/projects" },
-    { label: "Stack",    href: "/#stack",    match: null },
-    { label: "About",    href: "/about/",    match: "/about" },
+    { label: "Projects", href: "/README/projects/", match: "/projects" },
+    { label: "Stack",    href: "/README/#stack",    match: null },
+    { label: "About",    href: "/README/about/",    match: "/about" },
     { label: "GitHub",   href: "https://github.com/CaoHaoran-Dev", match: null, external: true }
   ];
 
@@ -15,7 +15,7 @@
 
   function isActive(link) {
     if (!link.match) return false;
-    return path.indexOf(link.match) === 0;
+    return path.indexOf(link.match) !== -1;
   }
 
   var linksHTML = LINKS.map(function (l) {
