@@ -6,7 +6,7 @@ I'm a middle school student from Chengdu, Sichuan.
 I build small Mac tools to learn, one project at a time.
 Everything here is built with care, for the Mac.
 
-**[Visit my homepage →](https://CaoHaoran-Dev.github.io/仓库名/)**
+**[Visit my homepage →](https://CaoHaoran-Dev.github.io/README/)**
 
 ---
 
