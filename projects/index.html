@@ -3,35 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Haoran Cao</title>
+<title>Projects — Haoran Cao</title>
 <link rel="stylesheet" href="/README/assets/css/main.css">
 </head>
 <body>
 
-<section class="detail-hero">
-  <div class="eyebrow">About</div>
-  <h1>Haoran Cao</h1>
-  <p class="tagline">Student developer from Chengdu, Sichuan.</p>
-</section>
+<section class="section" style="border-top:none;">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Projects</div>
+      <h2>Three tools.</h2>
+      <p class="subhead">Each made for the Mac.</p>
+    </div>
 
-<div class="detail-body">
-  <a class="back-link" href="/README/">‹ Home</a>
+    <article class="project">
+      <div class="project-meta">
+        <h3>Swift Zip Manager</h3>
+        <p class="tagline">A native macOS archive manager.</p>
+      </div>
+      <div class="project-body">
+        <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files in from Finder, and pull out individual entries without unpacking everything.</p>
+        <p>Built entirely in SwiftUI. Currently in beta, heading toward 1.0.</p>
+        <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
+        <div class="links">
+          <a href="/README/projects/swift-zip-manager.html">Learn more ›</a>
+          <a href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager">Repository ›</a>
+        </div>
+      </div>
+    </article>
 
-  <p>I'm a middle school student from Chengdu. I build native macOS apps, mostly in Swift and SwiftUI.</p>
+    <article class="project">
+      <div class="project-meta">
+        <h3>RunProcess</h3>
+        <p class="tagline">A Spotlight-style command launcher.</p>
+      </div>
+      <div class="project-body">
+        <p>Lives in the menu bar and opens a floating command window on a global hotkey. Real-time output, Tab completion, persistent history, drag-and-drop file paths, and sudo handling.</p>
+        <p>Three appearance modes — None, Frosted Glass, and Liquid Glass — let it match the rest of your screen. Session mode keeps a persistent shell alive between launches.</p>
+        <p class="stack">SwiftUI · Process/Pipe · macOS 12.4+</p>
+        <div class="links">
+          <a href="/README/projects/runprocess.html">Learn more ›</a>
+          <a href="https://github.com/CaoHaoran-Dev/RunProcess">Repository ›</a>
+        </div>
+      </div>
+    </article>
 
-  <p>I started because I use a Mac every day and wanted to understand how the software on it actually works. The first project was a fix for something small; the rest followed the same pattern.</p>
-
-  <p>Most of this happens in the evenings and on weekends. I write slowly and try to ship things that feel finished.</p>
-
-  <div class="detail-specs">
-    <div class="row"><span class="label">Based in</span><span class="value">Chengdu, Sichuan</span></div>
-    <div class="row"><span class="label">Focus</span><span class="value">macOS apps</span></div>
-    <div class="row"><span class="label">Languages</span><span class="value">Swift · JavaScript</span></div>
+    <article class="project">
+      <div class="project-meta">
+        <h3>RunProcess Web Demo</h3>
+        <p class="tagline">RunProcess, in your browser.</p>
+      </div>
+      <div class="project-body">
+        <p>The same idea rebuilt in HTML, CSS, and JavaScript. A working macOS desktop — menu bar, draggable windows, Dock — with a mock shell that responds to 50+ commands.</p>
+        <p>No download, no install, entirely frontend.</p>
+        <p class="stack">HTML · CSS · JavaScript</p>
+        <div class="links">
+          <a href="/README/projects/runprocess-webdemo.html">Learn more ›</a>
+          <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Demo ›</a>
+        </div>
+      </div>
+    </article>
   </div>
-
-  <h2>Elsewhere</h2>
-  <p><a href="https://github.com/CaoHaoran-Dev">GitHub ›</a></p>
-</div>
+</section>
 
 <script src="/README/assets/js/reveal.js"></script>
 <script src="/README/assets/js/nav.js"></script>
