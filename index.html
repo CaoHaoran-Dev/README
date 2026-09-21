@@ -8,18 +8,20 @@
 </head>
 <body>
 
+<!-- Hero -->
 <section class="hero">
   <div class="eyebrow">Student Developer</div>
   <h1>Hi! I'm Haoran Cao</h1>
-  <p class="subhead">Swift &amp; SwiftUI for the Mac.</p>
-  <p class="intro">I'm a middle school student from Chengdu, Sichuan.</p>
-  <p class="intro">I build small Mac tools to learn, one project at a time.</p>
-  <p class="intro">Everything here is built with care, for the Mac.</p>
+  <p class="subhead">I build small, careful tools for the Mac.</p>
+  <p class="intro">A middle school student from Chengdu, Sichuan.</p>
+  <p class="intro">I make native macOS apps — one project at a time.</p>
   <div class="hero-links">
-    <a href="/README/projects/">See all projects ›</a>
+    <a class="btn-primary" href="/README/projects/">See Projects</a>
+    <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">GitHub ›</a>
   </div>
 </section>
 
+<!-- Featured -->
 <section class="section" id="featured">
   <div class="section-inner">
     <div class="section-header">
@@ -34,10 +36,10 @@
         <p class="tagline">A native macOS archive manager.</p>
       </div>
       <div class="project-body">
-        <p>Handles ZIP, TAR, GZ, 7Z, and RAR with encrypted archive support. Currently in beta.</p>
+        <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files from Finder, and pull out individual files without unpacking everything.</p>
         <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
         <div class="links">
-          <a href="/README/projects/swift-zip-manager.html">Details ›</a>
+          <a href="/README/projects/swift-zip-manager.html">Learn more ›</a>
           <a href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases">Download ›</a>
         </div>
       </div>
@@ -49,10 +51,10 @@
         <p class="tagline">A Spotlight-style command launcher.</p>
       </div>
       <div class="project-body">
-        <p>A lightweight menu bar app that wraps <code>/bin/zsh</code> in a polished floating window.</p>
+        <p>Lives in the menu bar and opens a floating command window on a global hotkey. Real-time output, Tab completion, persistent history, drag-and-drop file paths, and sudo handling.</p>
         <p class="stack">SwiftUI · Process/Pipe · macOS 12.4+</p>
         <div class="links">
-          <a href="/README/projects/runprocess.html">Details ›</a>
+          <a href="/README/projects/runprocess.html">Learn more ›</a>
           <a href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Download ›</a>
         </div>
       </div>
@@ -64,10 +66,10 @@
         <p class="tagline">RunProcess, in your browser.</p>
       </div>
       <div class="project-body">
-        <p>Rebuilds the macOS desktop experience in pure HTML, CSS, and JavaScript.</p>
-        <p class="stack">HTML · CSS · JavaScript · localStorage</p>
+        <p>The same idea rebuilt in HTML, CSS, and JavaScript. A working macOS desktop — menu bar, draggable windows, Dock — with a mock shell that responds to 50+ commands.</p>
+        <p class="stack">HTML · CSS · JavaScript</p>
         <div class="links">
-          <a href="/README/projects/runprocess-webdemo.html">Details ›</a>
+          <a href="/README/projects/runprocess-webdemo.html">Learn more ›</a>
           <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Demo ›</a>
         </div>
       </div>
@@ -75,23 +77,76 @@
   </div>
 </section>
 
-<section class="section alt" id="stack">
+<!-- Tech Stack -->
+<section class="section" id="stack">
   <div class="section-inner">
     <div class="section-header">
       <div class="eyebrow">Tools</div>
       <h2>Tech Stack.</h2>
     </div>
-    <div class="stack-grid">
-      <span>Swift</span>
-      <span>SwiftUI</span>
-      <span>macOS</span>
-      <span>Xcode</span>
-      <span>JavaScript</span>
-      <span>HTML5</span>
+
+    <div class="stack-group">
+      <div class="stack-group-label">Languages</div>
+      <div class="stack-grid">
+        <span>Swift</span>
+        <span>JavaScript</span>
+        <span>HTML</span>
+        <span>CSS</span>
+      </div>
+    </div>
+
+    <div class="stack-group">
+      <div class="stack-group-label">Frameworks</div>
+      <div class="stack-grid">
+        <span>SwiftUI</span>
+        <span>AppKit</span>
+        <span>CryptoKit</span>
+      </div>
+    </div>
+
+    <div class="stack-group">
+      <div class="stack-group-label">Platforms</div>
+      <div class="stack-grid">
+        <span>macOS</span>
+        <span>Xcode</span>
+        <span>Git</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- About preview -->
+<section class="section alt" id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">About</div>
+      <h2>A little more.</h2>
+    </div>
+    <div class="about-preview">
+      <p>I build for the Mac because it's what I use every day.</p>
+      <p>Most of this happens in the evenings and on weekends. I write slowly and try to ship things that feel finished.</p>
+      <p><a href="/README/about/">Read more ›</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Elsewhere -->
+<section class="section" id="elsewhere">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Elsewhere</div>
+      <h2>Find me.</h2>
+    </div>
+    <div class="elsewhere-links">
+      <a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">
+        <span class="elsewhere-name">GitHub</span>
+        <span class="elsewhere-handle">@CaoHaoran-Dev</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="/README/assets/js/reveal.js"></script>
 <script src="/README/assets/js/nav.js"></script>
 <script src="/README/assets/js/footer.js"></script>
 </body>

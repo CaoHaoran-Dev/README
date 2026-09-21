@@ -11,15 +11,13 @@
 <section class="detail-hero">
   <div class="eyebrow">Web</div>
   <h1>RunProcess Web Demo</h1>
-  <p class="tagline">The browser-based recreation of RunProcess — pure frontend, no install.</p>
+  <p class="tagline">RunProcess, in your browser.</p>
 </section>
 
 <div class="detail-body">
   <a class="back-link" href="/README/projects/">‹ All projects</a>
 
-  <p>Rebuilds the macOS desktop experience in HTML + CSS + JavaScript: menu bar with working dropdowns, draggable windows with functional traffic lights, a Dock, and customizable wallpaper.</p>
-
-  <p>Simulates 50+ commands with mock output, includes Tab completion, command history via localStorage, and bilingual support.</p>
+  <p>The same idea rebuilt in HTML, CSS, and JavaScript. No download, no install — open it and use it. Entirely frontend, no backend.</p>
 
   <div class="download-row">
     <a class="btn-primary" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">
@@ -32,11 +30,21 @@
     <div class="row"><span class="label">Platform</span><span class="value">Any modern browser</span></div>
     <div class="row"><span class="label">Stack</span><span class="value">HTML · CSS · JavaScript</span></div>
     <div class="row"><span class="label">Storage</span><span class="value">localStorage</span></div>
-    <div class="row"><span class="label">Install</span><span class="value">None</span></div>
+    <div class="row"><span class="label">Backend</span><span class="value">None</span></div>
+    <div class="row"><span class="label">License</span><span class="value">Open Source</span></div>
   </div>
 
-  <h2>What's simulated</h2>
-  <p>Menu bar with dropdowns. Draggable, resizable windows with working close / minimize / maximize traffic lights. Dock with hover magnification. Wallpaper picker. A mock shell that responds to 50+ commands with realistic output.</p>
+  <h2>The desktop</h2>
+  <p>A working macOS desktop recreated in the browser. Menu bar with functional dropdowns. Draggable and resizable windows with working close, minimize, and maximize buttons. A Dock that magnifies on hover. A wallpaper picker for changing the background.</p>
+
+  <h2>The shell</h2>
+  <p>A mock shell responds to 50+ commands with realistic output. It's not a real shell — no command actually executes — but it behaves like one for demonstration purposes. Tab completion and command history are backed by localStorage, so your session survives a page refresh.</p>
+
+  <h2>Languages</h2>
+  <p>Bilingual support, following the same pattern as the native app.</p>
+
+  <h2>Why it exists</h2>
+  <p>The native app requires macOS. The Web Demo runs anywhere. It's a way to try RunProcess without installing anything, and a way to show what the interface looks like without asking someone to open Xcode.</p>
 
   <h2>Links</h2>
   <p>
@@ -45,6 +53,7 @@
   </p>
 </div>
 
+<script src="/README/assets/js/reveal.js"></script>
 <script src="/README/assets/js/nav.js"></script>
 <script src="/README/assets/js/footer.js"></script>
 </body>
