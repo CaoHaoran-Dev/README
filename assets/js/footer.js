@@ -1,11 +1,37 @@
-/* footer.js — injects the site footer */
+/* footer.js — 页脚 + 底部语言选择
+ * 站点固定部署在 /README/ 下，本地和 GitHub Pages 通用
+ */
 
 (function () {
-  var FOOTER_TEXT = "Designed and built for the Mac. Every pixel considered.";
+  var BASE = "/README/";
+  var path = window.location.pathname;
+  var isZh = path.indexOf("/README/zh-Hans/") !== -1 ||
+             path.indexOf("/README/zh-Hans") === 0;
+
+  // 当前页面相对站点根的路径（不含语言段），如 index.html / projects/runprocess.html
+  var page = document.documentElement.getAttribute("data-page") || "index.html";
+
+  var enHref = BASE + page;
+  var zhHref = BASE + "zh-Hans/" + page;
+
+  var FOOTER_TEXT = isZh
+    ? "为 Mac 设计与构建。每一像素都经过考量。"
+    : "Designed and built for the Mac. Every pixel considered.";
+
+  var LANG_LABEL = isZh ? "语言" : "Language";
+
+  var langHTML =
+    '<div class="lang-switch-footer">' +
+      '<span class="lang-label">' + LANG_LABEL + '</span>' +
+      '<a href="' + enHref + '"' + (!isZh ? ' class="active"' : '') + '>English</a>' +
+      '<span class="lang-sep">·</span>' +
+      '<a href="' + zhHref + '"' + (isZh ? ' class="active"' : '') + '>简体中文</a>' +
+    '</div>';
 
   var footerHTML =
     '<footer class="site-footer">' +
       '<p>' + FOOTER_TEXT + '</p>' +
+      langHTML +
     '</footer>';
 
   function inject() {

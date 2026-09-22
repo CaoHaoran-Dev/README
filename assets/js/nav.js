@@ -1,42 +1,32 @@
-/* nav.js — injects the global nav with a dropdown on "Projects" */
+/* nav.js — 最简版，固定 /README/ 前缀 */
 
 (function () {
+  var BASE = "/README/";
   var BRAND = "Haoran Cao";
-  var BRAND_HREF = "/README/";
+  var path = window.location.pathname;
+  var isZh = path.indexOf("/README/zh-Hans") === 0;
+  var SITE = isZh ? (BASE + "zh-Hans/") : BASE;
+
+  var T = isZh ? {
+    projects: "项目", stack: "技术栈", about: "关于", github: "GitHub",
+    d1: "原生 macOS 压缩包管理器。",
+    d2: "Spotlight 风格命令启动器。",
+    d3: "浏览器里的 RunProcess。"
+  } : {
+    projects: "Projects", stack: "Stack", about: "About", github: "GitHub",
+    d1: "A native macOS archive manager.",
+    d2: "A Spotlight-style command launcher.",
+    d3: "RunProcess, in your browser."
+  };
 
   var PROJECTS = [
-    {
-      label: "Swift Zip Manager",
-      href: "/README/projects/swift-zip-manager.html",
-      desc: "A native macOS archive manager."
-    },
-    {
-      label: "RunProcess",
-      href: "/README/projects/runprocess.html",
-      desc: "A Spotlight-style command launcher."
-    },
-    {
-      label: "RunProcess Web Demo",
-      href: "/README/projects/runprocess-webdemo.html",
-      desc: "RunProcess, in your browser."
-    }
+    { label: "Swift Zip Manager",  href: SITE + "projects/swift-zip-manager.html",  desc: T.d1 },
+    { label: "RunProcess",         href: SITE + "projects/runprocess.html",         desc: T.d2 },
+    { label: "RunProcess Web Demo", href: SITE + "projects/runprocess-webdemo.html", desc: T.d3 }
   ];
 
-  var LINKS = [
-    { label: "Projects", href: "/README/projects/", match: "/projects", dropdown: "projects" },
-    { label: "Stack",    href: "/README/#stack",    match: null },
-    { label: "About",    href: "/README/about/",    match: "/about" },
-    { label: "GitHub",   href: "https://github.com/CaoHaoran-Dev", match: null, external: true }
-  ];
+  function isActive(seg) { return path.indexOf(seg) !== -1; }
 
-  var path = window.location.pathname;
-
-  function isActive(link) {
-    if (!link.match) return false;
-    return path.indexOf(link.match) !== -1;
-  }
-
-  // Build dropdown items
   var dropdownItemsHTML = PROJECTS.map(function (p) {
     return '<a class="nav-dropdown-item" href="' + p.href + '">' +
              '<span class="nav-dropdown-title">' + p.label + '</span>' +
@@ -44,29 +34,19 @@
            '</a>';
   }).join("");
 
-  // Build nav links
-  var linksHTML = LINKS.map(function (l) {
-    var active = isActive(l) ? ' class="active"' : "";
-    var ext = l.external ? ' target="_blank" rel="noopener"' : "";
-
-    if (l.dropdown === "projects") {
-      return '<div class="nav-item has-dropdown">' +
-               '<a href="' + l.href + '"' + active + ext + '>' + l.label + '</a>' +
-               '<div class="nav-dropdown">' +
-                 '<div class="nav-dropdown-inner">' +
-                   dropdownItemsHTML +
-                 '</div>' +
-               '</div>' +
-             '</div>';
-    }
-
-    return '<a href="' + l.href + '"' + active + ext + '>' + l.label + '</a>';
-  }).join("");
+  var linksHTML =
+    '<div class="nav-item has-dropdown">' +
+      '<a href="' + SITE + 'projects/"' + (isActive("projects") ? ' class="active"' : '') + '>' + T.projects + '</a>' +
+      '<div class="nav-dropdown"><div class="nav-dropdown-inner">' + dropdownItemsHTML + '</div></div>' +
+    '</div>' +
+    '<a href="' + SITE + '#stack">' + T.stack + '</a>' +
+    '<a href="' + SITE + 'about/"' + (isActive("about") ? ' class="active"' : '') + '>' + T.about + '</a>' +
+    '<a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">' + T.github + '</a>';
 
   var navHTML =
     '<header class="global-nav">' +
       '<div class="global-nav-inner">' +
-        '<a href="' + BRAND_HREF + '" class="brand">' + BRAND + '</a>' +
+        '<a href="' + SITE + '" class="brand">' + BRAND + '</a>' +
         '<nav>' + linksHTML + '</nav>' +
       '</div>' +
       '<div class="nav-backdrop"></div>' +

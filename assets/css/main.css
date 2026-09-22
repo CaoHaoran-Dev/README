@@ -669,3 +669,46 @@ a:hover { text-decoration: underline; }
     padding: 12px 14px;
   }
 }
+
+/* ============================================
+   Footer Language Switch
+   ============================================ */
+.site-footer .lang-switch-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.lang-switch-footer .lang-label {
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+.lang-switch-footer a {
+  font-size: 12px;
+  color: var(--secondary);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.lang-switch-footer a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.lang-switch-footer a.active {
+  opacity: 1;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.lang-switch-footer .lang-sep {
+  color: var(--divider);
+  font-size: 12px;
+}
