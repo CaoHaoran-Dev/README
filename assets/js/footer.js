@@ -14,9 +14,11 @@
   var enHref = BASE + page;
   var zhHref = BASE + "zh-Hans/" + page;
 
-  var FOOTER_TEXT = isZh
-    ? "为 Mac 设计与构建。每一像素都经过考量。"
-    : "Designed and built for the Mac. Every pixel considered.";
+var YEAR = new Date().getFullYear();
+
+var FOOTER_TEXT = isZh
+  ? "© " + YEAR + " Haoran Cao. 保留所有权利。"
+  : "© " + YEAR + " Haoran Cao. All rights reserved.";
 
   var LANG_LABEL = isZh ? "语言" : "Language";
 

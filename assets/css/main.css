@@ -12,6 +12,14 @@
   --link: #06C;
   --max-width: 980px;
   --nav-height: 48px;
+
+  /* 毛玻璃材质 — 仅顶栏使用 */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-blur: saturate(180%) blur(30px);
+  --glass-border: rgba(0, 0, 0, 0.08);
+
+  /* 下拉纯色 */
+  --dropdown-bg: #FFFFFF;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +32,11 @@
     --accent-hover: #47A9FF;
     --divider: #424245;
     --link: #2997FF;
+
+    --glass-bg: rgba(0, 0, 0, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    --dropdown-bg: #000000;
   }
 }
 
@@ -49,20 +62,16 @@ a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ============================================
-   Global Nav
+   Global Nav — 毛玻璃
    ============================================ */
 .global-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--divider);
-}
-
-@media (prefers-color-scheme: dark) {
-  .global-nav { background: rgba(0, 0, 0, 0.8); }
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .global-nav-inner {
@@ -102,8 +111,9 @@ a:hover { text-decoration: underline; }
 .global-nav nav a.active { opacity: 1; font-weight: 500; }
 
 /* ============================================
-   Nav Dropdown
+   Mega Dropdown — Apple style，纯色背景
    ============================================ */
+
 .nav-item.has-dropdown {
   position: relative;
 }
@@ -115,71 +125,120 @@ a:hover { text-decoration: underline; }
 
 .nav-dropdown {
   position: fixed;
-  top: var(--nav-height);
+  /* 上移 1px 盖住顶栏的边框 */
+  top: calc(var(--nav-height) - 1px);
+  padding-top: 1px;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--divider);
-  padding: 0;
-  max-height: 0;
+
+  background: var(--dropdown-bg);
+  border-bottom: 1px solid var(--glass-border);
+
   overflow: hidden;
+  max-height: 0;
   opacity: 0;
   pointer-events: none;
+  transform: translateY(-8px);
   transition:
-    max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   z-index: 3;
-}
-
-@media (prefers-color-scheme: dark) {
-  .nav-dropdown {
-    background: rgba(0, 0, 0, 0.9);
-  }
 }
 
 .nav-item.has-dropdown:hover .nav-dropdown,
 .nav-item.has-dropdown:focus-within .nav-dropdown {
-  max-height: 320px;
+  max-height: 520px;
   opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
 .nav-dropdown-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 24px 22px 28px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  padding: 44px 22px 52px;
 }
 
-.nav-dropdown-item {
-  display: flex;
-  flex-direction: column;
-  padding: 16px 18px;
-  border-radius: 12px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.nav-dropdown-item:hover {
-  background: var(--bg-alt);
-  text-decoration: none;
-}
-
-.nav-dropdown-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-
-.nav-dropdown-desc {
+.mega-eyebrow {
   font-size: 12px;
   color: var(--secondary);
-  line-height: 1.4;
+  opacity: 0.8;
+  margin-bottom: 14px;
+  letter-spacing: 0;
+}
+
+.mega-heading {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 34px;
+}
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 2fr;
+  gap: 60px;
+}
+
+.mega-big {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-item {
+  display: block;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.mega-item:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.mega-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.mega-col-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--secondary);
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+
+.mega-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mega-col li {
+  margin-bottom: 10px;
+}
+
+.mega-col a {
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.mega-col a:hover {
+  opacity: 1;
+  color: var(--accent);
+  text-decoration: none;
 }
 
 /* Backdrop */
@@ -187,10 +246,10 @@ a:hover { text-decoration: underline; }
   position: fixed;
   inset: 0;
   top: var(--nav-height);
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.18);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
   z-index: 1;
 }
 
@@ -403,6 +462,13 @@ a:hover { text-decoration: underline; }
   margin: 48px 0 16px;
 }
 
+.detail-body h3 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 32px 0 10px;
+}
+
 .detail-specs {
   border-top: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
@@ -579,6 +645,49 @@ a:hover { text-decoration: underline; }
 }
 
 /* ============================================
+   Footer Language Switch
+   ============================================ */
+.site-footer .lang-switch-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.lang-switch-footer .lang-label {
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+.lang-switch-footer a {
+  font-size: 12px;
+  color: var(--secondary);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.lang-switch-footer a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.lang-switch-footer a.active {
+  opacity: 1;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.lang-switch-footer .lang-sep {
+  color: var(--divider);
+  font-size: 12px;
+}
+
+/* ============================================
    Motion — Apple style
    ============================================ */
 
@@ -661,54 +770,24 @@ a:hover { text-decoration: underline; }
   .global-nav nav { gap: 18px; }
   .detail-hero h1 { font-size: 36px; }
   .detail-hero .tagline { font-size: 17px; }
+
+  /* Mega dropdown on mobile */
   .nav-dropdown-inner {
+    padding: 28px 22px 36px;
+  }
+  .mega-heading {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+  .mega-grid {
     grid-template-columns: 1fr;
-    padding: 16px 22px 20px;
+    gap: 32px;
   }
-  .nav-dropdown-item {
-    padding: 12px 14px;
+  .mega-item {
+    font-size: 20px;
   }
-}
-
-/* ============================================
-   Footer Language Switch
-   ============================================ */
-.site-footer .lang-switch-footer {
-  margin-top: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--secondary);
-}
-
-.lang-switch-footer .lang-label {
-  color: var(--secondary);
-  opacity: 0.7;
-  margin-right: 2px;
-}
-
-.lang-switch-footer a {
-  font-size: 12px;
-  color: var(--secondary);
-  opacity: 0.7;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.lang-switch-footer a:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-.lang-switch-footer a.active {
-  opacity: 1;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.lang-switch-footer .lang-sep {
-  color: var(--divider);
-  font-size: 12px;
+  .mega-cols {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
