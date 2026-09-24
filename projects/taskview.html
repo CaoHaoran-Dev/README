@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-page="projects/taskview.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskView — Projects</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<section class="detail-hero">
+  <div class="eyebrow">macOS App</div>
+  <h1>TaskView</h1>
+  <p class="tagline">A macOS process management tool.</p>
+</section>
+
+<div class="detail-body">
+  <a class="back-link" href="./">‹ All projects</a>
+
+  <p>A native macOS utility for viewing and managing running processes. Built with SwiftUI, using <code>libproc</code>, <code>sysctl</code>, and Darwin APIs to read process information directly from the system.</p>
+
+  <div class="download-row">
+    <a class="btn-primary" href="https://github.com/CaoHaoran-Dev/TaskView/releases">
+      Download for macOS
+    </a>
+    <span class="download-note">Requires macOS 12.4 or later</span>
+  </div>
+
+  <div class="detail-specs">
+    <div class="row"><span class="label">Version</span><span class="value">1.0.0-Alpha.1</span></div>
+    <div class="row"><span class="label">Status</span><span class="value">In Development</span></div>
+    <div class="row"><span class="label">Platform</span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label">Language</span><span class="value">Swift 5</span></div>
+    <div class="row"><span class="label">Framework</span><span class="value">SwiftUI · libproc · sysctl</span></div>
+    <div class="row"><span class="label">License</span><span class="value">GPL-3.0</span></div>
+  </div>
+
+  <h2>Features</h2>
+  <p>Process list with PID, name, CPU, and memory. Select a process to see details: user, start time, status, path, and parent PID. Terminate with SIGTERM, or force with SIGKILL.</p>
+  <p>Search and filter to find what you need. Auto-refresh keeps the list current.</p>
+
+  <h2>Known issues</h2>
+  <p>This is an alpha. Some user processes show a blank name, and some show Unix Time Zero as their start time. System processes like <code>kernel_task</code> and <code>WindowServer</code> cannot be terminated.</p>
+
+  <h2>Links</h2>
+  <p>
+    <a href="https://github.com/CaoHaoran-Dev/TaskView">View Repository ›</a><br>
+    <a href="https://github.com/CaoHaoran-Dev/TaskView/releases">Releases ›</a>
+  </p>
+</div>
+
+<script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/footer.js"></script>
+</body>
+</html>

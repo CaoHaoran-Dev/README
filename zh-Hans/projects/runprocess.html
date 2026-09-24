@@ -9,70 +9,53 @@
 <body>
 
 <section class="detail-hero">
-  <div class="eyebrow">macOS 应用 · Web</div>
+  <div class="eyebrow">macOS 应用</div>
   <h1>RunProcess</h1>
-  <p class="tagline">Spotlight 风格命令启动器——原生与浏览器版。</p>
+  <p class="tagline">Spotlight 风格命令启动器。</p>
 </section>
 
 <div class="detail-body">
   <a class="back-link" href="./">‹ 所有项目</a>
 
-  <p>RunProcess 最初是一个原生 macOS 应用：一个菜单栏工具，把 <code>/bin/zsh</code> 包装进一个精致的半透明浮动窗口。同样的想法随后又被重做成了浏览器版，任何人都能直接试用，无需安装。</p>
+  <p>一个菜单栏应用，把 <code>/bin/zsh</code> 包装进一个精致的半透明浮动窗口。通过全局快捷键打开，用完即走。为那些你每天都在跑的命令而做。</p>
 
   <div class="download-row">
     <a class="btn-primary" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">
       下载 macOS 版
     </a>
-    <a class="btn-secondary" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">
-      试用 Web Demo ›
-    </a>
-    <span class="download-note">macOS 12.4+ · Web Demo 无需安装</span>
+    <span class="download-note">需要 macOS 12.4 或更高版本</span>
   </div>
 
   <div class="detail-specs">
-    <div class="row"><span class="label">平台</span><span class="value">macOS 12.4+ · 任意现代浏览器</span></div>
-    <div class="row"><span class="label">框架</span><span class="value">SwiftUI · HTML / CSS / JavaScript</span></div>
+    <div class="row"><span class="label">平台</span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label">框架</span><span class="value">SwiftUI</span></div>
     <div class="row"><span class="label">快捷键</span><span class="value">全局</span></div>
     <div class="row"><span class="label">外观</span><span class="value">None · Frosted Glass · Liquid Glass</span></div>
-    <div class="row"><span class="label">许可证</span><span class="value">开源</span></div>
+    <div class="row"><span class="label">许可证</span><span class="value">MIT License</span></div>
   </div>
 
-  <h2>原生 macOS 应用</h2>
-  <p>一个菜单栏应用，通过全局快捷键打开浮动命令窗口，用完即走。为那些你每天都在跑的命令而做。</p>
-
-  <h3>运行命令</h3>
+  <h2>运行命令</h2>
   <p>输出通过 <code>Process</code> 和 <code>Pipe</code> 实时流式返回。Tab 补全按你预期的方式工作。命令历史在多次启动之间保留，昨天那条很长的 <code>ffmpeg</code> 调用只差一次按键。</p>
 
-  <h3>处理文件</h3>
+  <h2>处理文件</h2>
   <p>从 Finder 拖入文件即可插入完整路径。对任何以路径为参数的命令都很方便。</p>
 
-  <h3>Sudo</h3>
+  <h2>Sudo</h2>
   <p>当命令需要提权时，RunProcess 会提示输入密码，并在会话期间保存在内存中。绝不写入磁盘。</p>
 
-  <h3>外观</h3>
+  <h2>外观</h2>
   <p>三种模式——None、Frosted Glass 和 Liquid Glass（macOS 26+）——让窗口与屏幕其余部分保持一致。None 是平面面板。Frosted Glass 会模糊背后的内容。Liquid Glass 是更新的 macOS 材质。</p>
 
-  <h3>会话模式</h3>
+  <h2>会话模式</h2>
   <p>默认情况下，每个窗口是自己的 shell。会话模式会在多次启动之间保持一个常驻 shell——环境变量、工作目录和历史都会保留。</p>
 
   <h2>Web Demo</h2>
-  <p>同样的想法用 HTML、CSS 和 JavaScript 重建。无需下载、无需安装——打开即用。完全前端，没有后端。</p>
-
-  <h3>桌面</h3>
-  <p>在浏览器里重建的一个可用 macOS 桌面。带可用下拉菜单的菜单栏。可拖动、可调整大小，关闭、最小化、最大化按钮都能用。悬停会放大的 Dock。可更换背景的壁纸选择器。</p>
-
-  <h3>Shell</h3>
-  <p>一个模拟 shell 能对 50+ 命令返回逼真的输出。它不是真正的 shell——没有任何命令真的执行——但用于演示时，它的行为和真的一样。Tab 补全和命令历史由 localStorage 支撑，所以刷新页面后会话依然保留。</p>
-
-  <h3>为什么做它</h3>
-  <p>原生应用需要 macOS。Web Demo 可以在任何地方运行。它是一种无需安装就能试用 RunProcess 的方式，也是一种不必让人打开 Xcode 就能展示界面长相的方式。</p>
+  <p>RunProcess 也有浏览器版。<a href="runprocess-webdemo.html">了解更多 ›</a></p>
 
   <h2>链接</h2>
   <p>
     <a href="https://github.com/CaoHaoran-Dev/RunProcess">查看代码仓库 ›</a><br>
-    <a href="https://github.com/CaoHaoran-Dev/RunProcess/releases">发布版本 ›</a><br>
-    <a href="https://github.com/CaoHaoran-Dev/RunProcess-WebDemo">Web Demo 代码仓库 ›</a><br>
-    <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">试用 Web Demo ›</a>
+    <a href="https://github.com/CaoHaoran-Dev/RunProcess/releases">发布版本 ›</a>
   </p>
 </div>
 

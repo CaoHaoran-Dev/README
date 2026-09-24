@@ -1,5 +1,6 @@
 /* nav.js — 全局导航
- * 下拉：苹果官网风，左侧大标题列 + 右侧链接列
+ * 左侧大字：已发布项目
+ * 右侧小字：开发中 / 了解更多 / 源码
  * 站点固定部署在 /README/ 下
  */
 
@@ -14,12 +15,15 @@
     nav: { projects: "项目", stack: "技术栈", about: "关于", github: "GitHub" },
     eyebrow: "探索项目",
     heading: "全部项目",
-    groups: [
+    big: [
+      { label: "Swift Zip Manager", href: SITE + "projects/swift-zip-manager.html" },
+      { label: "RunProcess",        href: SITE + "projects/runprocess.html" }
+    ],
+    cols: [
       {
-        title: "项目",
+        title: "开发中",
         links: [
-          { label: "Swift Zip Manager", href: SITE + "projects/swift-zip-manager.html" },
-          { label: "RunProcess",        href: SITE + "projects/runprocess.html" }
+          { label: "TaskView", href: SITE + "projects/taskview.html" }
         ]
       },
       {
@@ -35,6 +39,7 @@
         links: [
           { label: "Swift Zip Manager 仓库", href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
           { label: "RunProcess 仓库",        href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+          { label: "TaskView 仓库",          href: "https://github.com/CaoHaoran-Dev/TaskView" },
           { label: "Web Demo 仓库",          href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
         ]
       }
@@ -43,12 +48,15 @@
     nav: { projects: "Projects", stack: "Stack", about: "About", github: "GitHub" },
     eyebrow: "Explore",
     heading: "All projects",
-    groups: [
+    big: [
+      { label: "Swift Zip Manager", href: SITE + "projects/swift-zip-manager.html" },
+      { label: "RunProcess",        href: SITE + "projects/runprocess.html" }
+    ],
+    cols: [
       {
-        title: "Projects",
+        title: "In Development",
         links: [
-          { label: "Swift Zip Manager", href: SITE + "projects/swift-zip-manager.html" },
-          { label: "RunProcess",        href: SITE + "projects/runprocess.html" }
+          { label: "TaskView", href: SITE + "projects/taskview.html" }
         ]
       },
       {
@@ -64,6 +72,7 @@
         links: [
           { label: "Swift Zip Manager Repo", href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
           { label: "RunProcess Repo",        href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+          { label: "TaskView Repo",          href: "https://github.com/CaoHaoran-Dev/TaskView" },
           { label: "Web Demo Repo",          href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
         ]
       }
@@ -72,13 +81,11 @@
 
   function isActive(seg) { return path.indexOf(seg) !== -1; }
 
-  // 左侧大标题列
-  var bigLinksHTML = T.groups[0].links.map(function (l) {
+  var bigLinksHTML = T.big.map(function (l) {
     return '<a class="mega-item" href="' + l.href + '">' + l.label + '</a>';
   }).join("");
 
-  // 右侧小字列
-  var columnsHTML = T.groups.slice(1).map(function (g) {
+  var columnsHTML = T.cols.map(function (g) {
     var items = g.links.map(function (l) {
       var ext = l.href.indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : '';
       return '<li><a href="' + l.href + '"' + ext + '>' + l.label + '</a></li>';

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page="projects/taskview.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskView — 项目</title>
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+
+<section class="detail-hero">
+  <div class="eyebrow">macOS 应用</div>
+  <h1>TaskView</h1>
+  <p class="tagline">macOS 进程管理工具。</p>
+</section>
+
+<div class="detail-body">
+  <a class="back-link" href="./">‹ 所有项目</a>
+
+  <p>一个查看和管理运行中进程的原生 macOS 工具。用 SwiftUI 构建，通过 <code>libproc</code>、<code>sysctl</code> 和 Darwin API 直接从系统读取进程信息。</p>
+
+  <div class="download-row">
+    <a class="btn-primary" href="https://github.com/CaoHaoran-Dev/TaskView/releases">
+      下载 macOS 版
+    </a>
+    <span class="download-note">需要 macOS 12.4 或更高版本</span>
+  </div>
+
+  <div class="detail-specs">
+    <div class="row"><span class="label">版本</span><span class="value">1.0.0-Alpha.1</span></div>
+    <div class="row"><span class="label">状态</span><span class="value">开发中</span></div>
+    <div class="row"><span class="label">平台</span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label">语言</span><span class="value">Swift 5</span></div>
+    <div class="row"><span class="label">框架</span><span class="value">SwiftUI · libproc · sysctl</span></div>
+    <div class="row"><span class="label">许可证</span><span class="value">GPL-3.0</span></div>
+  </div>
+
+  <h2>功能</h2>
+  <p>进程列表含 PID、名称、CPU 和内存。选中某个进程可查看详情：用户、启动时间、状态、路径和父进程 PID。可用 SIGTERM 终止，或用 SIGKILL 强制结束。</p>
+  <p>支持搜索和过滤，快速找到想要的进程。自动刷新保持列表最新。</p>
+
+  <h2>已知问题</h2>
+  <p>这还是 alpha 版。部分用户进程名称显示为空，部分启动时间显示为 Unix 零点。像 <code>kernel_task</code>、<code>WindowServer</code> 这样的系统进程无法终止。</p>
+
+  <h2>链接</h2>
+  <p>
+    <a href="https://github.com/CaoHaoran-Dev/TaskView">查看代码仓库 ›</a><br>
+    <a href="https://github.com/CaoHaoran-Dev/TaskView/releases">发布版本 ›</a>
+  </p>
+</div>
+
+<script src="../../assets/js/reveal.js"></script>
+<script src="../../assets/js/nav.js"></script>
+<script src="../../assets/js/footer.js"></script>
+</body>
+</html>
