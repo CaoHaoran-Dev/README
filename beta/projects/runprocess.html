@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-page="projects/runprocess.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RunProcess — Projects</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+
+<link rel="stylesheet" href="https://unpkg.com/glassfx/src/glass.css" />
+<script type="module">
+  import "https://unpkg.com/glassfx";
+</script>
+</head>
+<body>
+
+<section class="detail-hero">
+  <div class="eyebrow">macOS App</div>
+  <h1>RunProcess</h1>
+  <p class="tagline">A Spotlight-style command launcher.</p>
+</section>
+
+<div class="detail-body">
+  <a class="back-link" href="./">‹ All projects</a>
+
+  <p>A menu bar app that wraps <code>/bin/zsh</code> in a polished, translucent floating window. Opens on a global hotkey, disappears when you're done. Built for the commands you run every day.</p>
+
+  <div class="download-row glass glass-refract">
+    <a class="btn-primary glass glass-refract" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">
+      Download for macOS
+    </a>
+    <span class="download-note">Requires macOS 12.4 or later</span>
+  </div>
+
+  <div class="detail-specs glass glass-refract">
+    <div class="row"><span class="label">Platform</span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label">Framework</span><span class="value">SwiftUI</span></div>
+    <div class="row"><span class="label">Hotkey</span><span class="value">Global</span></div>
+    <div class="row"><span class="label">Appearance</span><span class="value">None · Frosted Glass · Liquid Glass</span></div>
+    <div class="row"><span class="label">License</span><span class="value">MIT License</span></div>
+  </div>
+
+  <h2>Running commands</h2>
+  <p>Output streams in real time through <code>Process</code> and <code>Pipe</code>. Tab completion works the way you expect. Command history persists across launches, so yesterday's long <code>ffmpeg</code> invocation is one keystroke away.</p>
+
+  <h2>Working with files</h2>
+  <p>Drag files in from Finder to insert their full paths. Handy for anything that takes a path as an argument.</p>
+
+  <h2>Sudo</h2>
+  <p>When a command needs elevated privileges, RunProcess prompts for the password and holds it in memory for the session. It's never written to disk.</p>
+
+  <h2>Appearance</h2>
+  <p>Three modes — None, Frosted Glass, and Liquid Glass (macOS 26+) — let the window match whatever the rest of your screen is doing. None is a flat panel. Frosted Glass blurs what's behind it. Liquid Glass is the newer macOS material.</p>
+
+  <h2>Session mode</h2>
+  <p>By default, each window is its own shell. Session mode keeps a persistent shell alive between launches — environment variables, working directory, and history all carry over.</p>
+
+  <h2>Web Demo</h2>
+  <p>RunProcess is also available in the browser. <a href="runprocess-webdemo.html">Learn more ›</a></p>
+
+  <h2>Links</h2>
+  <p>
+    <a href="https://github.com/CaoHaoran-Dev/RunProcess">View Repository ›</a><br>
+    <a href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Releases ›</a>
+  </p>
+</div>
+
+<script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/footer.js"></script>
+</body>
+</html>

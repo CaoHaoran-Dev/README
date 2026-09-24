@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-page="projects/index.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Haoran Cao</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+
+<link rel="stylesheet" href="https://unpkg.com/glassfx/src/glass.css" />
+<script type="module">
+  import "https://unpkg.com/glassfx";
+</script>
+</head>
+<body>
+
+<section class="section" style="border-top:none;">
+  <div class="section-inner">
+    <div class="section-header glass glass-refract">
+      <div class="eyebrow">Projects</div>
+      <h2>Things I've built.</h2>
+      <p class="subhead">Released and in progress.</p>
+    </div>
+
+    <article class="project glass glass-refract">
+      <div class="project-meta">
+        <h3>Swift Zip Manager</h3>
+        <p class="tagline">A native macOS archive manager.</p>
+      </div>
+      <div class="project-body">
+        <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files in from Finder, and pull out individual entries without unpacking everything.</p>
+        <p>Built entirely in SwiftUI. Currently in beta, heading toward 1.0.</p>
+        <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
+        <div class="links">
+          <a href="swift-zip-manager.html">Learn more ›</a>
+          <a href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager">Repository ›</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project glass glass-refract">
+      <div class="project-meta">
+        <h3>RunProcess</h3>
+        <p class="tagline">A Spotlight-style command launcher.</p>
+      </div>
+      <div class="project-body">
+        <p>A native macOS menu bar app that opens a floating command window on a global hotkey — with real-time output, Tab completion, persistent history, drag-and-drop file paths, and sudo handling.</p>
+        <p>Three appearance modes — None, Frosted Glass, and Liquid Glass — let it match the rest of your screen. Session mode keeps a persistent shell alive between launches.</p>
+        <p>The same idea is also rebuilt for the browser: a working macOS desktop with a mock shell that responds to 50+ commands. No install required.</p>
+        <p class="stack">SwiftUI · Process/Pipe · HTML · CSS · JavaScript · macOS 12.4+</p>
+        <div class="links">
+          <a href="runprocess.html">Learn more ›</a>
+          <a href="https://github.com/CaoHaoran-Dev/RunProcess">Repository ›</a>
+          <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Web Demo ›</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-inner">
+    <div class="section-header glass glass-refract">
+      <div class="eyebrow">In Development</div>
+      <h2>Still being built.</h2>
+      <p class="subhead">Early versions, updated as they go.</p>
+    </div>
+
+    <article class="project glass glass-refract">
+      <div class="project-meta">
+        <h3>TaskView</h3>
+        <p class="tagline">A macOS process management tool.</p>
+      </div>
+      <div class="project-body">
+        <p>A native macOS utility for viewing and managing running processes. Reads process information directly from the system using <code>libproc</code>, <code>sysctl</code>, and Darwin APIs.</p>
+        <p>Process list with PID, name, CPU, and memory. Terminate with SIGTERM or force with SIGKILL. Search, filter, and auto-refresh.</p>
+        <p class="stack">Swift 5 · SwiftUI · libproc · sysctl · macOS 12.4+</p>
+        <div class="links">
+          <a href="taskview.html">Learn more ›</a>
+          <a href="https://github.com/CaoHaoran-Dev/TaskView">Repository ›</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/footer.js"></script>
+</body>
+</html>
