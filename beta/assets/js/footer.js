@@ -1,14 +1,21 @@
 /* footer.js — 页脚 + 底部语言选择
- * 站点固定部署在 /README/ 下，本地和 GitHub Pages 通用
+ * 站点根从当前路径动态推导，主站和 beta 通用
+ * SHOW_LANG_SWITCH: beta 里设为 false，隐藏语言切换入口
  */
 
 (function () {
-  var BASE = "/README/";
-  var path = window.location.pathname;
-  var isZh = path.indexOf("/README/zh-Hans/") !== -1 ||
-             path.indexOf("/README/zh-Hans") === 0;
+  var SHOW_LANG_SWITCH = false;
 
-  // 当前页面相对站点根的路径（不含语言段），如 index.html / projects/runprocess.html
+  var path = window.location.pathname;
+
+  var BETA_MARK = "/beta/";
+  var betaIdx = path.indexOf(BETA_MARK);
+  var BASE = betaIdx !== -1
+    ? path.substring(0, betaIdx + BETA_MARK.length)
+    : "/README/";
+
+  var isZh = path.indexOf(BASE + "zh-Hans") === 0;
+
   var page = document.documentElement.getAttribute("data-page") || "index.html";
 
   var enHref = BASE + page;
@@ -31,9 +38,9 @@
     '</div>';
 
   var footerHTML =
-    '<footer class="site-footer glass glass-refract">' +
+    '<footer class="site-footer">' +
       '<p>' + FOOTER_TEXT + '</p>' +
-      langHTML +
+      (SHOW_LANG_SWITCH ? langHTML : '') +
     '</footer>';
 
   function inject() {

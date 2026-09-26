@@ -1,50 +1,20 @@
-/* nav.js — 全局导航
- * 左侧大字：已发布项目
- * 右侧小字：开发中 / 了解更多 / 源码
- * 站点固定部署在 /README/ 下
+/* nav.js — 全局导航（beta，纯英文）
+ * 玻璃效果由 webglass 提供
+ * 下拉：桌面 hover 展开，触摸设备点击展开，点击外部收起
  */
 
 (function () {
-  var BASE = "/README/";
   var path = window.location.pathname;
-  var isZh = path.indexOf("/README/zh-Hans") === 0;
-  var BRAND = isZh ? "主页" : "Home";
-  var SITE = isZh ? (BASE + "zh-Hans/") : BASE;
 
-  var T = isZh ? {
-    nav: { projects: "项目", stack: "技术栈", about: "关于", github: "GitHub" },
-    eyebrow: "探索项目",
-    heading: "全部项目",
-    big: [
-      { label: "Swift Zip Manager", href: SITE + "projects/swift-zip-manager.html" },
-      { label: "RunProcess",        href: SITE + "projects/runprocess.html" }
-    ],
-    cols: [
-      {
-        title: "开发中",
-        links: [
-          { label: "TaskView", href: SITE + "projects/taskview.html" }
-        ]
-      },
-      {
-        title: "了解更多",
-        links: [
-          { label: "所有项目", href: SITE + "projects/" },
-          { label: "技术栈",   href: SITE + "#stack" },
-          { label: "关于",     href: SITE + "about/" }
-        ]
-      },
-      {
-        title: "源码",
-        links: [
-          { label: "Swift Zip Manager 仓库", href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
-          { label: "RunProcess 仓库",        href: "https://github.com/CaoHaoran-Dev/RunProcess" },
-          { label: "TaskView 仓库",          href: "https://github.com/CaoHaoran-Dev/TaskView" },
-          { label: "Web Demo 仓库",          href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
-        ]
-      }
-    ]
-  } : {
+  var BETA_MARK = "/beta/";
+  var betaIdx = path.indexOf(BETA_MARK);
+  var BASE = betaIdx !== -1
+    ? path.substring(0, betaIdx + BETA_MARK.length)
+    : "/README/";
+
+  var SITE = BASE;
+
+  var T = {
     nav: { projects: "Projects", stack: "Stack", about: "About", github: "GitHub" },
     eyebrow: "Explore",
     heading: "All projects",
@@ -111,23 +81,72 @@
   var linksHTML =
     '<div class="nav-item has-dropdown">' +
       '<a href="' + SITE + 'projects/"' + (isActive("projects") ? ' class="active"' : '') + '>' + T.nav.projects + '</a>' +
-      megaHTML +
     '</div>' +
     '<a href="' + SITE + '#stack">' + T.nav.stack + '</a>' +
     '<a href="' + SITE + 'about/"' + (isActive("about") ? ' class="active"' : '') + '>' + T.nav.about + '</a>' +
     '<a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">' + T.nav.github + '</a>';
 
   var navHTML =
-    '<header class="global-nav">' +
-      '<div class="global-nav-inner">' +
-        '<a href="' + SITE + '" class="brand">' + BRAND + '</a>' +
-        '<nav>' + linksHTML + '</nav>' +
-      '</div>' +
+    '<div class="nav-shell">' +
+      '<header class="global-nav">' +
+        '<div class="global-nav-inner">' +
+          '<a href="' + SITE + '" class="brand">Home</a>' +
+          '<nav>' + linksHTML + '</nav>' +
+        '</div>' +
+      '</header>' +
+      megaHTML +
       '<div class="nav-backdrop"></div>' +
-    '</header>';
+    '</div>';
 
   function inject() {
     document.body.insertAdjacentHTML("afterbegin", navHTML);
+
+    var shell = document.querySelector('.nav-shell');
+    var item = document.querySelector('.nav-item.has-dropdown');
+    var trigger = item ? item.querySelector('a') : null;
+
+    if (shell && item && trigger) {
+      var closeTimer = null;
+
+      var open = function () {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        shell.classList.add('is-open');
+      };
+
+      var close = function () {
+        if (closeTimer) { clearTimeout(closeTimer); }
+        closeTimer = setTimeout(function () {
+          shell.classList.remove('is-open');
+          closeTimer = null;
+        }, 150);
+      };
+
+      /* 桌面：hover */
+      item.addEventListener('mouseenter', open);
+      shell.addEventListener('mouseleave', close);
+
+      /* 键盘可访问性 */
+      item.addEventListener('focusin', open);
+      item.addEventListener('focusout', close);
+
+      /* 触摸设备：点击切换 */
+      trigger.addEventListener('click', function (e) {
+        var isTouch = window.matchMedia('(hover: none)').matches;
+        if (!isTouch) return;
+
+        if (!shell.classList.contains('is-open')) {
+          e.preventDefault();
+          open();
+        }
+      });
+
+      /* 点击外部收起 */
+      document.addEventListener('click', function (e) {
+        if (!shell.contains(e.target)) {
+          shell.classList.remove('is-open');
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") {

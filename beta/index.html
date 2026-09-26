@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home - Haoran Cao</title>
 <link rel="stylesheet" href="assets/css/main.css">
-
-<!-- glassfx: no build, no npm -->
-<link rel="stylesheet" href="https://unpkg.com/glassfx/src/glass.css" />
-<script type="module">
-  import "https://unpkg.com/glassfx";
-</script>
+<script src="assets/js/webglass.js"></script>
 </head>
 <body>
 
@@ -21,8 +16,8 @@
   <p class="intro">A middle school student from Chengdu, Sichuan.</p>
   <p class="intro">I mostly work on the Mac, but not only.</p>
   <div class="hero-links">
-    <a class="btn-primary glass glass-refract" href="projects/">See Projects</a>
-    <a class="btn-secondary glass glass-refract" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">GitHub ›</a>
+    <a class="btn-primary glass" href="projects/">See Projects</a>
+    <a class="btn-secondary glass" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">GitHub ›</a>
   </div>
 </section>
 
@@ -34,7 +29,7 @@
       <p class="subhead">Some projects</p>
     </div>
 
-    <article class="project glass glass-refract">
+    <article class="project glass">
       <div class="project-meta">
         <h3>Swift Zip Manager</h3>
         <p class="tagline">A native macOS archive manager.</p>
@@ -43,13 +38,13 @@
         <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files from Finder, and pull out individual files without unpacking everything.</p>
         <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
         <div class="links">
-          <a href="projects/swift-zip-manager.html">Learn more ›</a>
-          <a href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases">Download ›</a>
+          <a class="glass" href="projects/swift-zip-manager.html">Learn more ›</a>
+          <a class="glass" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases">Download ›</a>
         </div>
       </div>
     </article>
 
-    <article class="project glass glass-refract">
+    <article class="project glass">
       <div class="project-meta">
         <h3>RunProcess</h3>
         <p class="tagline">A Spotlight-style command launcher.</p>
@@ -59,9 +54,9 @@
         <p>Also available as a browser demo — the same interface, rebuilt in HTML, CSS, and JavaScript.</p>
         <p class="stack">SwiftUI · Process/Pipe · HTML · CSS · JavaScript</p>
         <div class="links">
-          <a href="projects/runprocess.html">Learn more ›</a>
-          <a href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Download ›</a>
-          <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Demo ›</a>
+          <a class="glass" href="projects/runprocess.html">Learn more ›</a>
+          <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Download ›</a>
+          <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Demo ›</a>
         </div>
       </div>
     </article>
@@ -75,7 +70,7 @@
       <h2>Tech Stack.</h2>
     </div>
 
-    <div class="stack-group">
+    <div class="stack-group glass">
       <div class="stack-group-label">Languages</div>
       <div class="stack-grid">
         <span>Swift</span>
@@ -85,7 +80,7 @@
       </div>
     </div>
 
-    <div class="stack-group">
+    <div class="stack-group glass">
       <div class="stack-group-label">Frameworks</div>
       <div class="stack-grid">
         <span>SwiftUI</span>
@@ -94,7 +89,7 @@
       </div>
     </div>
 
-    <div class="stack-group">
+    <div class="stack-group glass">
       <div class="stack-group-label">Platforms</div>
       <div class="stack-grid">
         <span>macOS</span>
@@ -111,10 +106,10 @@
       <div class="eyebrow">About</div>
       <h2>A little more.</h2>
     </div>
-    <div class="about-preview">
+    <div class="about-preview glass">
       <p>I build for the Mac because it's what I use every day.</p>
       <p>Most of this happens in the evenings and on weekends. I write slowly and try to ship things that feel finished.</p>
-      <p><a href="about/">Read more ›</a></p>
+      <p><a class="glass" href="about/">Read more ›</a></p>
     </div>
   </div>
 </section>
@@ -125,7 +120,7 @@
       <div class="eyebrow">Elsewhere</div>
       <h2>Find me.</h2>
     </div>
-    <div class="elsewhere-links">
+    <div class="elsewhere-links glass">
       <a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">
         <span class="elsewhere-name">GitHub</span>
         <span class="elsewhere-handle">@CaoHaoran-Dev</span>
