@@ -60,6 +60,11 @@ body {
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+body.drawer-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
 /* ============================================
    Nav Shell
    ============================================ */
@@ -144,6 +149,7 @@ a:hover { text-decoration: underline; }
    汉堡按钮
    ============================================ */
 .nav-burger {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -169,6 +175,12 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   transition: background 0.2s;
   flex-shrink: 0;
+}
+
+.nav-burger::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
 }
 
 .nav-burger:hover {
@@ -485,6 +497,11 @@ a:hover { text-decoration: underline; }
 
 .btn-secondary { display: inline-block; font-size: 17px; color: var(--text); padding: 12px 0; }
 
+.btn-secondary.btn-inline {
+  padding: 8px 18px;
+  font-size: 15px;
+}
+
 .download-row { border-radius: var(--radius-md); padding: 20px 24px; margin: 32px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 
 .download-note { font-size: 13px; color: var(--secondary); }
@@ -505,6 +522,65 @@ a:hover { text-decoration: underline; }
    ============================================ */
 .site-footer { background: var(--bg-alt); border-top: 1px solid var(--divider); padding: 32px 22px; text-align: center; }
 .site-footer p { font-size: 12px; color: var(--secondary); max-width: var(--max-width); margin: 0 auto; }
+
+/* ---------- Footer links（回主站 + 语言） ---------- */
+.site-footer .footer-links {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.site-footer .glass-switch-footer {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.glass-switch-footer a {
+  font-size: 12px;
+  color: var(--secondary);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.glass-switch-footer a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.site-footer .lang-switch-footer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.lang-switch-footer .lang-label {
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+.lang-switch-footer a {
+  font-size: 12px;
+  color: var(--secondary);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.lang-switch-footer a:hover { opacity: 1; text-decoration: underline; }
+.lang-switch-footer a.active { opacity: 1; font-weight: 500; color: var(--text); }
+
+.lang-switch-footer .lang-sep { color: var(--divider); font-size: 12px; }
 
 /* ============================================
    Motion
@@ -627,6 +703,11 @@ a:hover { text-decoration: underline; }
   background: rgba(255, 255, 255, 0.55);
   color: var(--accent-deep);
   text-decoration: none;
+}
+
+.btn-secondary.btn-inline {
+  padding: 8px 18px;
+  font-size: 15px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -768,7 +849,7 @@ a:hover { text-decoration: underline; }
 
 .global-nav:hover::after,
 .nav-burger:hover::after,
-.nav-dropdown.is-open::after,
+.nav-dropdown:hover::after,
 .glass-project:hover::after,
 .detail-specs:hover::after,
 .download-row:hover::after,
@@ -893,4 +974,21 @@ a:hover { text-decoration: underline; }
 .detail-specs:active,
 .download-row:active {
   cursor: grabbing;
+}
+
+/* ============================================
+   触控适配
+   ============================================ */
+
+@media (hover: none) {
+  .desktop-nav a:hover { opacity: 0.8; }
+  .nav-burger:hover { background: rgba(255, 255, 255, 0.35); }
+  .nav-burger:hover span { opacity: 1; }
+  .mega-item:hover { color: var(--text); }
+  .mega-col a:hover { opacity: 0.9; color: var(--text); }
+  .mobile-drawer-close:hover { opacity: 1; }
+}
+
+@media (hover: none) and (prefers-color-scheme: dark) {
+  .nav-burger:hover { background: rgba(28, 28, 30, 0.75); }
 }

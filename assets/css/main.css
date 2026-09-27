@@ -7,18 +7,30 @@
   --text: #1D1D1F;
   --secondary: #6E6E73;
   --accent: #0071E3;
+  --accent-rgb: 0, 113, 227;
   --accent-hover: #0077ED;
+  --accent-deep: #0055B3;
   --divider: #D2D2D7;
   --link: #06C;
   --max-width: 980px;
   --nav-height: 48px;
 
-  /* 毛玻璃材质 — 仅顶栏使用 */
+  --wg-render: true;
+  --wg-refraction: 1.45;
+  --wg-bezel: 0.28;
+  --wg-blur: 10;
+  --wg-light-angle: -55;
+  --wg-specular-strength: 0.65;
+  --wg-bg-opacity: 0.25;
+
+  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-sm: 14px;
+
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-blur: saturate(180%) blur(30px);
   --glass-border: rgba(0, 0, 0, 0.08);
 
-  /* 下拉纯色 */
   --dropdown-bg: #FFFFFF;
 }
 
@@ -29,7 +41,9 @@
     --text: #F5F5F7;
     --secondary: #86868B;
     --accent: #2997FF;
+    --accent-rgb: 41, 151, 255;
     --accent-hover: #47A9FF;
+    --accent-deep: #6FBCFF;
     --divider: #424245;
     --link: #2997FF;
 
@@ -42,10 +56,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
@@ -55,16 +66,20 @@ body {
   line-height: 1.47059;
   letter-spacing: -0.022em;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+body.drawer-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
 /* ============================================
-   Global Nav — 毛玻璃
+   Nav Shell
    ============================================ */
-.global-nav {
+.nav-shell {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -82,6 +97,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
   position: relative;
   z-index: 2;
 }
@@ -91,41 +107,62 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
+  flex-shrink: 0;
 }
 .global-nav .brand:hover { text-decoration: none; opacity: 0.7; }
 
-.global-nav nav {
+.desktop-nav {
   display: flex;
   gap: 28px;
   align-items: center;
+  margin-left: auto;
+  margin-right: 8px;
 }
-
-.global-nav nav a {
+.desktop-nav a {
   font-size: 12px;
   color: var(--text);
   opacity: 0.8;
   text-decoration: none;
   transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-.global-nav nav a:hover { opacity: 1; text-decoration: none; }
-.global-nav nav a.active { opacity: 1; font-weight: 500; }
+.desktop-nav a:hover { opacity: 1; text-decoration: none; }
+.desktop-nav a.active { opacity: 1; font-weight: 500; }
+
+.nav-burger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 44px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-burger::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+.nav-burger span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: opacity 0.2s;
+}
+.nav-burger:hover span { opacity: 0.6; }
 
 /* ============================================
-   Mega Dropdown — Apple style，纯色背景
+   Mega Dropdown — 纯色背景
    ============================================ */
-
-.nav-item.has-dropdown {
-  position: relative;
-}
-
-.nav-item.has-dropdown > a {
-  display: inline-block;
-  padding: 14px 0;
-}
-
 .nav-dropdown {
   position: fixed;
-  /* 上移 1px 盖住顶栏的边框 */
   top: calc(var(--nav-height) - 1px);
   padding-top: 1px;
   left: 0;
@@ -146,8 +183,7 @@ a:hover { text-decoration: underline; }
   z-index: 3;
 }
 
-.nav-item.has-dropdown:hover .nav-dropdown,
-.nav-item.has-dropdown:focus-within .nav-dropdown {
+.nav-dropdown.is-open {
   max-height: 520px;
   opacity: 1;
   transform: translateY(0);
@@ -182,14 +218,11 @@ a:hover { text-decoration: underline; }
   gap: 60px;
 }
 
-.mega-big {
-  display: flex;
-  flex-direction: column;
-}
+.mega-big { display: flex; flex-direction: column; }
 
 .mega-item {
   display: block;
-  font-size: 26px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -197,11 +230,7 @@ a:hover { text-decoration: underline; }
   padding: 8px 0;
   transition: color 0.2s;
 }
-
-.mega-item:hover {
-  color: var(--accent);
-  text-decoration: none;
-}
+.mega-item:hover { color: var(--accent); text-decoration: none; }
 
 .mega-cols {
   display: grid;
@@ -217,16 +246,8 @@ a:hover { text-decoration: underline; }
   margin-bottom: 14px;
 }
 
-.mega-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.mega-col li {
-  margin-bottom: 10px;
-}
-
+.mega-col ul { list-style: none; padding: 0; margin: 0; }
+.mega-col li { margin-bottom: 10px; }
 .mega-col a {
   font-size: 12px;
   color: var(--text);
@@ -234,14 +255,8 @@ a:hover { text-decoration: underline; }
   opacity: 0.9;
   transition: opacity 0.2s, color 0.2s;
 }
+.mega-col a:hover { opacity: 1; color: var(--accent); text-decoration: none; }
 
-.mega-col a:hover {
-  opacity: 1;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-/* Backdrop */
 .nav-backdrop {
   position: fixed;
   inset: 0;
@@ -252,28 +267,88 @@ a:hover { text-decoration: underline; }
   transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
   z-index: 1;
 }
+.nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
 
-.nav-item.has-dropdown:hover ~ .nav-backdrop,
-.nav-item.has-dropdown:focus-within ~ .nav-backdrop {
-  opacity: 1;
-  pointer-events: auto;
+/* ============================================
+   移动端抽屉
+   ============================================ */
+.mobile-drawer {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: calc(var(--nav-height) + 8px);
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 200;
+  max-width: 640px;
+  margin: 0 auto;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--dropdown-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+.mobile-drawer.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--divider);
+}
+.mobile-drawer-title { font-size: 14px; font-weight: 500; }
+.mobile-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.mobile-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 24px 20px 40px;
+}
+
+.drawer-big { display: flex; flex-direction: column; margin-bottom: 32px; }
+.drawer-big a {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 10px 0;
+  text-decoration: none;
+}
+.drawer-cols { display: flex; flex-direction: column; gap: 24px; }
+.drawer-group-title { font-size: 12px; font-weight: 500; color: var(--secondary); margin-bottom: 10px; }
+.drawer-group ul { list-style: none; padding: 0; margin: 0; }
+.drawer-group li { margin-bottom: 8px; }
+.drawer-group a { font-size: 14px; color: var(--text); opacity: 0.9; text-decoration: none; }
+.drawer-group a:hover { opacity: 1; text-decoration: none; }
 
 /* ============================================
    Hero
    ============================================ */
-.hero {
-  text-align: center;
-  padding: 100px 22px 80px;
-  background: var(--bg);
-}
+.hero { text-align: center; padding: 100px 22px 80px; background: var(--bg); }
 
-.hero .eyebrow {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
+.hero-inner { max-width: 640px; margin: 0 auto; }
+
+.hero .eyebrow { font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 12px; }
 
 .hero h1 {
   font-size: 64px;
@@ -314,16 +389,10 @@ a:hover { text-decoration: underline; }
 /* ============================================
    Section
    ============================================ */
-.section {
-  padding: 80px 22px;
-  border-top: 1px solid var(--divider);
-}
+.section { padding: 80px 22px; border-top: 1px solid var(--divider); }
 .section.alt { background: var(--bg-alt); }
 
-.section-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+.section-inner { max-width: var(--max-width); margin: 0 auto; }
 
 .section-header { margin-bottom: 48px; }
 
@@ -362,9 +431,7 @@ a:hover { text-decoration: underline; }
 }
 .project:first-child { border-top: none; padding-top: 0; }
 
-.project:hover {
-  transform: translateY(-2px);
-}
+.project:hover { transform: translateY(-2px); }
 
 .project-meta h3 {
   font-size: 28px;
@@ -418,10 +485,7 @@ a:hover { text-decoration: underline; }
 /* ============================================
    Detail Page
    ============================================ */
-.detail-hero {
-  text-align: center;
-  padding: 80px 22px 60px;
-}
+.detail-hero { text-align: center; padding: 80px 22px 60px; }
 .detail-hero .eyebrow {
   font-size: 14px;
   font-weight: 500;
@@ -490,11 +554,7 @@ a:hover { text-decoration: underline; }
 /* ============================================
    Stack Grid
    ============================================ */
-.stack-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+.stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 .stack-grid span {
   font-size: 14px;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
@@ -505,19 +565,10 @@ a:hover { text-decoration: underline; }
   border-radius: 999px;
 }
 
-.section.alt .stack-grid span {
-  background: var(--bg);
-}
+.section.alt .stack-grid span { background: var(--bg); }
 
-/* ============================================
-   Stack Groups
-   ============================================ */
-.stack-group {
-  margin-bottom: 32px;
-}
-.stack-group:last-child {
-  margin-bottom: 0;
-}
+.stack-group { margin-bottom: 32px; }
+.stack-group:last-child { margin-bottom: 0; }
 .stack-group-label {
   font-size: 13px;
   font-weight: 500;
@@ -565,6 +616,11 @@ a:hover { text-decoration: underline; }
   padding: 12px 0;
 }
 
+.btn-secondary.btn-inline {
+  padding: 8px 18px;
+  font-size: 15px;
+}
+
 .download-row {
   display: flex;
   align-items: center;
@@ -573,10 +629,7 @@ a:hover { text-decoration: underline; }
   margin: 32px 0;
 }
 
-.download-note {
-  font-size: 13px;
-  color: var(--secondary);
-}
+.download-note { font-size: 13px; color: var(--secondary); }
 
 /* ============================================
    About Preview
@@ -586,16 +639,12 @@ a:hover { text-decoration: underline; }
   line-height: 1.6;
   color: var(--text);
   margin-bottom: 20px;
-  max-width: 680px;
 }
 
 /* ============================================
    Elsewhere
    ============================================ */
-.elsewhere-links {
-  display: flex;
-  flex-direction: column;
-}
+.elsewhere-links { display: flex; flex-direction: column; }
 
 .elsewhere-links a {
   display: flex;
@@ -606,22 +655,10 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
   transition: opacity 0.2s;
 }
+.elsewhere-links a:hover { text-decoration: none; opacity: 0.7; }
+.elsewhere-links a:first-child { border-top: none; }
 
-.elsewhere-links a:hover {
-  text-decoration: none;
-  opacity: 0.7;
-}
-
-.elsewhere-links a:first-child {
-  border-top: none;
-}
-
-.elsewhere-name {
-  font-size: 17px;
-  color: var(--text);
-  font-weight: 500;
-}
-
+.elsewhere-name { font-size: 17px; color: var(--text); font-weight: 500; }
 .elsewhere-handle {
   font-size: 14px;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
@@ -644,45 +681,56 @@ a:hover { text-decoration: underline; }
   margin: 0 auto;
 }
 
-/* ============================================
-   Footer Language Switch
-   ============================================ */
-.site-footer .lang-switch-footer {
+/* ---------- Footer links（Liquid Glass + 语言）—— 非蓝色 ---------- */
+.site-footer .footer-links {
   margin-top: 14px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.site-footer .glass-switch-footer,
+.site-footer .lang-switch-footer {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
   color: var(--secondary);
 }
 
-.lang-switch-footer .lang-label {
-  color: var(--secondary);
-  opacity: 0.7;
-  margin-right: 2px;
-}
-
-.lang-switch-footer a {
+.site-footer .glass-switch-footer a,
+.site-footer .lang-switch-footer a {
   font-size: 12px;
-  color: var(--secondary);
+  color: var(--secondary) !important;
   opacity: 0.7;
   text-decoration: none;
   transition: opacity 0.2s;
 }
 
-.lang-switch-footer a:hover {
+.site-footer .glass-switch-footer a:hover,
+.site-footer .lang-switch-footer a:hover {
   opacity: 1;
   text-decoration: underline;
+  color: var(--secondary) !important;
 }
 
-.lang-switch-footer a.active {
+.site-footer .lang-switch-footer a.active {
   opacity: 1;
   font-weight: 500;
-  color: var(--text);
+  color: var(--text) !important;
 }
 
-.lang-switch-footer .lang-sep {
+.site-footer .lang-switch-footer .lang-label {
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+.site-footer .lang-switch-footer .lang-sep {
   color: var(--divider);
   font-size: 12px;
 }
@@ -690,7 +738,6 @@ a:hover { text-decoration: underline; }
 /* ============================================
    Motion — Apple style
    ============================================ */
-
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -724,14 +771,8 @@ a:hover { text-decoration: underline; }
 .hero-links      { animation: heroFadeUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.30s both; }
 
 @keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -746,9 +787,7 @@ a:hover { text-decoration: underline; }
     opacity: 1 !important;
     transform: none !important;
   }
-  .project:hover {
-    transform: none;
-  }
+  .project:hover { transform: none; }
 }
 
 /* ============================================
@@ -767,27 +806,15 @@ a:hover { text-decoration: underline; }
     padding: 32px 0;
   }
   .project-meta h3 { font-size: 22px; }
-  .global-nav nav { gap: 18px; }
   .detail-hero h1 { font-size: 36px; }
   .detail-hero .tagline { font-size: 17px; }
 
-  /* Mega dropdown on mobile */
-  .nav-dropdown-inner {
-    padding: 28px 22px 36px;
-  }
-  .mega-heading {
-    font-size: 22px;
-    margin-bottom: 24px;
-  }
-  .mega-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .mega-item {
-    font-size: 20px;
-  }
-  .mega-cols {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+  .desktop-nav { display: none; }
+  .nav-dropdown { display: none; }
+
+  .nav-dropdown-inner { padding: 28px 22px 36px; }
+  .mega-heading { font-size: 22px; margin-bottom: 24px; }
+  .mega-grid { grid-template-columns: 1fr; gap: 32px; }
+  .mega-item { font-size: 20px; }
+  .mega-cols { grid-template-columns: 1fr; gap: 24px; }
 }

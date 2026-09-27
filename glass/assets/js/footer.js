@@ -1,6 +1,7 @@
-/* footer.js — 页脚 + 底部语言选择
- * 站点根从当前路径动态推导，主站和 beta 通用
- * SHOW_LANG_SWITCH: beta 里设为 false，隐藏语言切换入口
+/* footer.js — 页脚（glass 版）
+ * 站点根从当前路径动态推导
+ * SHOW_LANG_SWITCH = false，隐藏语言切换
+ * 加一个「回主站」链接
  */
 
 (function () {
@@ -8,7 +9,7 @@
 
   var path = window.location.pathname;
 
-  var BETA_MARK = "/beta/";
+  var BETA_MARK = "/glass/";
   var betaIdx = path.indexOf(BETA_MARK);
   var BASE = betaIdx !== -1
     ? path.substring(0, betaIdx + BETA_MARK.length)
@@ -37,10 +38,21 @@
       '<a href="' + zhHref + '"' + (isZh ? ' class="active"' : '') + '>简体中文</a>' +
     '</div>';
 
+  /* 回主站 —— 从 /README/glass/... 推到 /README/ */
+  var MAIN_HREF = BASE.replace(/glass\/$/, "");
+
+  var linksHTML =
+    '<div class="footer-links">' +
+      '<span class="glass-switch-footer">' +
+        '<a href="' + MAIN_HREF + '">‹ Back to main site</a>' +
+      '</span>' +
+      (SHOW_LANG_SWITCH ? langHTML : '') +
+    '</div>';
+
   var footerHTML =
     '<footer class="site-footer">' +
       '<p>' + FOOTER_TEXT + '</p>' +
-      (SHOW_LANG_SWITCH ? langHTML : '') +
+      linksHTML +
     '</footer>';
 
   function inject() {

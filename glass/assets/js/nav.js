@@ -1,13 +1,14 @@
-/* nav.js — 全局导航（beta，纯英文）
+/* nav.js — glass 版导航（触控适配）
  * 顶栏：Home + Projects + Stack + About + GitHub + 汉堡
- * 汉堡 hover / 点击 → 展开下拉（桌面）
- * 汉堡点击 → 打开抽屉（移动端）
+ * 桌面：鼠标 hover / 触控 click → 展开下拉
+ * 移动端：汉堡 click → 打开抽屉
+ * 站点根从当前路径动态推导
  */
 
 (function () {
   var path = window.location.pathname;
 
-  var BETA_MARK = "/beta/";
+  var BETA_MARK = "/glass/";
   var betaIdx = path.indexOf(BETA_MARK);
   var BASE = betaIdx !== -1
     ? path.substring(0, betaIdx + BETA_MARK.length)
@@ -47,7 +48,8 @@
           { label: "Web Demo Repo",          href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
         ]
       }
-    ]
+    ],
+    drawer: { title: "Menu", close: "Close" }
   };
 
   function isActive(seg) { return path.indexOf(seg) !== -1; }
@@ -103,8 +105,8 @@
   var drawerHTML =
     '<div class="mobile-drawer">' +
       '<div class="mobile-drawer-header">' +
-        '<span class="mobile-drawer-title">Menu</span>' +
-        '<button class="mobile-drawer-close" aria-label="Close">' +
+        '<span class="mobile-drawer-title">' + T.drawer.title + '</span>' +
+        '<button class="mobile-drawer-close" aria-label="' + T.drawer.close + '">' +
           '<svg width="20" height="20" viewBox="0 0 20 20" fill="none">' +
             '<path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
           '</svg>' +
@@ -122,7 +124,7 @@
         '<div class="global-nav-inner">' +
           '<a href="' + SITE + '" class="brand">Home</a>' +
           '<nav class="desktop-nav">' + linksHTML + '</nav>' +
-          '<button class="nav-burger" aria-label="Menu">' +
+          '<button class="nav-burger" aria-label="' + T.drawer.title + '" aria-expanded="false">' +
             '<span></span>' +
             '<span></span>' +
           '</button>' +
@@ -143,6 +145,16 @@
     var drawer = document.querySelector('.mobile-drawer');
     var closeBtn = document.querySelector('.mobile-drawer-close');
 
+    var isMobile = function () {
+      return window.matchMedia('(max-width: 734px)').matches;
+    };
+
+    var setExpanded = function (open) {
+      if (burger) burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    /* ---------- 桌面下拉 ---------- */
+
     if (burger && dropdown) {
       var closeTimer = null;
 
@@ -150,47 +162,84 @@
         if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
         dropdown.classList.add('is-open');
         if (backdrop) backdrop.classList.add('is-open');
+        setExpanded(true);
       };
 
-      var closeDD = function () {
+      var closeDD = function (delay) {
         if (closeTimer) { clearTimeout(closeTimer); }
         closeTimer = setTimeout(function () {
           dropdown.classList.remove('is-open');
           if (backdrop) backdrop.classList.remove('is-open');
+          setExpanded(false);
           closeTimer = null;
-        }, 150);
+        }, delay == null ? 150 : delay);
       };
 
-      burger.addEventListener('mouseenter', openDD);
-      burger.addEventListener('mouseleave', closeDD);
-      dropdown.addEventListener('mouseenter', openDD);
-      dropdown.addEventListener('mouseleave', closeDD);
+      var toggleDD = function () {
+        if (dropdown.classList.contains('is-open')) {
+          closeDD(0);
+        } else {
+          openDD();
+        }
+      };
 
+      /* hover 只在鼠标指针时生效 —— 触屏滚动时不会误触发 */
+      var onEnter = function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        if (isMobile()) return;
+        openDD();
+      };
+      var onLeave = function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        if (isMobile()) return;
+        closeDD();
+      };
+
+      burger.addEventListener('pointerenter', onEnter);
+      burger.addEventListener('pointerleave', onLeave);
+      dropdown.addEventListener('pointerenter', onEnter);
+      dropdown.addEventListener('pointerleave', onLeave);
+
+      /* click：触控 / 键盘 / 鼠标都走这里 */
       burger.addEventListener('click', function (e) {
         e.preventDefault();
-        var isMobile = window.matchMedia('(max-width: 734px)').matches;
 
-        if (isMobile) {
+        if (isMobile()) {
           if (drawer) {
             drawer.classList.add('is-open');
             document.body.style.overflow = 'hidden';
           }
-        } else {
-          if (dropdown.classList.contains('is-open')) {
-            closeDD();
-          } else {
-            openDD();
-          }
+          return;
+        }
+
+        toggleDD();
+      });
+
+      /* 键盘 Esc */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeDD(0);
         }
       });
 
-      document.addEventListener('click', function (e) {
-        if (!shell.contains(e.target) && !dropdown.contains(e.target)) {
-          dropdown.classList.remove('is-open');
-          if (backdrop) backdrop.classList.remove('is-open');
-        }
+      /* 点外面关闭。pointerdown 触屏也会触发 */
+      document.addEventListener('pointerdown', function (e) {
+        if (isMobile()) return;
+        if (!dropdown.classList.contains('is-open')) return;
+        if (shell && shell.contains(e.target)) return;
+        if (dropdown.contains(e.target)) return;
+        closeDD(0);
       });
+
+      /* 点 backdrop 显式关闭（/glass/ 的 backdrop 是全屏 fixed） */
+      if (backdrop) {
+        backdrop.addEventListener('click', function () {
+          closeDD(0);
+        });
+      }
     }
+
+    /* ---------- 移动端抽屉 ---------- */
 
     if (drawer) {
       var closeDrawer = function () {
@@ -211,7 +260,26 @@
       drawer.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', closeDrawer);
       });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeDrawer();
+        }
+      });
     }
+
+    /* ---------- 视口切换时复位 ---------- */
+
+    window.addEventListener('resize', function () {
+      if (isMobile()) {
+        if (dropdown) dropdown.classList.remove('is-open');
+        if (backdrop) backdrop.classList.remove('is-open');
+        setExpanded(false);
+      } else {
+        if (drawer) drawer.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }, { passive: true });
   }
 
   if (document.readyState === "loading") {
