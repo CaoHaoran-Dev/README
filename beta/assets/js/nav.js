@@ -1,6 +1,7 @@
 /* nav.js — 全局导航（beta，纯英文）
- * 玻璃效果由 webglass 提供
- * 下拉：桌面 hover 展开，触摸设备点击展开，点击外部收起
+ * 顶栏：Home + Projects + Stack + About + GitHub + 汉堡
+ * 汉堡 hover / 点击 → 展开下拉（桌面）
+ * 汉堡点击 → 打开抽屉（移动端）
  */
 
 (function () {
@@ -79,72 +80,136 @@
     '</div>';
 
   var linksHTML =
-    '<div class="nav-item has-dropdown">' +
-      '<a href="' + SITE + 'projects/"' + (isActive("projects") ? ' class="active"' : '') + '>' + T.nav.projects + '</a>' +
-    '</div>' +
+    '<a href="' + SITE + 'projects/"' + (isActive("projects") ? ' class="active"' : '') + '>' + T.nav.projects + '</a>' +
     '<a href="' + SITE + '#stack">' + T.nav.stack + '</a>' +
     '<a href="' + SITE + 'about/"' + (isActive("about") ? ' class="active"' : '') + '>' + T.nav.about + '</a>' +
     '<a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">' + T.nav.github + '</a>';
+
+  var drawerBig = T.big.map(function (l) {
+    return '<a href="' + l.href + '">' + l.label + '</a>';
+  }).join("");
+
+  var drawerCols = T.cols.map(function (g) {
+    var items = g.links.map(function (l) {
+      var ext = l.href.indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : '';
+      return '<li><a href="' + l.href + '"' + ext + '>' + l.label + '</a></li>';
+    }).join("");
+    return '<div class="drawer-group">' +
+             '<div class="drawer-group-title">' + g.title + '</div>' +
+             '<ul>' + items + '</ul>' +
+           '</div>';
+  }).join("");
+
+  var drawerHTML =
+    '<div class="mobile-drawer">' +
+      '<div class="mobile-drawer-header">' +
+        '<span class="mobile-drawer-title">Menu</span>' +
+        '<button class="mobile-drawer-close" aria-label="Close">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="none">' +
+            '<path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+          '</svg>' +
+        '</button>' +
+      '</div>' +
+      '<div class="mobile-drawer-body">' +
+        '<div class="drawer-big">' + drawerBig + '</div>' +
+        '<div class="drawer-cols">' + drawerCols + '</div>' +
+      '</div>' +
+    '</div>';
 
   var navHTML =
     '<div class="nav-shell">' +
       '<header class="global-nav">' +
         '<div class="global-nav-inner">' +
           '<a href="' + SITE + '" class="brand">Home</a>' +
-          '<nav>' + linksHTML + '</nav>' +
+          '<nav class="desktop-nav">' + linksHTML + '</nav>' +
+          '<button class="nav-burger" aria-label="Menu">' +
+            '<span></span>' +
+            '<span></span>' +
+          '</button>' +
         '</div>' +
       '</header>' +
       megaHTML +
-      '<div class="nav-backdrop"></div>' +
-    '</div>';
+    '</div>' +
+    '<div class="nav-backdrop"></div>' +
+    drawerHTML;
 
   function inject() {
     document.body.insertAdjacentHTML("afterbegin", navHTML);
 
     var shell = document.querySelector('.nav-shell');
-    var item = document.querySelector('.nav-item.has-dropdown');
-    var trigger = item ? item.querySelector('a') : null;
+    var burger = document.querySelector('.nav-burger');
+    var dropdown = document.querySelector('.nav-dropdown');
+    var backdrop = document.querySelector('.nav-backdrop');
+    var drawer = document.querySelector('.mobile-drawer');
+    var closeBtn = document.querySelector('.mobile-drawer-close');
 
-    if (shell && item && trigger) {
+    if (burger && dropdown) {
       var closeTimer = null;
 
-      var open = function () {
+      var openDD = function () {
         if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-        shell.classList.add('is-open');
+        dropdown.classList.add('is-open');
+        if (backdrop) backdrop.classList.add('is-open');
       };
 
-      var close = function () {
+      var closeDD = function () {
         if (closeTimer) { clearTimeout(closeTimer); }
         closeTimer = setTimeout(function () {
-          shell.classList.remove('is-open');
+          dropdown.classList.remove('is-open');
+          if (backdrop) backdrop.classList.remove('is-open');
           closeTimer = null;
         }, 150);
       };
 
-      /* 桌面：hover */
-      item.addEventListener('mouseenter', open);
-      shell.addEventListener('mouseleave', close);
+      burger.addEventListener('mouseenter', openDD);
+      burger.addEventListener('mouseleave', closeDD);
+      dropdown.addEventListener('mouseenter', openDD);
+      dropdown.addEventListener('mouseleave', closeDD);
 
-      /* 键盘可访问性 */
-      item.addEventListener('focusin', open);
-      item.addEventListener('focusout', close);
+      burger.addEventListener('click', function (e) {
+        e.preventDefault();
+        var isMobile = window.matchMedia('(max-width: 734px)').matches;
 
-      /* 触摸设备：点击切换 */
-      trigger.addEventListener('click', function (e) {
-        var isTouch = window.matchMedia('(hover: none)').matches;
-        if (!isTouch) return;
-
-        if (!shell.classList.contains('is-open')) {
-          e.preventDefault();
-          open();
+        if (isMobile) {
+          if (drawer) {
+            drawer.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+          }
+        } else {
+          if (dropdown.classList.contains('is-open')) {
+            closeDD();
+          } else {
+            openDD();
+          }
         }
       });
 
-      /* 点击外部收起 */
       document.addEventListener('click', function (e) {
-        if (!shell.contains(e.target)) {
-          shell.classList.remove('is-open');
+        if (!shell.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove('is-open');
+          if (backdrop) backdrop.classList.remove('is-open');
         }
+      });
+    }
+
+    if (drawer) {
+      var closeDrawer = function () {
+        drawer.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeDrawer);
+      }
+
+      drawer.addEventListener('click', function (e) {
+        if (e.target === drawer) {
+          closeDrawer();
+        }
+      });
+
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeDrawer);
       });
     }
   }

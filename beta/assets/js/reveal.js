@@ -4,7 +4,6 @@
   var REVEAL_CLASS = "reveal";
   var VISIBLE_CLASS = "is-visible";
 
-  // Elements to animate
   var SELECTORS = [
     ".section-header",
     ".project",
@@ -15,7 +14,6 @@
   ];
 
   function init() {
-    // Respect reduced motion
     var prefersReduced = window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -24,14 +22,11 @@
     var elements = document.querySelectorAll(SELECTORS.join(","));
     if (!elements.length) return;
 
-    // Mark initial state
     elements.forEach(function (el) {
       el.classList.add(REVEAL_CLASS);
     });
 
-    // IntersectionObserver
     if (!("IntersectionObserver" in window)) {
-      // Fallback: just show everything
       elements.forEach(function (el) {
         el.classList.add(VISIBLE_CLASS);
       });
