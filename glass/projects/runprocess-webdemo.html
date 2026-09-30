@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-page="projects/runprocess-webdemo.html">
+<html lang="en" data-page="projects/runprocess-webdemo.html" data-i18n-title="detail.webdemo.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,53 +10,50 @@
 <body>
 
 <section class="detail-hero">
-  <div class="eyebrow">Web</div>
-  <h1>RunProcess Web Demo</h1>
-  <p class="tagline">RunProcess, in your browser.</p>
+  <div class="eyebrow" data-i18n="detail.webdemo.eyebrow"></div>
+  <h1 data-i18n="detail.webdemo.h1"></h1>
+  <p class="tagline" data-i18n="detail.webdemo.tagline"></p>
 </section>
 
 <div class="detail-body">
-  <a class="back-link glass" href="runprocess.html">‹ RunProcess</a>
+  <a class="back-link glass" href="runprocess.html" data-i18n="detail.runprocessBack"></a>
 
-  <p>The same idea rebuilt in HTML, CSS, and JavaScript. No download, no install — open it and use it. Entirely frontend, no backend.</p>
+  <p data-i18n="detail.webdemo.p1"></p>
 
   <div class="download-row glass">
-    <a class="btn-primary glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">
-      Open in Browser
-    </a>
-    <span class="download-note">No install required</span>
+    <a class="btn-primary glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/" data-i18n="detail.webdemo.open"></a>
+    <span class="download-note" data-i18n="detail.webdemo.note"></span>
   </div>
 
   <div class="detail-specs glass">
-    <div class="row"><span class="label">Platform</span><span class="value">Any modern browser</span></div>
-    <div class="row"><span class="label">Stack</span><span class="value">HTML · CSS · JavaScript</span></div>
-    <div class="row"><span class="label">Storage</span><span class="value">localStorage</span></div>
-    <div class="row"><span class="label">Backend</span><span class="value">None</span></div>
-    <div class="row"><span class="label">License</span><span class="value">MIT License</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.platform"></span><span class="value" data-i18n="detail.specs.browser"></span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.stack"></span><span class="value">HTML · CSS · JavaScript</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.storage"></span><span class="value">localStorage</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.backend"></span><span class="value" data-i18n="detail.specs.noBackend"></span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.license"></span><span class="value">MIT License</span></div>
   </div>
 
-  <h2>The desktop</h2>
-  <p>A working macOS desktop recreated in the browser. Menu bar with functional dropdowns. Draggable and resizable windows with working close, minimize, and maximize buttons. A Dock that magnifies on hover. A wallpaper picker for changing the background.</p>
+  <h2 data-i18n="detail.webdemo.h2.desktop"></h2>
+  <p data-i18n="detail.webdemo.p.desktop"></p>
 
-  <h2>The shell</h2>
-  <p>A mock shell responds to 50+ commands with realistic output. It's not a real shell — no command actually executes — but it behaves like one for demonstration purposes. Tab completion and command history are backed by localStorage, so your session survives a page refresh.</p>
+  <h2 data-i18n="detail.webdemo.h2.shell"></h2>
+  <p data-i18n="detail.webdemo.p.shell"></p>
 
-  <h2>Languages</h2>
-  <p>Bilingual support, following the same pattern as the native app.</p>
+  <h2 data-i18n="detail.webdemo.h2.languages"></h2>
+  <p data-i18n="detail.webdemo.p.languages"></p>
 
-  <h2>Why it exists</h2>
-  <p>The native app requires macOS. The Web Demo runs anywhere. It's a way to try RunProcess without installing anything, and a way to show what the interface looks like without asking someone to open Xcode.</p>
+  <h2 data-i18n="detail.webdemo.h2.why"></h2>
+  <p data-i18n="detail.webdemo.p.why"></p>
 
-  <h2>Links</h2>
+  <h2 data-i18n="detail.webdemo.h2.links"></h2>
   <p>
-    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess-WebDemo">View Repository ›</a>
-  </p>
-  <p>
-    <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Web Demo ›</a>
+    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" data-i18n="detail.webdemo.viewRepo"></a><br>
+    <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/" data-i18n="detail.webdemo.tryDemo"></a>
   </p>
 </div>
 
 <script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/nav.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script src="../assets/js/interactions.js"></script>

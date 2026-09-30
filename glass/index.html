@@ -1,5 +1,5 @@
-</html><!DOCTYPE html>
-<html lang="en" data-page="index.html">
+<!DOCTYPE html>
+<html lang="en" data-page="index.html" data-i18n-title="home.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,37 +10,39 @@
 <body>
 
 <section class="hero">
-  <div class="eyebrow">Student Developer</div>
-  <h1>Hi! I'm Haoran Cao</h1>
-  <p class="subhead">I build projects, and write them down here.</p>
-  <p class="intro">A middle school student from Chengdu, Sichuan.</p>
-  <p class="intro">I mostly work on the Mac, but not only.</p>
-  <div class="hero-links">
-    <a class="btn-primary glass" href="projects/">See Projects</a>
-    <a class="btn-secondary glass" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">GitHub ›</a>
+  <div class="hero-inner">
+    <div class="eyebrow" data-i18n="home.eyebrow"></div>
+    <h1 data-i18n="home.h1"></h1>
+    <p class="subhead" data-i18n="home.subhead"></p>
+    <p class="intro" data-i18n="home.intro1"></p>
+    <p class="intro" data-i18n="home.intro2"></p>
+    <div class="hero-links">
+      <a class="btn-primary glass" href="projects/" data-i18n="home.ctaProjects"></a>
+      <a class="btn-secondary glass" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener" data-i18n="home.ctaGithub"></a>
+    </div>
   </div>
 </section>
 
 <section class="section" id="featured">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">Featured</div>
-      <h2>What I'm building.</h2>
-      <p class="subhead">Some projects</p>
+      <div class="eyebrow" data-i18n="home.featured.eyebrow"></div>
+      <h2 data-i18n="home.featured.h2"></h2>
+      <p class="subhead" data-i18n="home.featured.subhead"></p>
     </div>
 
     <div class="glass-project glass">
       <article class="project">
         <div class="project-meta">
-          <h3>Swift Zip Manager</h3>
-          <p class="tagline">A native macOS archive manager.</p>
+          <h3 data-i18n="project.swiftZip.title"></h3>
+          <p class="tagline" data-i18n="project.swiftZip.tagline"></p>
         </div>
         <div class="project-body">
-          <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files from Finder, and pull out individual files without unpacking everything.</p>
-          <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
+          <p data-i18n="project.swiftZip.body1"></p>
+          <p class="stack" data-i18n="project.swiftZip.stack"></p>
           <div class="links">
-            <a class="glass" href="projects/swift-zip-manager.html">Learn more ›</a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases">Download ›</a>
+            <a class="glass" href="projects/swift-zip-manager.html" data-i18n="project.swiftZip.learn"></a>
+            <a class="glass" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases" data-i18n="project.swiftZip.download"></a>
           </div>
         </div>
       </article>
@@ -49,17 +51,17 @@
     <div class="glass-project glass">
       <article class="project">
         <div class="project-meta">
-          <h3>RunProcess</h3>
-          <p class="tagline">A Spotlight-style command launcher.</p>
+          <h3 data-i18n="project.runprocess.title"></h3>
+          <p class="tagline" data-i18n="project.runprocess.tagline"></p>
         </div>
         <div class="project-body">
-          <p>A native macOS menu bar app that opens a floating command window on a global hotkey. Real-time output, Tab completion, persistent history, drag-and-drop paths, and sudo handling.</p>
-          <p>Also available as a browser demo — the same interface, rebuilt in HTML, CSS, and JavaScript.</p>
-          <p class="stack">SwiftUI · Process/Pipe · HTML · CSS · JavaScript</p>
+          <p data-i18n="project.runprocess.body1"></p>
+          <p data-i18n="project.runprocess.body2"></p>
+          <p class="stack" data-i18n="project.runprocess.stack"></p>
           <div class="links">
-            <a class="glass" href="projects/runprocess.html">Learn more ›</a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Download ›</a>
-            <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Demo ›</a>
+            <a class="glass" href="projects/runprocess.html" data-i18n="project.runprocess.learn"></a>
+            <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases" data-i18n="project.runprocess.download"></a>
+            <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/" data-i18n="project.runprocess.demo"></a>
           </div>
         </div>
       </article>
@@ -70,40 +72,33 @@
 <section class="section" id="stack">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">Tools</div>
-      <h2>Tech Stack.</h2>
+      <div class="eyebrow" data-i18n="home.stack.eyebrow"></div>
+      <h2 data-i18n="home.stack.h2"></h2>
     </div>
 
     <div class="glass-project glass">
       <div class="stack-group">
-        <div class="stack-group-label">Languages</div>
+        <div class="stack-group-label" data-i18n="home.stack.languages"></div>
         <div class="stack-grid">
-          <span>Swift</span>
-          <span>JavaScript</span>
-          <span>HTML</span>
-          <span>CSS</span>
+          <span>Swift</span><span>JavaScript</span><span>HTML</span><span>CSS</span>
         </div>
       </div>
     </div>
 
     <div class="glass-project glass">
       <div class="stack-group">
-        <div class="stack-group-label">Frameworks</div>
+        <div class="stack-group-label" data-i18n="home.stack.frameworks"></div>
         <div class="stack-grid">
-          <span>SwiftUI</span>
-          <span>AppKit</span>
-          <span>CryptoKit</span>
+          <span>SwiftUI</span><span>AppKit</span><span>CryptoKit</span>
         </div>
       </div>
     </div>
 
     <div class="glass-project glass">
       <div class="stack-group">
-        <div class="stack-group-label">Platforms</div>
+        <div class="stack-group-label" data-i18n="home.stack.platforms"></div>
         <div class="stack-grid">
-          <span>macOS</span>
-          <span>Xcode</span>
-          <span>Git</span>
+          <span>macOS</span><span>Xcode</span><span>Git</span>
         </div>
       </div>
     </div>
@@ -113,14 +108,14 @@
 <section class="section alt" id="about">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">About</div>
-      <h2>A little more.</h2>
+      <div class="eyebrow" data-i18n="home.about.eyebrow"></div>
+      <h2 data-i18n="home.about.h2"></h2>
     </div>
     <div class="glass-project glass">
       <div class="about-preview">
-        <p>I build for the Mac because it's what I use every day.</p>
-        <p>Most of this happens in the evenings and on weekends. I write slowly and try to ship things that feel finished.</p>
-        <p><a class="btn-secondary btn-inline glass" href="about/">Read more ›</a></p>
+        <p data-i18n="home.about.p1"></p>
+        <p data-i18n="home.about.p2"></p>
+        <p><a class="btn-secondary btn-inline glass" href="about/" data-i18n="home.about.more"></a></p>
       </div>
     </div>
   </div>
@@ -129,8 +124,8 @@
 <section class="section" id="elsewhere">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">Elsewhere</div>
-      <h2>Find me.</h2>
+      <div class="eyebrow" data-i18n="home.elsewhere.eyebrow"></div>
+      <h2 data-i18n="home.elsewhere.h2"></h2>
     </div>
     <div class="glass-project glass">
       <div class="elsewhere-links">
@@ -144,6 +139,7 @@
 </section>
 
 <script src="assets/js/reveal.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/footer.js"></script>
 <script src="assets/js/interactions.js"></script>

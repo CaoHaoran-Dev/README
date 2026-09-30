@@ -1,85 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" data-page="projects/index.html">
+<html lang="en" data-page="projects/index.html" data-i18n-title="projects.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Haoran Cao</title>
 <link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/webglass.js"></script>
 </head>
 <body>
 
 <section class="section" style="border-top:none;">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">Projects</div>
-      <h2>Things I've built.</h2>
-      <p class="subhead">Released and in progress.</p>
+      <div class="eyebrow" data-i18n="projects.eyebrow"></div>
+      <h2 data-i18n="projects.h2"></h2>
+      <p class="subhead" data-i18n="projects.subhead"></p>
     </div>
 
-    <article class="project">
-      <div class="project-meta">
-        <h3>Swift Zip Manager</h3>
-        <p class="tagline">A native macOS archive manager.</p>
-      </div>
-      <div class="project-body">
-        <p>Handles ZIP, TAR, GZ, 7Z, and RAR, including encrypted archives. Browse contents before extracting, drag files in from Finder, and pull out individual entries without unpacking everything.</p>
-        <p>Built entirely in SwiftUI. Currently in beta, heading toward 1.0.</p>
-        <p class="stack">Swift 5 · SwiftUI · CryptoKit · macOS 13.5+</p>
-        <div class="links">
-          <a href="swift-zip-manager.html">Learn more ›</a>
-          <a href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager">Repository ›</a>
+    <div class="glass-project glass">
+      <article class="project">
+        <div class="project-meta">
+          <h3 data-i18n="project.swiftZip.title"></h3>
+          <p class="tagline" data-i18n="project.swiftZip.tagline"></p>
         </div>
-      </div>
-    </article>
+        <div class="project-body">
+          <p data-i18n="project.swiftZip.body1"></p>
+          <p data-i18n="project.swiftZip.body2"></p>
+          <p class="stack" data-i18n="project.swiftZip.stack"></p>
+          <div class="links">
+            <a class="glass" href="swift-zip-manager.html" data-i18n="project.swiftZip.learn"></a>
+            <a class="glass" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" data-i18n="project.swiftZip.repo"></a>
+          </div>
+        </div>
+      </article>
+    </div>
 
-    <article class="project">
-      <div class="project-meta">
-        <h3>RunProcess</h3>
-        <p class="tagline">A Spotlight-style command launcher.</p>
-      </div>
-      <div class="project-body">
-        <p>A native macOS menu bar app that opens a floating command window on a global hotkey — with real-time output, Tab completion, persistent history, drag-and-drop file paths, and sudo handling.</p>
-        <p>Three appearance modes — None, Frosted Glass, and Liquid Glass — let it match the rest of your screen. Session mode keeps a persistent shell alive between launches.</p>
-        <p>The same idea is also rebuilt for the browser: a working macOS desktop with a mock shell that responds to 50+ commands. No install required.</p>
-        <p class="stack">SwiftUI · Process/Pipe · HTML · CSS · JavaScript · macOS 12.4+</p>
-        <div class="links">
-          <a href="runprocess.html">Learn more ›</a>
-          <a href="https://github.com/CaoHaoran-Dev/RunProcess">Repository ›</a>
-          <a href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/">Try Web Demo ›</a>
+    <div class="glass-project glass">
+      <article class="project">
+        <div class="project-meta">
+          <h3 data-i18n="project.runprocess.title"></h3>
+          <p class="tagline" data-i18n="project.runprocess.tagline"></p>
         </div>
-      </div>
-    </article>
+        <div class="project-body">
+          <p data-i18n="project.runprocess.body1"></p>
+          <p data-i18n="project.runprocess.body3"></p>
+          <p data-i18n="project.runprocess.body4"></p>
+          <p class="stack" data-i18n="project.runprocess.stack"></p>
+          <div class="links">
+            <a class="glass" href="runprocess.html" data-i18n="project.runprocess.learn"></a>
+            <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess" data-i18n="project.runprocess.repo"></a>
+            <a class="glass" href="https://CaoHaoran-Dev.github.io/RunProcess-WebDemo/" data-i18n="project.runprocess.tryWeb"></a>
+          </div>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
 <section class="section alt">
   <div class="section-inner">
     <div class="section-header">
-      <div class="eyebrow">In Development</div>
-      <h2>Still being built.</h2>
-      <p class="subhead">Early versions, updated as they go.</p>
+      <div class="eyebrow" data-i18n="projects.devEyebrow"></div>
+      <h2 data-i18n="projects.devH2"></h2>
+      <p class="subhead" data-i18n="projects.devSubhead"></p>
     </div>
 
-    <article class="project">
-      <div class="project-meta">
-        <h3>TaskView</h3>
-        <p class="tagline">A macOS process management tool.</p>
-      </div>
-      <div class="project-body">
-        <p>A native macOS utility for viewing and managing running processes. Reads process information directly from the system using <code>libproc</code>, <code>sysctl</code>, and Darwin APIs.</p>
-        <p>Process list with PID, name, CPU, and memory. Terminate with SIGTERM or force with SIGKILL. Search, filter, and auto-refresh.</p>
-        <p class="stack">Swift 5 · SwiftUI · libproc · sysctl · macOS 12.4+</p>
-        <div class="links">
-          <a href="taskview.html">Learn more ›</a>
-          <a href="https://github.com/CaoHaoran-Dev/TaskView">Repository ›</a>
+    <div class="glass-project glass">
+      <article class="project">
+        <div class="project-meta">
+          <h3 data-i18n="project.taskview.title"></h3>
+          <p class="tagline" data-i18n="project.taskview.tagline"></p>
         </div>
-      </div>
-    </article>
+        <div class="project-body">
+          <p data-i18n="project.taskview.body1"></p>
+          <p data-i18n="project.taskview.body2"></p>
+          <p class="stack" data-i18n="project.taskview.stack"></p>
+          <div class="links">
+            <a class="glass" href="taskview.html" data-i18n="project.taskview.learn"></a>
+            <a class="glass" href="https://github.com/CaoHaoran-Dev/TaskView" data-i18n="project.taskview.repo"></a>
+          </div>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
 <script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/nav.js"></script>
 <script src="../assets/js/footer.js"></script>
+<script src="../assets/js/interactions.js"></script>
 </body>
 </html>

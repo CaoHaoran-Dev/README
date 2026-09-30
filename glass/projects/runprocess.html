@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-page="projects/runprocess.html">
+<html lang="en" data-page="projects/runprocess.html" data-i18n-title="detail.runprocess.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,59 +10,56 @@
 <body>
 
 <section class="detail-hero">
-  <div class="eyebrow">macOS App</div>
+  <div class="eyebrow" data-i18n="detail.runprocess.eyebrow"></div>
   <h1>RunProcess</h1>
-  <p class="tagline">A Spotlight-style command launcher.</p>
+  <p class="tagline" data-i18n="detail.runprocess.tagline"></p>
 </section>
 
 <div class="detail-body">
-  <a class="back-link glass" href="./">‹ All projects</a>
+  <a class="back-link glass" href="./" data-i18n="detail.backAll"></a>
 
-  <p>A menu bar app that wraps <code>/bin/zsh</code> in a polished, translucent floating window. Opens on a global hotkey, disappears when you're done. Built for the commands you run every day.</p>
+  <p data-i18n="detail.runprocess.p1"></p>
 
   <div class="download-row glass">
-    <a class="btn-primary glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">
-      Download for macOS
-    </a>
-    <span class="download-note">Requires macOS 12.4 or later</span>
+    <a class="btn-primary glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases" data-i18n="detail.runprocess.download"></a>
+    <span class="download-note" data-i18n="detail.runprocess.note"></span>
   </div>
 
   <div class="detail-specs glass">
-    <div class="row"><span class="label">Platform</span><span class="value">macOS 12.4+</span></div>
-    <div class="row"><span class="label">Framework</span><span class="value">SwiftUI</span></div>
-    <div class="row"><span class="label">Hotkey</span><span class="value">Global</span></div>
-    <div class="row"><span class="label">Appearance</span><span class="value">None · Frosted Glass · Liquid Glass</span></div>
-    <div class="row"><span class="label">License</span><span class="value">MIT License</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.platform"></span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.framework"></span><span class="value">SwiftUI</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.hotkey"></span><span class="value" data-i18n="detail.specs.global"></span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.appearance"></span><span class="value">None · Frosted Glass · Liquid Glass</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.license"></span><span class="value">MIT License</span></div>
   </div>
 
-  <h2>Running commands</h2>
-  <p>Output streams in real time through <code>Process</code> and <code>Pipe</code>. Tab completion works the way you expect. Command history persists across launches, so yesterday's long <code>ffmpeg</code> invocation is one keystroke away.</p>
+  <h2 data-i18n="detail.runprocess.h2.run"></h2>
+  <p data-i18n="detail.runprocess.p.run"></p>
 
-  <h2>Working with files</h2>
-  <p>Drag files in from Finder to insert their full paths. Handy for anything that takes a path as an argument.</p>
+  <h2 data-i18n="detail.runprocess.h2.files"></h2>
+  <p data-i18n="detail.runprocess.p.files"></p>
 
-  <h2>Sudo</h2>
-  <p>When a command needs elevated privileges, RunProcess prompts for the password and holds it in memory for the session. It's never written to disk.</p>
+  <h2 data-i18n="detail.runprocess.h2.sudo"></h2>
+  <p data-i18n="detail.runprocess.p.sudo"></p>
 
-  <h2>Appearance</h2>
-  <p>Three modes — None, Frosted Glass, and Liquid Glass (macOS 26+) — let the window match whatever the rest of your screen is doing. None is a flat panel. Frosted Glass blurs what's behind it. Liquid Glass is the newer macOS material.</p>
+  <h2 data-i18n="detail.runprocess.h2.appearance"></h2>
+  <p data-i18n="detail.runprocess.p.appearance"></p>
 
-  <h2>Session mode</h2>
-  <p>By default, each window is its own shell. Session mode keeps a persistent shell alive between launches — environment variables, working directory, and history all carry over.</p>
+  <h2 data-i18n="detail.runprocess.h2.session"></h2>
+  <p data-i18n="detail.runprocess.p.session"></p>
 
-  <h2>Web Demo</h2>
-  <p>RunProcess is also available in the browser. <a class="glass" href="runprocess-webdemo.html">Learn more ›</a></p>
+  <h2 data-i18n="detail.runprocess.h2.demo"></h2>
+  <p><span data-i18n="detail.runprocess.p.demo"></span> <a class="glass" href="runprocess-webdemo.html" data-i18n="project.runprocess.learn"></a></p>
 
-  <h2>Links</h2>
+  <h2 data-i18n="detail.runprocess.h2.links"></h2>
   <p>
-    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess">View Repository ›</a>
-  </p>
-  <p>
-    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases">Releases ›</a>
+    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess" data-i18n="detail.runprocess.viewRepo"></a><br>
+    <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases" data-i18n="detail.runprocess.releases"></a>
   </p>
 </div>
 
 <script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/nav.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script src="../assets/js/interactions.js"></script>

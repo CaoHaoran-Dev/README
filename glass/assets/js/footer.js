@@ -1,62 +1,47 @@
-/* footer.js — 页脚（glass 版）
- * 站点根从当前路径动态推导
- * SHOW_LANG_SWITCH = false，隐藏语言切换
- * 加一个「回主站」链接
+/* footer.js — glass 版页脚
+ * base 从当前路径推导：/README/glass/...
+ * 语言切换保留 /glass/ 前缀
  */
-
 (function () {
-  var SHOW_LANG_SWITCH = false;
-
   var path = window.location.pathname;
-
-  var BETA_MARK = "/glass/";
-  var betaIdx = path.indexOf(BETA_MARK);
-  var BASE = betaIdx !== -1
-    ? path.substring(0, betaIdx + BETA_MARK.length)
-    : "/README/";
-
-  var isZh = path.indexOf(BASE + "zh-Hans") === 0;
-
-  var page = document.documentElement.getAttribute("data-page") || "index.html";
-
-  var enHref = BASE + page;
-  var zhHref = BASE + "zh-Hans/" + page;
+  var BASE = "/README/";
+  var GLASS = BASE + "glass/";
+  var MAIN = BASE;
 
   var YEAR = new Date().getFullYear();
 
-  var FOOTER_TEXT = isZh
-    ? "© " + YEAR + " Haoran Cao. 保留所有权利。"
-    : "© " + YEAR + " Haoran Cao. All rights reserved.";
-
-  var LANG_LABEL = isZh ? "语言" : "Language";
-
-  var langHTML =
-    '<div class="lang-switch-footer">' +
-      '<span class="lang-label">' + LANG_LABEL + '</span>' +
-      '<a href="' + enHref + '"' + (!isZh ? ' class="active"' : '') + '>English</a>' +
-      '<span class="lang-sep">·</span>' +
-      '<a href="' + zhHref + '"' + (isZh ? ' class="active"' : '') + '>简体中文</a>' +
-    '</div>';
-
-  /* 回主站 —— 从 /README/glass/... 推到 /README/ */
-  var MAIN_HREF = BASE.replace(/glass\/$/, "");
-
-  var linksHTML =
-    '<div class="footer-links">' +
-      '<span class="glass-switch-footer">' +
-        '<a href="' + MAIN_HREF + '">‹ Back to main site</a>' +
-      '</span>' +
-      (SHOW_LANG_SWITCH ? langHTML : '') +
-    '</div>';
-
-  var footerHTML =
-    '<footer class="site-footer">' +
-      '<p>' + FOOTER_TEXT + '</p>' +
-      linksHTML +
-    '</footer>';
-
   function inject() {
-    document.body.insertAdjacentHTML("beforeend", footerHTML);
+    window.i18n.ready(function (t) {
+      var isZh = window.i18n.lang === "zh-Hans";
+
+      var linksHTML =
+        '<div class="footer-links">' +
+          '<span class="glass-switch-footer">' +
+            '<a href="' + MAIN + '">' + t("footer.backMain") + '</a>' +
+          '</span>' +
+          '<span class="lang-switch-footer">' +
+            '<span class="lang-label">' + t("footer.language") + '</span>' +
+            '<a href="#" data-lang="en"'      + (!isZh ? ' class="active"' : '') + '>' + t("footer.english") + '</a>' +
+            '<span class="lang-sep">·</span>' +
+            '<a href="#" data-lang="zh-Hans"' + ( isZh ? ' class="active"' : '') + '>' + t("footer.chinese") + '</a>' +
+          '</span>' +
+        '</div>';
+
+      var html =
+        '<footer class="site-footer">' +
+          '<p>' + t("footer.rights", { year: YEAR }) + '</p>' +
+          linksHTML +
+        '</footer>';
+
+      document.body.insertAdjacentHTML("beforeend", html);
+
+      document.querySelectorAll('.lang-switch-footer a[data-lang]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.i18n.switchTo(a.getAttribute('data-lang'));
+        });
+      });
+    });
   }
 
   if (document.readyState === "loading") {

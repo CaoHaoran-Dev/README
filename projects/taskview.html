@@ -1,56 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" data-page="projects/taskview.html">
+<html lang="en" data-page="projects/taskview.html" data-i18n-title="detail.taskview.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaskView — Projects</title>
 <link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/webglass.js"></script>
 </head>
 <body>
 
 <section class="detail-hero">
-  <div class="eyebrow">macOS App</div>
+  <div class="eyebrow" data-i18n="detail.taskview.eyebrow"></div>
   <h1>TaskView</h1>
-  <p class="tagline">A macOS process management tool.</p>
+  <p class="tagline" data-i18n="detail.taskview.tagline"></p>
 </section>
 
 <div class="detail-body">
-  <a class="back-link" href="./">‹ All projects</a>
+  <a class="back-link glass" href="./" data-i18n="detail.backAll"></a>
 
-  <p>A native macOS utility for viewing and managing running processes. Built with SwiftUI, using <code>libproc</code>, <code>sysctl</code>, and Darwin APIs to read process information directly from the system.</p>
+  <p data-i18n="detail.taskview.p1"></p>
 
-  <div class="download-row">
-    <a class="btn-primary" href="https://github.com/CaoHaoran-Dev/TaskView/releases">
-      Download for macOS
-    </a>
-    <span class="download-note">Requires macOS 12.4 or later</span>
+  <div class="download-row glass">
+    <a class="btn-primary glass" href="https://github.com/CaoHaoran-Dev/TaskView/releases" data-i18n="detail.taskview.download"></a>
+    <span class="download-note" data-i18n="detail.taskview.note"></span>
   </div>
 
-  <div class="detail-specs">
-    <div class="row"><span class="label">Version</span><span class="value">1.0.0-Alpha.1</span></div>
-    <div class="row"><span class="label">Status</span><span class="value">In Development</span></div>
-    <div class="row"><span class="label">Platform</span><span class="value">macOS 12.4+</span></div>
-    <div class="row"><span class="label">Language</span><span class="value">Swift 5</span></div>
-    <div class="row"><span class="label">Framework</span><span class="value">SwiftUI · libproc · sysctl</span></div>
-    <div class="row"><span class="label">License</span><span class="value">GPL-3.0</span></div>
+  <div class="detail-specs glass">
+    <div class="row"><span class="label" data-i18n="detail.specs.version"></span><span class="value">1.0.0-Alpha.1</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.status"></span><span class="value" data-i18n="detail.specs.inDev"></span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.platform"></span><span class="value">macOS 12.4+</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.language"></span><span class="value">Swift 5</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.framework"></span><span class="value">SwiftUI · libproc · sysctl</span></div>
+    <div class="row"><span class="label" data-i18n="detail.specs.license"></span><span class="value">GPL-3.0</span></div>
   </div>
 
-  <h2>Features</h2>
-  <p>Process list with PID, name, CPU, and memory. Select a process to see details: user, start time, status, path, and parent PID. Terminate with SIGTERM, or force with SIGKILL.</p>
-  <p>Search and filter to find what you need. Auto-refresh keeps the list current.</p>
+  <h2 data-i18n="detail.taskview.h2.features"></h2>
+  <p data-i18n="detail.taskview.p.features1"></p>
+  <p data-i18n="detail.taskview.p.features2"></p>
 
-  <h2>Known issues</h2>
-  <p>This is an alpha. Some user processes show a blank name, and some show Unix Time Zero as their start time. System processes like <code>kernel_task</code> and <code>WindowServer</code> cannot be terminated.</p>
+  <h2 data-i18n="detail.taskview.h2.issues"></h2>
+  <p data-i18n="detail.taskview.p.issues"></p>
 
-  <h2>Links</h2>
+  <h2 data-i18n="detail.taskview.h2.links"></h2>
   <p>
-    <a href="https://github.com/CaoHaoran-Dev/TaskView">View Repository ›</a><br>
-    <a href="https://github.com/CaoHaoran-Dev/TaskView/releases">Releases ›</a>
+    <a class="glass" href="https://github.com/CaoHaoran-Dev/TaskView" data-i18n="detail.taskview.viewRepo"></a><br>
+    <a class="glass" href="https://github.com/CaoHaoran-Dev/TaskView/releases" data-i18n="detail.taskview.releases"></a>
   </p>
 </div>
 
 <script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/nav.js"></script>
 <script src="../assets/js/footer.js"></script>
+<script src="../assets/js/interactions.js"></script>
 </body>
 </html>
