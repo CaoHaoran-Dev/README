@@ -8,20 +8,13 @@
 <script src="../assets/js/settings-apply.js"></script>
 <script src="../assets/js/webglass.js"></script>
 <style>
-  /* ============================================
-     Settings 页专属样式 —— Liquid Glass
-     ============================================ */
-
   .settings-wrap {
     max-width: 720px;
     margin: 0 auto;
-    padding: 120px 22px 80px;
+    padding: 140px 22px 80px;
   }
 
-  .settings-header {
-    margin-bottom: 32px;
-    text-align: center;
-  }
+  .settings-header { margin-bottom: 40px; }
   .settings-header .eyebrow {
     font-size: 14px; font-weight: 500;
     color: var(--accent); margin-bottom: 12px;
@@ -34,277 +27,84 @@
     font-size: 17px; color: var(--secondary);
   }
 
-  /* ---------- Toolbar ---------- */
   .settings-toolbar {
-    position: sticky; top: 76px;
+    position: sticky; top: 0;
     z-index: 10;
-    display: flex; gap: 10px; flex-wrap: wrap;
-    align-items: center;
-    padding: 12px;
-    margin-bottom: 28px;
-    border-radius: var(--radius-pill);
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      var(--shadow-sm),
-      var(--shadow-lg);
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding: 16px 0; margin-bottom: 32px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--divider);
   }
-
-  /* ---------- 通用玻璃控件 ---------- */
-  .glass-control {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  .settings-toolbar button,
+  .settings-toolbar select {
+    font-size: 14px; font-family: inherit;
     padding: 8px 16px;
-    font-size: 13px;
-    font-family: inherit;
-    font-weight: 500;
+    border-radius: 980px;
+    border: 1px solid var(--divider);
+    background: var(--bg-alt);
     color: var(--text);
-    border-radius: var(--radius-pill);
-    border: none;
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      var(--shadow-sm);
     cursor: pointer;
-    transition: background var(--dur-fast) var(--ease-apple), transform var(--dur-base) var(--ease-spring);
+    transition: background 0.2s;
   }
-
-  .glass-control:hover {
-    background: rgba(var(--glass-rgb), var(--glass-opacity-hover));
-  }
-
-  .glass-control:active {
-    transform: scale(0.97);
-  }
-
-  .glass-control.primary {
+  .settings-toolbar button:hover,
+  .settings-toolbar select:hover { background: var(--divider); }
+  .settings-toolbar button.primary {
     background: var(--accent);
-    color: #FFFFFF;
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, 0.75),
-      inset 0 1px 0 rgba(255, 255, 255, 0.65),
-      0 2px 8px rgba(var(--accent-rgb), 0.35);
+    color: #FFF;
+    border-color: var(--accent);
   }
+  .settings-toolbar button.primary:hover { background: var(--accent-hover); }
+  .settings-toolbar .spacer { flex: 1; }
 
-  .glass-control.primary:hover {
-    background: var(--accent-hover);
-  }
-
-  select.glass-control {
-    appearance: none;
-    -webkit-appearance: none;
-    padding-right: 32px;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%236E6E73' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-  }
-
-  /* ---------- Toggle ---------- */
-  .glass-toggle {
-    position: relative;
-    display: inline-block;
-    width: 44px;
-    height: 26px;
-    flex-shrink: 0;
-  }
-
-  .glass-toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-  }
-
-  .glass-toggle-track {
-    position: absolute;
-    inset: 0;
-    border-radius: 999px;
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 2px rgba(0, 0, 0, 0.08);
-    transition: background var(--dur-base) var(--ease-apple);
-    cursor: pointer;
-  }
-
-  .glass-toggle-track::after {
-    content: "";
-    position: absolute;
-    top: 3px; left: 3px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 1),
-      0 1px 3px rgba(0, 0, 0, 0.15);
-    transition: transform var(--dur-base) var(--ease-spring);
-  }
-
-  .glass-toggle input:checked + .glass-toggle-track {
-    background: var(--accent);
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, 0.75),
-      inset 0 1px 0 rgba(255, 255, 255, 0.65),
-      0 2px 8px rgba(var(--accent-rgb), 0.35);
-  }
-
-  .glass-toggle input:checked + .glass-toggle-track::after {
-    transform: translateX(18px);
-  }
-
-  /* ---------- Range（蓝色填充）---------- */
-  input[type="range"].glass-range {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    height: 6px;
-    border-radius: 999px;
-    outline: none;
-    cursor: pointer;
-
-    background:
-      linear-gradient(
-        to right,
-        var(--accent) 0%,
-        var(--accent) var(--val, 50%),
-        rgba(var(--glass-rgb), var(--glass-opacity)) var(--val, 50%),
-        rgba(var(--glass-rgb), var(--glass-opacity)) 100%
-      );
-
-    box-shadow:
-      inset 0 0 0 1px var(--glass-ring),
-      inset 0 1px 2px rgba(0, 0, 0, 0.06);
-  }
-
-  input[type="range"].glass-range::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 1),
-      0 1px 4px rgba(0, 0, 0, 0.15),
-      0 4px 12px rgba(0, 0, 0, 0.10);
-    cursor: grab;
-    transition: transform var(--dur-fast) var(--ease-spring);
-  }
-
-  input[type="range"].glass-range::-webkit-slider-thumb:active {
-    cursor: grabbing;
-    transform: scale(1.1);
-  }
-
-  input[type="range"].glass-range::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
-    border: none;
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 1),
-      0 1px 4px rgba(0, 0, 0, 0.15);
-    cursor: grab;
-  }
-
-  input[type="range"].glass-range::-moz-range-progress {
-    background: var(--accent);
-    height: 6px;
-    border-radius: 999px;
-  }
-
-  input[type="range"].glass-range::-moz-range-track {
-    background: transparent;
-  }
-
-  /* ---------- Color ---------- */
-  input[type="color"].glass-color {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    height: 40px;
-    padding: 4px;
-    border: none;
-    border-radius: var(--radius-sm);
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      var(--shadow-sm);
-    cursor: pointer;
-  }
-
-  input[type="color"].glass-color::-webkit-color-swatch-wrapper { padding: 0; }
-  input[type="color"].glass-color::-webkit-color-swatch {
-    border: none;
-    border-radius: calc(var(--radius-sm) - 4px);
-  }
-
-  /* ---------- 分组卡片 ---------- */
   .settings-group {
-    margin-bottom: 24px;
+    margin-bottom: 40px;
     border-radius: var(--radius-md);
     overflow: hidden;
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      var(--shadow-sm),
-      var(--shadow-lg);
+    border: 1px solid var(--divider);
   }
-
   .settings-group-title {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--secondary);
     padding: 14px 20px;
+    background: var(--bg-alt);
     border-bottom: 1px solid var(--divider);
   }
 
   .settings-row {
     display: grid;
-    grid-template-columns: 1fr 200px 60px;
+    grid-template-columns: 240px 1fr 80px;
     align-items: center;
     gap: 16px;
     padding: 12px 20px;
     border-bottom: 1px solid var(--divider);
     font-size: 14px;
   }
-
   .settings-row:last-child { border-bottom: none; }
-
   .settings-row label {
     color: var(--text);
     font-weight: 500;
-    display: flex;
-    flex-direction: column;
   }
-
   .settings-row .hint {
+    display: block;
     font-size: 11px;
     color: var(--secondary);
     font-weight: 400;
     margin-top: 2px;
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
   }
-
+  .settings-row input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+  .settings-row input[type="color"] {
+    width: 100%; height: 32px;
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 2px;
+    cursor: pointer;
+    background: var(--bg);
+  }
   .settings-row .value {
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
     font-size: 12px;
@@ -312,48 +112,26 @@
     text-align: right;
   }
 
-  .settings-row .toggle-cell {
-    display: flex;
-    justify-content: flex-end;
-    grid-column: 2 / span 2;
-  }
-
-  /* ---------- 预览 ---------- */
   .preview {
-    margin-top: 40px;
-    padding: 24px;
+    margin-top: 48px;
+    padding: 32px;
     border-radius: var(--radius-md);
-    background: rgba(var(--glass-rgb), var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      var(--shadow-sm),
-      var(--shadow-lg);
+    border: 1px dashed var(--divider);
+    background: var(--bg-alt);
   }
-
   .preview-title {
-    font-size: 12px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.05em;
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--secondary);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
-
-  .preview-bg {
-    background-image:
-      linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 25%, #A1C4FD 50%, #C2E9FB 75%, #FF9A9E 100%);
-    padding: 24px;
-    border-radius: var(--radius-md);
-  }
-
   .preview-row {
     display: flex; gap: 12px; flex-wrap: wrap;
-    align-items: stretch;
+    align-items: center;
+    margin-bottom: 16px;
   }
-
   .preview-card {
-    padding: 20px;
+    padding: 24px;
     border-radius: var(--radius-lg);
     background: rgba(var(--glass-rgb), var(--glass-opacity));
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -366,67 +144,58 @@
     font-size: 14px;
     flex: 1; min-width: 200px;
   }
-
   .preview-btn {
     padding: 10px 20px;
     border-radius: var(--radius-pill);
     font-size: 14px;
-    font-family: inherit;
     background: rgba(var(--glass-rgb), var(--glass-opacity));
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     color: var(--accent);
     border: none;
-    cursor: pointer;
     box-shadow:
       inset 0 0 0 1.5px var(--glass-ring),
       inset 0 1px 0 var(--glass-ring),
       var(--shadow-sm);
   }
+  .preview-bg {
+    background-image:
+      linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 25%, #A1C4FD 50%, #C2E9FB 75%, #FF9A9E 100%);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+  }
 
-  /* ---------- 导出弹窗 ---------- */
   .export-modal {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     display: none;
     align-items: center; justify-content: center;
     z-index: 1000;
     padding: 20px;
   }
   .export-modal.is-open { display: flex; }
-
   .export-modal-box {
     max-width: 640px; width: 100%;
     max-height: 80vh;
+    background: var(--bg);
     border-radius: var(--radius-md);
     overflow: hidden;
     display: flex; flex-direction: column;
-    background: rgba(var(--glass-rgb), 0.92);
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow:
-      inset 0 0 0 1.5px var(--glass-ring),
-      inset 0 1px 0 var(--glass-ring),
-      0 24px 48px rgba(0,0,0,0.30);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
   }
-
   .export-modal-header {
     padding: 16px 20px;
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid var(--divider);
     font-weight: 600;
   }
-
   .export-modal-header button {
     background: transparent; border: none;
-    font-size: 22px; cursor: pointer;
+    font-size: 20px; cursor: pointer;
     color: var(--text);
     padding: 0 8px;
-    line-height: 1;
   }
-
   .export-modal textarea {
     flex: 1;
     width: 100%;
@@ -435,22 +204,10 @@
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
     font-size: 12px;
     line-height: 1.6;
-    background: transparent;
+    background: var(--bg-alt);
     color: var(--text);
     resize: none;
     outline: none;
-  }
-
-  @media (max-width: 500px) {
-    .settings-row {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    .settings-row .toggle-cell {
-      grid-column: 1;
-      justify-content: flex-start;
-    }
-    .settings-row .value { text-align: left; }
   }
 </style>
 </head>
@@ -465,27 +222,17 @@
   </header>
 
   <div class="settings-toolbar">
-    <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--secondary)">
-      <span data-i18n="settings.theme"></span>
-      <select id="theme-mode" class="glass-control">
-        <option value="light" data-i18n="settings.themeLight"></option>
-        <option value="dark" data-i18n="settings.themeDark"></option>
-        <option value="auto" data-i18n="settings.themeAuto"></option>
-      </select>
-    </label>
-
-    <select id="preset" class="glass-control">
+    <select id="preset">
       <option value="">— Preset —</option>
       <option value="default">Default</option>
       <option value="clear">Clear</option>
       <option value="frosted">Frosted</option>
       <option value="dense">Dense</option>
     </select>
-
-    <button id="reset" class="glass-control" data-i18n="settings.reset"></button>
-    <button id="export" class="glass-control primary" data-i18n="settings.export"></button>
-    <span class="spacer" style="flex:1"></span>
-    <button id="lang-btn" class="glass-control">中 / EN</button>
+    <button id="reset" data-i18n="settings.reset"></button>
+    <button id="export" class="primary" data-i18n="settings.export"></button>
+    <span class="spacer"></span>
+    <button id="lang-btn">中 / EN</button>
   </div>
 
   <div id="controls"></div>
@@ -525,24 +272,6 @@
   var STORAGE_KEY = 'glass-settings';
 
   var GROUPS = [
-    {
-      key: 'toggles',
-      title: { en: 'Feature Toggles', 'zh-Hans': '功能开关' },
-      items: [
-        { var: '--sheen-color', type: 'toggle',
-          on: 'rgba(255, 255, 255, 0.45)', off: 'rgba(255, 255, 255, 0)',
-          label: { en: 'Mouse sheen', 'zh-Hans': '鼠标光晕' } },
-        { var: '--wg-specular-strength', type: 'toggle',
-          on: '1', off: '0',
-          label: { en: 'WebGlass specular', 'zh-Hans': 'WebGlass 边缘高光' } },
-        { var: '--glass-ring', type: 'toggle',
-          on: 'rgba(255, 255, 255, 1)', off: 'rgba(255, 255, 255, 0)',
-          label: { en: 'Inner stroke', 'zh-Hans': '内描边' } },
-        { var: '--fixed-stroke-enabled', type: 'toggle',
-          on: '1', off: '0',
-          label: { en: 'Dark fixed stroke', 'zh-Hans': '暗色固定描边' } }
-      ]
-    },
     {
       key: 'glass',
       title: { en: 'Glass', 'zh-Hans': '玻璃' },
@@ -609,10 +338,10 @@
           label: { en: 'Bezel width', 'zh-Hans': '边框宽度' } },
         { var: '--wg-scale', type: 'range', min: 0, max: 100, step: 1, unit: 'px',
           label: { en: 'Displacement scale', 'zh-Hans': '位移强度' } },
+        { var: '--wg-specular-strength', type: 'range', min: 0, max: 1, step: 0.05,
+          label: { en: 'Specular strength', 'zh-Hans': '高光强度' } },
         { var: '--wg-specular-width', type: 'range', min: 0, max: 0.5, step: 0.01,
           label: { en: 'Specular width', 'zh-Hans': '高光宽度' } },
-        { var: '--wg-specular-back', type: 'range', min: 0, max: 1, step: 0.05,
-          label: { en: 'Specular back', 'zh-Hans': '反向高光' } },
         { var: '--wg-bg-opacity', type: 'range', min: 0, max: 0.6, step: 0.01,
           label: { en: 'WG bg opacity', 'zh-Hans': 'WG 白底透明度' } }
       ]
@@ -642,14 +371,6 @@
     return [parseInt(m[0], 16), parseInt(m[1], 16), parseInt(m[2], 16)].join(', ');
   }
 
-  function updateRangeFill(input) {
-    var min = parseFloat(input.min);
-    var max = parseFloat(input.max);
-    var val = parseFloat(input.value);
-    var pct = ((val - min) / (max - min)) * 100;
-    input.style.setProperty('--val', pct + '%');
-  }
-
   function buildUI() {
     var container = document.getElementById('controls');
     var html = '';
@@ -669,23 +390,13 @@
         html += '</label>';
 
         if (item.type === 'range') {
-          html += '<input type="range" class="glass-range" data-var-range="' + item.var + '" '
+          html += '<input type="range" data-var-range="' + item.var + '" '
             + 'min="' + item.min + '" max="' + item.max + '" '
             + 'step="' + item.step + '" value="' + num + '">';
           html += '<span class="value" data-var-value="' + item.var + '">' + current + '</span>';
         } else if (item.type === 'rgb') {
-          html += '<input type="color" class="glass-color" data-var-color="' + item.var + '" value="' + rgbToHex(current) + '">';
+          html += '<input type="color" data-var-color="' + item.var + '" value="' + rgbToHex(current) + '">';
           html += '<span class="value" data-var-value="' + item.var + '">' + current + '</span>';
-        } else if (item.type === 'toggle') {
-          var checked = current === item.on || parseFloat(current) > 0;
-          html += '<div class="toggle-cell">';
-          html += '<label class="glass-toggle">';
-          html += '<input type="checkbox" data-var-toggle="' + item.var + '" '
-            + 'data-on="' + item.on + '" data-off="' + item.off + '" '
-            + (checked ? 'checked' : '') + '>';
-          html += '<span class="glass-toggle-track"></span>';
-          html += '</label>';
-          html += '</div>';
         }
 
         html += '</div>';
@@ -720,30 +431,26 @@
   }
 
   function bindEvents() {
-    /* range */
     document.querySelectorAll('[data-var-range]').forEach(function (input) {
-      updateRangeFill(input);
-
       input.addEventListener('input', function () {
-        updateRangeFill(input);
-
         var varName = input.getAttribute('data-var-range');
         var val = input.value;
 
         if (varName === '--glass-saturate') setVar(varName, val + '%');
-        else if (varName === '--wg-refraction' || varName === '--wg-bezel'
-              || varName === '--wg-specular-width' || varName === '--wg-specular-back'
-              || varName === '--wg-bg-opacity' || varName === '--glass-opacity'
-              || varName === '--glass-opacity-hover') setVar(varName, val);
+        else if (varName.indexOf('--wg-') === 0 && (
+          varName === '--wg-refraction' || varName === '--wg-bezel'
+          || varName === '--wg-specular-strength' || varName === '--wg-specular-width'
+          || varName === '--wg-bg-opacity')) setVar(varName, val);
+        else if (varName === '--glass-opacity' || varName === '--glass-opacity-hover') setVar(varName, val);
         else setVar(varName, val + 'px');
 
         var display = document.querySelector('[data-var-value="' + varName + '"]');
         if (display) display.textContent = getVar(varName);
+
         save();
       });
     });
 
-    /* color */
     document.querySelectorAll('[data-var-color]').forEach(function (input) {
       input.addEventListener('input', function () {
         var varName = input.getAttribute('data-var-color');
@@ -755,48 +462,23 @@
       });
     });
 
-    /* toggle */
-    document.querySelectorAll('[data-var-toggle]').forEach(function (input) {
-      input.addEventListener('change', function () {
-        var varName = input.getAttribute('data-var-toggle');
-        var on = input.getAttribute('data-on');
-        var off = input.getAttribute('data-off');
-        setVar(varName, input.checked ? on : off);
-        save();
-      });
-    });
-
-    /* theme mode */
-    var themeSel = document.getElementById('theme-mode');
-    if (themeSel && window.glassSettings) {
-      themeSel.value = window.glassSettings.theme;
-      themeSel.addEventListener('change', function () {
-        window.glassSettings.setTheme(themeSel.value);
-      });
-    }
-
-    /* reset */
     document.getElementById('reset').addEventListener('click', function () {
       var msg = window.i18n.lang === 'zh-Hans' ? '重置所有设置？' : 'Reset all settings?';
       if (!confirm(msg)) return;
-      if (window.glassSettings) window.glassSettings.reset();
+      localStorage.removeItem(STORAGE_KEY);
       document.documentElement.removeAttribute('style');
-      document.documentElement.removeAttribute('data-theme');
       location.reload();
     });
 
-    /* export */
     document.getElementById('export').addEventListener('click', exportCSS);
     document.getElementById('export-close').addEventListener('click', function () {
       document.getElementById('export-modal').classList.remove('is-open');
     });
 
-    /* preset */
     document.getElementById('preset').addEventListener('change', function (e) {
       applyPreset(e.target.value);
     });
 
-    /* lang */
     document.getElementById('lang-btn').addEventListener('click', function () {
       var next = window.i18n.lang === 'zh-Hans' ? 'en' : 'zh-Hans';
       window.i18n.switchTo(next);
@@ -813,11 +495,7 @@
       var v = pair.slice(i + 1).trim();
       if (k && v) obj[k] = v;
     });
-    if (window.glassSettings) {
-      window.glassSettings.setVars(obj);
-    } else {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {}
-    }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {}
   }
 
   var PRESETS = {
@@ -862,10 +540,7 @@
 
     document.querySelectorAll('[data-var-range]').forEach(function (input) {
       var varName = input.getAttribute('data-var-range');
-      if (preset[varName] !== undefined) {
-        input.value = parseNum(preset[varName]);
-        updateRangeFill(input);
-      }
+      if (preset[varName] !== undefined) input.value = parseNum(preset[varName]);
     });
     document.querySelectorAll('[data-var-value]').forEach(function (el) {
       var varName = el.getAttribute('data-var-value');

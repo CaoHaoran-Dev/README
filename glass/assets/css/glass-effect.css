@@ -27,6 +27,7 @@
     box-shadow var(--dur-base) var(--ease-apple);
   will-change: transform;
 
+  /* 按钮：更细更白的高光 */
   --wg-light-angle: -90;
   --wg-bezel: 0.25;
   --wg-specular-strength: 1.0;
@@ -58,7 +59,7 @@
   font-size: 17px;
 
   box-shadow:
-    inset 0 0 0 1.5px var(--glass-ring),
+    inset 0 0 0 1.5px var(--divider),
     inset 0 1px 0 var(--glass-ring),
     var(--shadow-sm),
     var(--shadow-md);
@@ -229,177 +230,6 @@
   cursor: grabbing;
 }
 
-/* ============================================
-   暗色模式：固定边缘高光（每个元素独立）
-   通过 --fixed-stroke-enabled 开关控制
-   ============================================ */
-
-/* 顶栏 */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .global-nav,
-  [data-theme="auto"] .global-nav {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-}
-
-/* 汉堡 */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .nav-burger,
-  [data-theme="auto"] .nav-burger {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30);
-  }
-}
-
-/* 下拉 */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .nav-dropdown,
-  [data-theme="auto"] .nav-dropdown {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-}
-
-/* 移动抽屉 */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .mobile-drawer,
-  [data-theme="auto"] .mobile-drawer {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-}
-
-/* 卡片 */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .glass-project,
-  [data-theme="auto"] .glass-project {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-  [data-theme="dark"] .glass-project:hover,
-  [data-theme="auto"] .glass-project:hover {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.40 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.55 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.20 * var(--fixed-stroke-enabled, 0))),
-      0 2px 4px rgba(0, 0, 0, 0.40),
-      0 20px 48px rgba(0, 0, 0, 0.70);
-  }
-}
-
-/* Specs */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .detail-specs,
-  [data-theme="auto"] .detail-specs {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-}
-
-/* Download Row */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .download-row,
-  [data-theme="auto"] .download-row {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 12px 32px rgba(0, 0, 0, 0.50);
-  }
-}
-
-/* btn-primary */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .btn-primary,
-  [data-theme="auto"] .btn-primary {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, 0.55),
-      inset 0 1px 0 rgba(255, 255, 255, 0.65),
-      0 2px 8px rgba(41, 151, 255, 0.35);
-  }
-}
-
-/* btn-secondary */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .btn-secondary,
-  [data-theme="auto"] .btn-secondary {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30),
-      0 2px 6px rgba(0, 0, 0, 0.20);
-  }
-  [data-theme="dark"] .btn-secondary:hover,
-  [data-theme="auto"] .btn-secondary:hover {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.40 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.55 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.20 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.40),
-      0 4px 12px rgba(0, 0, 0, 0.30);
-  }
-}
-
-/* a.glass */
-@media (prefers-color-scheme: dark) {
-  [data-theme="dark"] .project-body .links a.glass,
-  [data-theme="auto"] .project-body .links a.glass,
-  [data-theme="dark"] .detail-body a.glass,
-  [data-theme="auto"] .detail-body a.glass,
-  [data-theme="dark"] .back-link.glass,
-  [data-theme="auto"] .back-link.glass,
-  [data-theme="dark"] .elsewhere-links a.glass,
-  [data-theme="auto"] .elsewhere-links a.glass {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.30 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.45 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.15 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.30);
-  }
-  [data-theme="dark"] .project-body .links a.glass:hover,
-  [data-theme="auto"] .project-body .links a.glass:hover,
-  [data-theme="dark"] .detail-body a.glass:hover,
-  [data-theme="auto"] .detail-body a.glass:hover,
-  [data-theme="dark"] .back-link.glass:hover,
-  [data-theme="auto"] .back-link.glass:hover,
-  [data-theme="dark"] .elsewhere-links a.glass:hover,
-  [data-theme="auto"] .elsewhere-links a.glass:hover {
-    box-shadow:
-      inset 0 0 0 1.5px rgba(255, 255, 255, calc(0.40 * var(--fixed-stroke-enabled, 0))),
-      inset 0 1px 0 rgba(255, 255, 255, calc(0.55 * var(--fixed-stroke-enabled, 0))),
-      inset 0 -1px 0 rgba(255, 255, 255, calc(0.20 * var(--fixed-stroke-enabled, 0))),
-      0 1px 2px rgba(0, 0, 0, 0.40);
-  }
-}
-
-/* ============================================
-   prefers-reduced-motion
-   ============================================ */
 @media (prefers-reduced-motion: reduce) {
   .global-nav::after,
   .nav-burger::after,

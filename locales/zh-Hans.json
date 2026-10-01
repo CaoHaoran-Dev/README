@@ -200,14 +200,10 @@
   "settings.title": "设置 — Liquid Glass",
   "settings.eyebrow": "设置",
   "settings.h1": "玻璃设置",
-  "settings.tagline": "实时调整玻璃效果，改动应用到所有 /glass/ 页面。",
-  "settings.theme": "主题",
-  "settings.themeLight": "浅色",
-  "settings.themeDark": "深色",
-  "settings.themeAuto": "跟随系统",
+  "settings.tagline": "实时调整玻璃效果，改动自动保存。",
   "settings.reset": "重置",
   "settings.export": "导出 CSS",
   "settings.preview": "预览",
-  "settings.previewCard": "这是一个玻璃卡片，把鼠标移到我上面。",
+  "settings.previewCard": "这是一个玻璃卡片。把鼠标移到我上面。",
   "settings.previewBtn": "玻璃按钮"
 }
