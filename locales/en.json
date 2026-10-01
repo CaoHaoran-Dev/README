@@ -200,10 +200,15 @@
   "settings.title": "Settings — Liquid Glass",
   "settings.eyebrow": "Settings",
   "settings.h1": "Glass Settings",
-  "settings.tagline": "Tweak the glass live. Changes are saved to localStorage.",
+  "settings.tagline": "Tweak the glass live. Changes apply to all /glass/ pages.",
+  "settings.theme": "Theme",
+  "settings.themeLight": "Light",
+  "settings.themeDark": "Dark",
+  "settings.themeAuto": "Follow system",
   "settings.reset": "Reset",
   "settings.export": "Export CSS",
   "settings.preview": "Preview",
   "settings.previewCard": "This is a glass card. Move the mouse over me.",
   "settings.previewBtn": "Glass button"
+
 }

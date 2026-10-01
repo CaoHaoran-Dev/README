@@ -1,8 +1,8 @@
 /* ============================================
-   Tokens — 全局统一视觉参数
+   Tokens
    ============================================ */
 :root {
-  /* ---------- 基础色 ---------- */
+  /* ---------- 亮色（默认）---------- */
   --bg: #FFFFFF;
   --bg-alt: #F5F5F7;
   --text: #1D1D1F;
@@ -14,7 +14,6 @@
   --divider: #D2D2D7;
   --link: #06C;
 
-  /* ---------- 布局 ---------- */
   --max-width: 980px;
   --nav-height: 48px;
   --nav-top: 16px;
@@ -22,7 +21,6 @@
   --nav-max-width: 1400px;
   --nav-gap: 8px;
 
-  /* ---------- 圆角 ---------- */
   --radius-lg: 22px;
   --radius-md: 18px;
   --radius-sm: 14px;
@@ -30,60 +28,98 @@
   --radius-dropdown: 28px;
   --radius-drawer: 22px;
 
-  /* ---------- 玻璃基色 ---------- */
   --glass-rgb: 255, 255, 255;
-
-  /* ---------- 玻璃透明度 ---------- */
   --glass-opacity: 0.35;
   --glass-opacity-hover: 0.55;
-
-  /* ---------- 玻璃模糊 ---------- */
   --glass-blur: 24px;
   --glass-saturate: 190%;
 
-  /* ---------- 玻璃内发光边 ---------- */
-  --glass-ring: rgba(255, 255, 255, 1.00);
-  --glass-ring-soft: rgba(255, 255, 255, 0.70);
-
-  /* ---------- 阴影 ---------- */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.10);
   --shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.15);
 
-  /* ---------- 动画 ---------- */
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur-fast: 0.2s;
   --dur-base: 0.3s;
   --dur-slow: 0.5s;
 
-  /* ---------- 鼠标跟随高光 ---------- */
+  /* 高光总开关（1 = 开，0 = 关）*/
+  --sheen-enabled: 1;
+  --specular-enabled: 1;
+  --stroke-enabled: 1;
+  --fixed-stroke-enabled: 0;   /* 暗色固定描边，默认关 */
+
+  /* 鼠标光晕 */
   --sheen-size: 200px;
   --sheen-color: rgba(255, 255, 255, 0.45);
   --sheen-color-edge: rgba(255, 255, 255, 0);
   --sheen-stop: 70%;
 
-  /* ============================================
-     webglass.js — 液态玻璃参数
-     细白边缘高光
-     ============================================ */
+  /* 内描边（亮色）*/
+  --glass-ring: rgba(255, 255, 255, 1.00);
+  --glass-ring-soft: rgba(255, 255, 255, 0.70);
+
+  /* webglass */
   --wg-render: true;
   --wg-shape: squircle;
   --wg-refraction: 1.45;
-  --wg-bezel: 0.15;               /* 边缘高光带窄 */
+  --wg-bezel: 0.15;
   --wg-scale: 40;
   --wg-blur: 0;
-  --wg-light-angle: -90;          /* 光源从顶部 */
-  --wg-specular-strength: 1.0;    /* 高光最白 */
-  --wg-specular-width: 0.06;      /* 高光带内更窄 */
+  --wg-light-angle: -90;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.06;
   --wg-specular-edge: 0;
-  --wg-specular-back: 0.35;       /* 对面高光（让整体更亮）*/
+  --wg-specular-back: 0.35;
   --wg-bg-opacity: 0.15;
 }
 
+/* ============================================
+   深色变量 —— 两种触发方式：
+   1) [data-theme="dark"] —— 手动切
+   2) @media + [data-theme="auto"] —— 跟随系统
+   ============================================ */
+
+/* ---------- 手动深色 ---------- */
+[data-theme="dark"] {
+  --bg: #000000;
+  --bg-alt: #1D1D1F;
+  --text: #F5F5F7;
+  --secondary: #86868B;
+  --accent: #2997FF;
+  --accent-rgb: 41, 151, 255;
+  --accent-hover: #47A9FF;
+  --accent-deep: #6FBCFF;
+  --divider: #424245;
+  --link: #2997FF;
+
+  --glass-rgb: 28, 28, 30;
+  --glass-opacity: 0.55;
+  --glass-opacity-hover: 0.75;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.30);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.50);
+  --shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.70);
+
+  /* 暗色：关 webglass specular、内描边、鼠标光晕 —— 由 Settings 里开关控制 */
+  --glass-ring: rgba(255, 255, 255, 0);
+  --glass-ring-soft: rgba(255, 255, 255, 0);
+  --sheen-color: rgba(255, 255, 255, 0);
+  --sheen-color-edge: rgba(255, 255, 255, 0);
+  --wg-specular-strength: 0;
+  --wg-specular-back: 0;
+  --wg-bg-opacity: 0.20;
+
+  /* 暗色默认启用固定描边 */
+  --fixed-stroke-enabled: 1;
+}
+
+/* ---------- 跟随系统 ---------- */
 @media (prefers-color-scheme: dark) {
-  :root {
+  [data-theme="auto"] {
     --bg: #000000;
     --bg-alt: #1D1D1F;
     --text: #F5F5F7;
@@ -99,19 +135,19 @@
     --glass-opacity: 0.55;
     --glass-opacity-hover: 0.75;
 
-    --glass-ring: rgba(255, 255, 255, 0.55);
-    --glass-ring-soft: rgba(255, 255, 255, 0.35);
-
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
     --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.30);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.50);
     --shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.70);
 
-    --sheen-color: rgba(255, 255, 255, 0.30);
+    --glass-ring: rgba(255, 255, 255, 0);
+    --glass-ring-soft: rgba(255, 255, 255, 0);
+    --sheen-color: rgba(255, 255, 255, 0);
     --sheen-color-edge: rgba(255, 255, 255, 0);
-
+    --wg-specular-strength: 0;
+    --wg-specular-back: 0;
     --wg-bg-opacity: 0.20;
-    --wg-specular-strength: 0.85;
-    --wg-specular-back: 0.25;
+
+    --fixed-stroke-enabled: 1;
   }
 }
