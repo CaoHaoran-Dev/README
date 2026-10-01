@@ -195,5 +195,15 @@
   "detail.webdemo.p.languages": "Bilingual support, following the same pattern as the native app.",
   "detail.webdemo.p.why": "The native app requires macOS. The Web Demo runs anywhere. It's a way to try RunProcess without installing anything, and a way to show what the interface looks like without asking someone to open Xcode.",
   "detail.webdemo.viewRepo": "View Repository ›",
-  "detail.webdemo.tryDemo": "Try Web Demo ›"
+  "detail.webdemo.tryDemo": "Try Web Demo ›",
+
+  "settings.title": "Settings — Liquid Glass",
+  "settings.eyebrow": "Settings",
+  "settings.h1": "Glass Settings",
+  "settings.tagline": "Tweak the glass live. Changes are saved to localStorage.",
+  "settings.reset": "Reset",
+  "settings.export": "Export CSS",
+  "settings.preview": "Preview",
+  "settings.previewCard": "This is a glass card. Move the mouse over me.",
+  "settings.previewBtn": "Glass button"
 }

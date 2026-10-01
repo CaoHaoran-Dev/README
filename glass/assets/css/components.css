@@ -1,0 +1,169 @@
+/* ============================================
+   玻璃容器 + 卡片
+   ============================================ */
+.glass-project {
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  overflow: hidden;
+  cursor: grab;
+
+  background: rgba(var(--glass-rgb), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+
+  box-shadow:
+    inset 0 0 0 1.5px var(--glass-ring),
+    inset 0 1px 0 var(--glass-ring),
+    var(--shadow-sm),
+    var(--shadow-lg);
+
+  /* 卡片：细白高光 */
+  --wg-light-angle: -90;
+  --wg-bezel: 0.18;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.06;
+  --wg-specular-back: 0.35;
+}
+
+.glass-project:active { cursor: grabbing; }
+.glass-project:last-child { margin-bottom: 0; }
+
+.project {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.project-meta h3 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+.project-meta .tagline { font-size: 17px; color: var(--secondary); font-style: italic; }
+.project-body p { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+.project-body .stack {
+  font-size: 13px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  color: var(--secondary);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.project-body .links { display: flex; gap: 24px; flex-wrap: wrap; }
+.project-body .links a { font-size: 15px; }
+
+.glass-project .stack-group { padding: 24px; margin-bottom: 0; }
+.glass-project .about-preview { padding: 32px; }
+.glass-project .elsewhere-links { padding: 8px 24px; }
+
+/* ============================================
+   Detail — Links 组
+   ============================================ */
+.detail-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+.detail-links a.glass { display: inline-block; margin: 0; }
+
+/* ============================================
+   Detail — Specs 表
+   ============================================ */
+.detail-specs {
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin: 32px 0;
+  position: relative;
+  isolation: isolate;
+
+  background: rgba(var(--glass-rgb), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+
+  box-shadow:
+    inset 0 0 0 1.5px var(--glass-ring),
+    inset 0 1px 0 var(--glass-ring),
+    var(--shadow-sm),
+    var(--shadow-lg);
+
+  --wg-light-angle: -90;
+  --wg-bezel: 0.18;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.06;
+  --wg-specular-back: 0.35;
+}
+
+.detail-specs .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.detail-specs .row .label { color: var(--secondary); }
+.detail-specs .row .value {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 13px;
+}
+
+/* ============================================
+   Stack Grid
+   ============================================ */
+.stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.stack-grid span {
+  font-size: 14px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--divider);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+.stack-group-label {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 16px;
+}
+
+/* ============================================
+   Back Link
+   ============================================ */
+.back-link {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+/* ============================================
+   Download Row
+   ============================================ */
+.download-row {
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin: 32px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  isolation: isolate;
+
+  background: rgba(var(--glass-rgb), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+
+  box-shadow:
+    inset 0 0 0 1.5px var(--glass-ring),
+    inset 0 1px 0 var(--glass-ring),
+    var(--shadow-sm),
+    var(--shadow-lg);
+
+  --wg-light-angle: -90;
+  --wg-bezel: 0.18;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.06;
+  --wg-specular-back: 0.35;
+}
+
+.download-note { font-size: 13px; color: var(--secondary); }

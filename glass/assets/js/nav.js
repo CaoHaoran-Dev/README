@@ -1,55 +1,53 @@
 /* nav.js — glass 版导航，i18n 版
  * 站点根：/README/glass/
  * 文案与主站共用 /README/locales/
+ *
+ * DOM 结构（匹配 main.css 的定位）：
+ *   .nav-shell
+ *     .global-nav
+ *     .nav-dropdown    ← 相对 .nav-shell absolute
+ *   .mobile-drawer      ← 独立 fixed
  */
 (function () {
-  var path = window.location.pathname;
+  var path  = window.location.pathname;
   var BASE  = "/README/";
   var GLASS = BASE + "glass/";
   var MAIN  = BASE;
 
-  function buildHTML(t) {
-    var T = {
-      nav: {
-        projects: t("nav.projects"),
-        stack:    t("nav.stack"),
-        about:    t("nav.about"),
-        github:   t("nav.github")
-      },
-      brand:   t("nav.brand"),
-      eyebrow: t("nav.explore"),
-      heading: t("nav.allProjects"),
-      big: [
-        { label: t("nav.swiftZip"),   href: GLASS + "projects/swift-zip-manager.html" },
-        { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" }
-      ],
-      cols: [
-        { title: t("nav.inDev"), links: [
-          { label: t("nav.taskview"), href: GLASS + "projects/taskview.html" }
-        ]},
-        { title: t("nav.more"), links: [
-          { label: t("nav.allProjectsLink"), href: GLASS + "projects/" },
-          { label: t("nav.stack"),           href: GLASS + "#stack" },
-          { label: t("nav.about"),           href: GLASS + "about/" },
-          { label: t("footer.backMain"),     href: MAIN }
-        ]},
-        { title: t("nav.source"), links: [
-          { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
-          { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
-          { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
-          { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
-        ]}
-      ],
-      drawer: { title: t("nav.menu"), close: t("nav.close") }
-    };
+  function buildNav(t) {
+    var topLinks =
+      '<a href="' + GLASS + 'projects/"' + (path.indexOf("projects") !== -1 ? ' class="active"' : '') + '>' + t("nav.projects") + '</a>' +
+      '<a href="' + GLASS + '#stack">' + t("nav.stack") + '</a>' +
+      '<a href="' + GLASS + 'about/"' + (path.indexOf("about") !== -1 ? ' class="active"' : '') + '>' + t("nav.about") + '</a>' +
+      '<a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">' + t("nav.github") + '</a>';
 
-    function isActive(seg) { return path.indexOf(seg) !== -1; }
+    var big = [
+      { label: t("nav.swiftZip"),   href: GLASS + "projects/swift-zip-manager.html" },
+      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" }
+    ];
+    var cols = [
+      { title: t("nav.inDev"), links: [
+        { label: t("nav.taskview"), href: GLASS + "projects/taskview.html" }
+      ]},
+      { title: t("nav.more"), links: [
+        { label: t("nav.allProjectsLink"), href: GLASS + "projects/" },
+        { label: t("nav.stack"),           href: GLASS + "#stack" },
+        { label: t("nav.about"),           href: GLASS + "about/" },
+        { label: t("footer.backMain"),     href: MAIN }
+      ]},
+      { title: t("nav.source"), links: [
+        { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
+        { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+        { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
+        { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
+      ]}
+    ];
 
-    var bigLinksHTML = T.big.map(function (l) {
+    var bigHTML = big.map(function (l) {
       return '<a class="mega-item" href="' + l.href + '">' + l.label + '</a>';
     }).join("");
 
-    var columnsHTML = T.cols.map(function (g) {
+    var colsHTML = cols.map(function (g) {
       var items = g.links.map(function (l) {
         var ext = l.href.indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : '';
         return '<li><a href="' + l.href + '"' + ext + '>' + l.label + '</a></li>';
@@ -60,29 +58,61 @@
              '</div>';
     }).join("");
 
-    var megaHTML =
-      '<div class="nav-dropdown">' +
+    var dropdownHTML =
+      '<div class="nav-dropdown" id="nav-dropdown" role="dialog" aria-modal="true" aria-label="' + t("nav.menu") + '">' +
         '<div class="nav-dropdown-inner">' +
-          '<div class="mega-eyebrow">' + T.eyebrow + '</div>' +
-          '<div class="mega-heading">' + T.heading + '</div>' +
+          '<div class="mega-eyebrow">' + t("nav.explore") + '</div>' +
+          '<div class="mega-heading">' + t("nav.allProjects") + '</div>' +
           '<div class="mega-grid">' +
-            '<div class="mega-big">' + bigLinksHTML + '</div>' +
-            '<div class="mega-cols">' + columnsHTML + '</div>' +
+            '<div class="mega-big">' + bigHTML + '</div>' +
+            '<div class="mega-cols">' + colsHTML + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
 
-    var linksHTML =
-      '<a href="' + GLASS + 'projects/"' + (isActive("projects") ? ' class="active"' : '') + '>' + T.nav.projects + '</a>' +
-      '<a href="' + GLASS + '#stack">' + T.nav.stack + '</a>' +
-      '<a href="' + GLASS + 'about/"' + (isActive("about") ? ' class="active"' : '') + '>' + T.nav.about + '</a>' +
-      '<a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">' + T.nav.github + '</a>';
+    return '' +
+      '<div class="nav-shell">' +
+        '<header class="global-nav">' +
+          '<div class="global-nav-inner">' +
+            '<a href="' + GLASS + '" class="brand">' + t("nav.brand") + '</a>' +
+            '<nav class="desktop-nav">' + topLinks + '</nav>' +
+            '<button class="nav-burger" aria-label="' + t("nav.menu") + '" aria-expanded="false" aria-controls="nav-dropdown">' +
+              '<span></span><span></span>' +
+            '</button>' +
+          '</div>' +
+        '</header>' +
+        dropdownHTML +
+      '</div>';
+  }
 
-    var drawerBig = T.big.map(function (l) {
+  function buildDrawer(t) {
+    var big = [
+      { label: t("nav.swiftZip"),   href: GLASS + "projects/swift-zip-manager.html" },
+      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" }
+    ];
+    var cols = [
+      { title: t("nav.inDev"), links: [
+        { label: t("nav.taskview"), href: GLASS + "projects/taskview.html" }
+      ]},
+      { title: t("nav.more"), links: [
+        { label: t("nav.allProjectsLink"), href: GLASS + "projects/" },
+        { label: t("nav.stack"),           href: GLASS + "#stack" },
+        { label: t("nav.about"),           href: GLASS + "about/" },
+        { label: t("footer.backMain"),     href: MAIN }
+      ]},
+      { title: t("nav.source"), links: [
+        { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
+        { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+        { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
+        { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
+      ]}
+    ];
+
+    var bigHTML = big.map(function (l) {
       return '<a href="' + l.href + '">' + l.label + '</a>';
     }).join("");
 
-    var drawerCols = T.cols.map(function (g) {
+    var colsHTML = cols.map(function (g) {
       var items = g.links.map(function (l) {
         var ext = l.href.indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : '';
         return '<li><a href="' + l.href + '"' + ext + '>' + l.label + '</a></li>';
@@ -93,56 +123,42 @@
              '</div>';
     }).join("");
 
-    var drawerHTML =
-      '<div class="mobile-drawer">' +
+    return '' +
+      '<div class="mobile-drawer" role="dialog" aria-modal="true" aria-label="' + t("nav.menu") + '">' +
         '<div class="mobile-drawer-header">' +
-          '<span class="mobile-drawer-title">' + T.drawer.title + '</span>' +
-          '<button class="mobile-drawer-close" aria-label="' + T.drawer.close + '">' +
+          '<span class="mobile-drawer-title">' + t("nav.menu") + '</span>' +
+          '<button class="mobile-drawer-close" aria-label="' + t("nav.close") + '">' +
             '<svg width="20" height="20" viewBox="0 0 20 20" fill="none">' +
               '<path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
             '</svg>' +
           '</button>' +
         '</div>' +
         '<div class="mobile-drawer-body">' +
-          '<div class="drawer-big">' + drawerBig + '</div>' +
-          '<div class="drawer-cols">' + drawerCols + '</div>' +
+          '<div class="drawer-big">' + bigHTML + '</div>' +
+          '<div class="drawer-cols">' + colsHTML + '</div>' +
         '</div>' +
       '</div>';
-
-    return '<div class="nav-shell">' +
-             '<header class="global-nav">' +
-               '<div class="global-nav-inner">' +
-                 '<a href="' + GLASS + '" class="brand">' + T.brand + '</a>' +
-                 '<nav class="desktop-nav">' + linksHTML + '</nav>' +
-                 '<button class="nav-burger" aria-label="' + T.drawer.title + '" aria-expanded="false">' +
-                   '<span></span>' +
-                   '<span></span>' +
-                 '</button>' +
-               '</div>' +
-             '</header>' +
-             megaHTML +
-           '</div>' +
-           '<div class="nav-backdrop"></div>' +
-           drawerHTML;
   }
 
   function bindEvents() {
-    var shell = document.querySelector('.nav-shell');
-    var burger = document.querySelector('.nav-burger');
+    var burger   = document.querySelector('.nav-burger');
     var dropdown = document.querySelector('.nav-dropdown');
     var backdrop = document.querySelector('.nav-backdrop');
-    var drawer = document.querySelector('.mobile-drawer');
+    var drawer   = document.querySelector('.mobile-drawer');
     var closeBtn = document.querySelector('.mobile-drawer-close');
+
+    if (!burger) return;
 
     var isMobile = function () {
       return window.matchMedia('(max-width: 734px)').matches;
     };
 
     var setExpanded = function (open) {
-      if (burger) burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
 
-    if (burger && dropdown) {
+    /* ---------- 桌面下拉 ---------- */
+    if (dropdown) {
       var closeTimer = null;
 
       var openDD = function () {
@@ -153,13 +169,13 @@
       };
 
       var closeDD = function (delay) {
-        if (closeTimer) { clearTimeout(closeTimer); }
+        if (closeTimer) clearTimeout(closeTimer);
         closeTimer = setTimeout(function () {
           dropdown.classList.remove('is-open');
           if (backdrop) backdrop.classList.remove('is-open');
           setExpanded(false);
           closeTimer = null;
-        }, delay == null ? 150 : delay);
+        }, delay == null ? 200 : delay);
       };
 
       var toggleDD = function () {
@@ -185,13 +201,7 @@
 
       burger.addEventListener('click', function (e) {
         e.preventDefault();
-        if (isMobile()) {
-          if (drawer) {
-            drawer.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-          }
-          return;
-        }
+        if (isMobile()) return;
         toggleDD();
       });
 
@@ -202,7 +212,7 @@
       document.addEventListener('pointerdown', function (e) {
         if (isMobile()) return;
         if (!dropdown.classList.contains('is-open')) return;
-        if (shell && shell.contains(e.target)) return;
+        if (burger.contains(e.target)) return;
         if (dropdown.contains(e.target)) return;
         closeDD(0);
       });
@@ -212,6 +222,7 @@
       }
     }
 
+    /* ---------- 移动抽屉 ---------- */
     if (drawer) {
       var closeDrawer = function () {
         drawer.classList.remove('is-open');
@@ -231,8 +242,16 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeDrawer();
       });
+
+      burger.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!isMobile()) return;
+        drawer.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
     }
 
+    /* ---------- 视口变化复位 ---------- */
     window.addEventListener('resize', function () {
       if (isMobile()) {
         if (dropdown) dropdown.classList.remove('is-open');
@@ -247,8 +266,14 @@
 
   function inject() {
     window.i18n.ready(function (t) {
-      document.body.insertAdjacentHTML("afterbegin", buildHTML(t));
+      document.body.insertAdjacentHTML("afterbegin",
+        buildNav(t) +
+        '<div class="nav-backdrop"></div>' +
+        buildDrawer(t)
+      );
+
       bindEvents();
+      document.dispatchEvent(new CustomEvent('nav:ready'));
     });
   }
 

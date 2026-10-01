@@ -1,5 +1,5 @@
 /* interactions.js — 液态玻璃交互特效
- * 1. 光照角度追踪 + 环境借色 + 光标追踪光晕
+ * 1. 光照角度追踪 + 环境借色 + 光标追踪光晕（事件委托）
  * 2. 按压变形（凹陷）
  * 3. 拖动形变（拉伸）
  * 4. 弹性回弹
@@ -33,7 +33,6 @@
     '.project-body .links a.glass, .detail-body a.glass, ' +
     '.back-link.glass, .elsewhere-links a.glass';
 
-  /* 大块玻璃：走「卡片档」拖动幅度 */
   function isLargeGlass(el) {
     return el.classList.contains('glass-project') ||
            el.classList.contains('detail-specs') ||
@@ -41,7 +40,6 @@
            el.classList.contains('global-nav');
   }
 
-  /* 内部有链接/按钮的容器：点它们时跳过 */
   function hasInnerControls(el) {
     return el.classList.contains('global-nav') ||
            el.classList.contains('detail-specs') ||
@@ -57,41 +55,50 @@
 
   /* ============================================
      1. 光照角度追踪 + 环境借色 + 光晕跟随
+     事件委托：mousemove 绑在 document，对动态插入的 DOM 自动生效
      ============================================ */
   function initLight() {
     if (isTouch) return;
+    if (initLight.__bound) return;
+    initLight.__bound = true;
 
-    document.querySelectorAll(LIGHT_SELECTOR).forEach(function (el) {
-      el.addEventListener('mousemove', function (e) {
-        var rect = el.getBoundingClientRect();
+    document.addEventListener('mousemove', function (e) {
+      var el = e.target.closest(LIGHT_SELECTOR);
+      if (!el) return;
 
-        var x = (e.clientX - rect.left) / rect.width - 0.5;
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
+      var rect = el.getBoundingClientRect();
 
-        var angle = Math.atan2(y, x) * 180 / Math.PI;
-        el.style.setProperty('--wg-light-angle', angle.toFixed(1));
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
 
-        var mx = ((e.clientX - rect.left) / rect.width) * 100;
-        var my = ((e.clientY - rect.top) / rect.height) * 100;
-        el.style.setProperty('--mx', mx + '%');
-        el.style.setProperty('--my', my + '%');
+      var angle = Math.atan2(y, x) * 180 / Math.PI;
+      el.style.setProperty('--wg-light-angle', angle.toFixed(1));
 
-        var behind = document.elementFromPoint(e.clientX, e.clientY);
-        if (behind && behind !== el && !el.contains(behind)) {
-          var bg = getComputedStyle(behind).backgroundColor;
-          var match = bg.match(/\d+/g);
-          if (match && match.length >= 3) {
-            el.style.setProperty('--wg-tint', match[0] + ', ' + match[1] + ', ' + match[2]);
-          }
+      var mx = ((e.clientX - rect.left) / rect.width) * 100;
+      var my = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty('--mx', mx + '%');
+      el.style.setProperty('--my', my + '%');
+
+      var behind = document.elementFromPoint(e.clientX, e.clientY);
+      if (behind && behind !== el && !el.contains(behind)) {
+        var bg = getComputedStyle(behind).backgroundColor;
+        var match = bg.match(/\d+/g);
+        if (match && match.length >= 3) {
+          el.style.setProperty('--wg-tint', match[0] + ', ' + match[1] + ', ' + match[2]);
         }
-      });
+      }
+    }, true);
 
-      el.addEventListener('mouseleave', function () {
-        el.style.setProperty('--wg-light-angle', '-55');
-        el.style.setProperty('--mx', '50%');
-        el.style.setProperty('--my', '50%');
-      });
-    });
+    document.addEventListener('mouseout', function (e) {
+      var el = e.target.closest(LIGHT_SELECTOR);
+      if (!el) return;
+      var related = e.relatedTarget;
+      if (related && el.contains(related)) return;
+
+      el.style.setProperty('--wg-light-angle', '-55');
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '50%');
+    }, true);
   }
 
   /* ============================================
@@ -99,6 +106,9 @@
      ============================================ */
   function initPressDeform() {
     document.querySelectorAll(PRESS_SELECTOR).forEach(function (el) {
+      if (el.__pressBound) return;
+      el.__pressBound = true;
+
       disableNativeDrag(el);
 
       el.addEventListener('pointerdown', function (e) {
@@ -136,6 +146,9 @@
     if (isTouch) return;
 
     document.querySelectorAll(DRAG_SELECTOR).forEach(function (el) {
+      if (el.__dragBound) return;
+      el.__dragBound = true;
+
       disableNativeDrag(el);
 
       var isDragging = false;
@@ -216,7 +229,8 @@
      ============================================ */
   function initDropdown() {
     var dropdown = document.querySelector('.nav-dropdown');
-    if (!dropdown) return;
+    if (!dropdown || dropdown.__dropdownBound) return;
+    dropdown.__dropdownBound = true;
 
     var observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {
@@ -243,6 +257,12 @@
     initDragMorph();
     initDropdown();
   }
+
+  document.addEventListener('nav:ready', function () {
+    initPressDeform();
+    initDragMorph();
+    initDropdown();
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

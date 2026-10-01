@@ -1,0 +1,21 @@
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 734px) {
+  .hero { padding: 120px 22px 48px; }
+  .hero h1 { font-size: 40px; }
+  .hero .subhead { font-size: 21px; }
+  .section { padding: 56px 22px; }
+  .section-header h2 { font-size: 32px; }
+  .project { grid-template-columns: 1fr; gap: 20px; padding: 24px; }
+  .project-meta h3 { font-size: 22px; }
+  .detail-hero { padding: 120px 22px 40px; }
+  .detail-hero h1 { font-size: 36px; }
+
+  .desktop-nav { display: none; }
+  .nav-dropdown { display: none; }
+
+  .glass-project { border-radius: var(--radius-md); }
+  .detail-specs,
+  .download-row { border-radius: var(--radius-sm); }
+}

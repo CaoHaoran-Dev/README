@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-page="settings/index.html" data-i18n-title="settings.title">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — Haoran Cao</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/settings-apply.js"></script>
+<script src="../assets/js/webglass.js"></script>
+<style>
+  .settings-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 140px 22px 80px;
+  }
+
+  .settings-header { margin-bottom: 40px; }
+  .settings-header .eyebrow {
+    font-size: 14px; font-weight: 500;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .settings-header h1 {
+    font-size: 48px; font-weight: 700;
+    letter-spacing: -0.03em; margin-bottom: 12px;
+  }
+  .settings-header .tagline {
+    font-size: 17px; color: var(--secondary);
+  }
+
+  .settings-toolbar {
+    position: sticky; top: 0;
+    z-index: 10;
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding: 16px 0; margin-bottom: 32px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--divider);
+  }
+  .settings-toolbar button,
+  .settings-toolbar select {
+    font-size: 14px; font-family: inherit;
+    padding: 8px 16px;
+    border-radius: 980px;
+    border: 1px solid var(--divider);
+    background: var(--bg-alt);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .settings-toolbar button:hover,
+  .settings-toolbar select:hover { background: var(--divider); }
+  .settings-toolbar button.primary {
+    background: var(--accent);
+    color: #FFF;
+    border-color: var(--accent);
+  }
+  .settings-toolbar button.primary:hover { background: var(--accent-hover); }
+  .settings-toolbar .spacer { flex: 1; }
+
+  .settings-group {
+    margin-bottom: 40px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--divider);
+  }
+  .settings-group-title {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--secondary);
+    padding: 14px 20px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .settings-row {
+    display: grid;
+    grid-template-columns: 240px 1fr 80px;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14px;
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-row label {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .settings-row .hint {
+    display: block;
+    font-size: 11px;
+    color: var(--secondary);
+    font-weight: 400;
+    margin-top: 2px;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  }
+  .settings-row input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+  .settings-row input[type="color"] {
+    width: 100%; height: 32px;
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 2px;
+    cursor: pointer;
+    background: var(--bg);
+  }
+  .settings-row .value {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: var(--secondary);
+    text-align: right;
+  }
+
+  .preview {
+    margin-top: 48px;
+    padding: 32px;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--divider);
+    background: var(--bg-alt);
+  }
+  .preview-title {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--secondary);
+    margin-bottom: 20px;
+  }
+  .preview-row {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .preview-card {
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    background: rgba(var(--glass-rgb), var(--glass-opacity));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    box-shadow:
+      inset 0 0 0 1.5px var(--glass-ring),
+      inset 0 1px 0 var(--glass-ring),
+      var(--shadow-sm), var(--shadow-lg);
+    color: var(--text);
+    font-size: 14px;
+    flex: 1; min-width: 200px;
+  }
+  .preview-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    background: rgba(var(--glass-rgb), var(--glass-opacity));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    color: var(--accent);
+    border: none;
+    box-shadow:
+      inset 0 0 0 1.5px var(--glass-ring),
+      inset 0 1px 0 var(--glass-ring),
+      var(--shadow-sm);
+  }
+  .preview-bg {
+    background-image:
+      linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 25%, #A1C4FD 50%, #C2E9FB 75%, #FF9A9E 100%);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+  }
+
+  .export-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .export-modal.is-open { display: flex; }
+  .export-modal-box {
+    max-width: 640px; width: 100%;
+    max-height: 80vh;
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  }
+  .export-modal-header {
+    padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--divider);
+    font-weight: 600;
+  }
+  .export-modal-header button {
+    background: transparent; border: none;
+    font-size: 20px; cursor: pointer;
+    color: var(--text);
+    padding: 0 8px;
+  }
+  .export-modal textarea {
+    flex: 1;
+    width: 100%;
+    border: none;
+    padding: 20px;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: var(--bg-alt);
+    color: var(--text);
+    resize: none;
+    outline: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="settings-wrap">
+
+  <header class="settings-header">
+    <div class="eyebrow" data-i18n="settings.eyebrow"></div>
+    <h1 data-i18n="settings.h1"></h1>
+    <p class="tagline" data-i18n="settings.tagline"></p>
+  </header>
+
+  <div class="settings-toolbar">
+    <select id="preset">
+      <option value="">— Preset —</option>
+      <option value="default">Default</option>
+      <option value="clear">Clear</option>
+      <option value="frosted">Frosted</option>
+      <option value="dense">Dense</option>
+    </select>
+    <button id="reset" data-i18n="settings.reset"></button>
+    <button id="export" class="primary" data-i18n="settings.export"></button>
+    <span class="spacer"></span>
+    <button id="lang-btn">中 / EN</button>
+  </div>
+
+  <div id="controls"></div>
+
+  <div class="preview">
+    <div class="preview-title" data-i18n="settings.preview"></div>
+    <div class="preview-bg">
+      <div class="preview-row">
+        <div class="preview-card" data-i18n="settings.previewCard"></div>
+        <button class="preview-btn" data-i18n="settings.previewBtn"></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="export-modal" id="export-modal">
+  <div class="export-modal-box">
+    <div class="export-modal-header">
+      <span>token.css</span>
+      <button id="export-close">×</button>
+    </div>
+    <textarea id="export-text" readonly></textarea>
+  </div>
+</div>
+
+<script src="../assets/js/reveal.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/footer.js"></script>
+<script src="../assets/js/interactions.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'glass-settings';
+
+  var GROUPS = [
+    {
+      key: 'glass',
+      title: { en: 'Glass', 'zh-Hans': '玻璃' },
+      items: [
+        { var: '--glass-opacity', type: 'range', min: 0, max: 1, step: 0.01,
+          label: { en: 'Opacity', 'zh-Hans': '透明度' } },
+        { var: '--glass-opacity-hover', type: 'range', min: 0, max: 1, step: 0.01,
+          label: { en: 'Opacity (hover)', 'zh-Hans': '透明度 (hover)' } },
+        { var: '--glass-blur', type: 'range', min: 0, max: 80, step: 1, unit: 'px',
+          label: { en: 'Blur', 'zh-Hans': '模糊' } },
+        { var: '--glass-saturate', type: 'range', min: 100, max: 300, step: 5, unit: '%',
+          label: { en: 'Saturation', 'zh-Hans': '饱和度' } }
+      ]
+    },
+    {
+      key: 'glass-color',
+      title: { en: 'Glass Color', 'zh-Hans': '玻璃颜色' },
+      items: [
+        { var: '--glass-rgb', type: 'rgb',
+          label: { en: 'Base RGB', 'zh-Hans': '基色 RGB' } }
+      ]
+    },
+    {
+      key: 'radius',
+      title: { en: 'Radius', 'zh-Hans': '圆角' },
+      items: [
+        { var: '--radius-lg', type: 'range', min: 0, max: 40, step: 1, unit: 'px',
+          label: { en: 'Large (card)', 'zh-Hans': '大 (卡片)' } },
+        { var: '--radius-md', type: 'range', min: 0, max: 40, step: 1, unit: 'px',
+          label: { en: 'Medium (specs)', 'zh-Hans': '中 (specs)' } },
+        { var: '--radius-pill', type: 'range', min: 0, max: 999, step: 1, unit: 'px',
+          label: { en: 'Pill (button)', 'zh-Hans': '胶囊 (按钮)' } }
+      ]
+    },
+    {
+      key: 'nav',
+      title: { en: 'Nav', 'zh-Hans': '导航' },
+      items: [
+        { var: '--nav-height', type: 'range', min: 32, max: 96, step: 1, unit: 'px',
+          label: { en: 'Height', 'zh-Hans': '高度' } },
+        { var: '--nav-top', type: 'range', min: 0, max: 48, step: 1, unit: 'px',
+          label: { en: 'Top margin', 'zh-Hans': '顶部边距' } },
+        { var: '--nav-side', type: 'range', min: 0, max: 48, step: 1, unit: 'px',
+          label: { en: 'Side margin', 'zh-Hans': '左右边距' } },
+        { var: '--nav-gap', type: 'range', min: 0, max: 32, step: 1, unit: 'px',
+          label: { en: 'Dropdown gap', 'zh-Hans': '下拉间隙' } }
+      ]
+    },
+    {
+      key: 'sheen',
+      title: { en: 'Sheen (mouse glow)', 'zh-Hans': '光晕' },
+      items: [
+        { var: '--sheen-size', type: 'range', min: 50, max: 500, step: 10, unit: 'px',
+          label: { en: 'Size', 'zh-Hans': '大小' } }
+      ]
+    },
+    {
+      key: 'wg',
+      title: { en: 'WebGlass (SVG refraction)', 'zh-Hans': 'WebGlass (SVG 折射)' },
+      items: [
+        { var: '--wg-refraction', type: 'range', min: 1.0, max: 2.2, step: 0.05,
+          label: { en: 'Refraction', 'zh-Hans': '折射率' } },
+        { var: '--wg-bezel', type: 'range', min: 0, max: 0.6, step: 0.01,
+          label: { en: 'Bezel width', 'zh-Hans': '边框宽度' } },
+        { var: '--wg-scale', type: 'range', min: 0, max: 100, step: 1, unit: 'px',
+          label: { en: 'Displacement scale', 'zh-Hans': '位移强度' } },
+        { var: '--wg-specular-strength', type: 'range', min: 0, max: 1, step: 0.05,
+          label: { en: 'Specular strength', 'zh-Hans': '高光强度' } },
+        { var: '--wg-specular-width', type: 'range', min: 0, max: 0.5, step: 0.01,
+          label: { en: 'Specular width', 'zh-Hans': '高光宽度' } },
+        { var: '--wg-bg-opacity', type: 'range', min: 0, max: 0.6, step: 0.01,
+          label: { en: 'WG bg opacity', 'zh-Hans': 'WG 白底透明度' } }
+      ]
+    }
+  ];
+
+  function getVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+  function setVar(name, value) {
+    document.documentElement.style.setProperty(name, value);
+  }
+  function parseNum(str) {
+    var m = String(str).match(/-?\d+\.?\d*/);
+    return m ? parseFloat(m[0]) : 0;
+  }
+  function rgbToHex(rgb) {
+    var m = String(rgb).match(/\d+/g);
+    if (!m || m.length < 3) return '#ffffff';
+    return '#' + [m[0], m[1], m[2]].map(function (n) {
+      return ('0' + parseInt(n).toString(16)).slice(-2);
+    }).join('');
+  }
+  function hexToRgb(hex) {
+    var m = hex.replace('#', '').match(/.{2}/g);
+    if (!m || m.length < 3) return '255, 255, 255';
+    return [parseInt(m[0], 16), parseInt(m[1], 16), parseInt(m[2], 16)].join(', ');
+  }
+
+  function buildUI() {
+    var container = document.getElementById('controls');
+    var html = '';
+
+    GROUPS.forEach(function (group) {
+      html += '<div class="settings-group">';
+      html += '<div class="settings-group-title" data-group-title="' + group.key + '"></div>';
+
+      group.items.forEach(function (item) {
+        var current = getVar(item.var);
+        var num = parseNum(current);
+
+        html += '<div class="settings-row">';
+        html += '<label>';
+        html += '<span data-var-name="' + item.var + '"></span>';
+        html += '<span class="hint">' + item.var + '</span>';
+        html += '</label>';
+
+        if (item.type === 'range') {
+          html += '<input type="range" data-var-range="' + item.var + '" '
+            + 'min="' + item.min + '" max="' + item.max + '" '
+            + 'step="' + item.step + '" value="' + num + '">';
+          html += '<span class="value" data-var-value="' + item.var + '">' + current + '</span>';
+        } else if (item.type === 'rgb') {
+          html += '<input type="color" data-var-color="' + item.var + '" value="' + rgbToHex(current) + '">';
+          html += '<span class="value" data-var-value="' + item.var + '">' + current + '</span>';
+        }
+
+        html += '</div>';
+      });
+
+      html += '</div>';
+    });
+
+    container.innerHTML = html;
+    fillI18n();
+    bindEvents();
+  }
+
+  function fillI18n() {
+    var isZh = window.i18n.lang === 'zh-Hans';
+    var lang = isZh ? 'zh-Hans' : 'en';
+    var t = window.i18n.t;
+
+    GROUPS.forEach(function (group) {
+      var titleEl = document.querySelector('[data-group-title="' + group.key + '"]');
+      if (titleEl) titleEl.textContent = group.title[lang] || group.title.en;
+
+      group.items.forEach(function (item) {
+        var nameEl = document.querySelector('[data-var-name="' + item.var + '"]');
+        if (nameEl) nameEl.textContent = item.label[lang] || item.label.en;
+      });
+    });
+
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+  }
+
+  function bindEvents() {
+    document.querySelectorAll('[data-var-range]').forEach(function (input) {
+      input.addEventListener('input', function () {
+        var varName = input.getAttribute('data-var-range');
+        var val = input.value;
+
+        if (varName === '--glass-saturate') setVar(varName, val + '%');
+        else if (varName.indexOf('--wg-') === 0 && (
+          varName === '--wg-refraction' || varName === '--wg-bezel'
+          || varName === '--wg-specular-strength' || varName === '--wg-specular-width'
+          || varName === '--wg-bg-opacity')) setVar(varName, val);
+        else if (varName === '--glass-opacity' || varName === '--glass-opacity-hover') setVar(varName, val);
+        else setVar(varName, val + 'px');
+
+        var display = document.querySelector('[data-var-value="' + varName + '"]');
+        if (display) display.textContent = getVar(varName);
+
+        save();
+      });
+    });
+
+    document.querySelectorAll('[data-var-color]').forEach(function (input) {
+      input.addEventListener('input', function () {
+        var varName = input.getAttribute('data-var-color');
+        var rgb = hexToRgb(input.value);
+        setVar(varName, rgb);
+        var display = document.querySelector('[data-var-value="' + varName + '"]');
+        if (display) display.textContent = rgb;
+        save();
+      });
+    });
+
+    document.getElementById('reset').addEventListener('click', function () {
+      var msg = window.i18n.lang === 'zh-Hans' ? '重置所有设置？' : 'Reset all settings?';
+      if (!confirm(msg)) return;
+      localStorage.removeItem(STORAGE_KEY);
+      document.documentElement.removeAttribute('style');
+      location.reload();
+    });
+
+    document.getElementById('export').addEventListener('click', exportCSS);
+    document.getElementById('export-close').addEventListener('click', function () {
+      document.getElementById('export-modal').classList.remove('is-open');
+    });
+
+    document.getElementById('preset').addEventListener('change', function (e) {
+      applyPreset(e.target.value);
+    });
+
+    document.getElementById('lang-btn').addEventListener('click', function () {
+      var next = window.i18n.lang === 'zh-Hans' ? 'en' : 'zh-Hans';
+      window.i18n.switchTo(next);
+    });
+  }
+
+  function save() {
+    var obj = {};
+    var style = document.documentElement.getAttribute('style') || '';
+    style.split(';').forEach(function (pair) {
+      var i = pair.indexOf(':');
+      if (i < 0) return;
+      var k = pair.slice(0, i).trim();
+      var v = pair.slice(i + 1).trim();
+      if (k && v) obj[k] = v;
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {}
+  }
+
+  var PRESETS = {
+    default: {
+      '--glass-opacity': '0.35',
+      '--glass-opacity-hover': '0.55',
+      '--glass-blur': '24px',
+      '--glass-saturate': '190%',
+      '--wg-bg-opacity': '0.15',
+      '--wg-refraction': '1.45'
+    },
+    clear: {
+      '--glass-opacity': '0.10',
+      '--glass-opacity-hover': '0.25',
+      '--glass-blur': '32px',
+      '--glass-saturate': '200%',
+      '--wg-bg-opacity': '0.05',
+      '--wg-refraction': '1.55'
+    },
+    frosted: {
+      '--glass-opacity': '0.55',
+      '--glass-opacity-hover': '0.75',
+      '--glass-blur': '40px',
+      '--glass-saturate': '180%',
+      '--wg-bg-opacity': '0.30',
+      '--wg-refraction': '1.30'
+    },
+    dense: {
+      '--glass-opacity': '0.75',
+      '--glass-opacity-hover': '0.90',
+      '--glass-blur': '20px',
+      '--glass-saturate': '160%',
+      '--wg-bg-opacity': '0.40',
+      '--wg-refraction': '1.20'
+    }
+  };
+
+  function applyPreset(name) {
+    if (!name || !PRESETS[name]) return;
+    var preset = PRESETS[name];
+    Object.keys(preset).forEach(function (k) { setVar(k, preset[k]); });
+
+    document.querySelectorAll('[data-var-range]').forEach(function (input) {
+      var varName = input.getAttribute('data-var-range');
+      if (preset[varName] !== undefined) input.value = parseNum(preset[varName]);
+    });
+    document.querySelectorAll('[data-var-value]').forEach(function (el) {
+      var varName = el.getAttribute('data-var-value');
+      el.textContent = getVar(varName);
+    });
+
+    save();
+  }
+
+  function exportCSS() {
+    var lines = [':root {'];
+    document.documentElement.style.cssText.split(';').forEach(function (pair) {
+      var i = pair.indexOf(':');
+      if (i < 0) return;
+      var k = pair.slice(0, i).trim();
+      var v = pair.slice(i + 1).trim();
+      if (k.indexOf('--') === 0 && v) lines.push('  ' + k + ': ' + v + ';');
+    });
+    lines.push('}');
+
+    var text = lines.join('\n');
+    document.getElementById('export-text').value = text;
+    document.getElementById('export-modal').classList.add('is-open');
+
+    if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {});
+  }
+
+  function init() {
+    buildUI();
+    document.addEventListener('click', function (e) {
+      if (e.target.id === 'lang-btn') setTimeout(fillI18n, 300);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

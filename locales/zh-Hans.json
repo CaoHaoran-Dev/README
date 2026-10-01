@@ -195,5 +195,15 @@
   "detail.webdemo.p.languages": "双语支持，与原生应用采用相同的模式。",
   "detail.webdemo.p.why": "原生应用需要 macOS。Web Demo 可以在任何地方运行。它是一种无需安装就能试用 RunProcess 的方式，也是一种不必让人打开 Xcode 就能展示界面长相的方式。",
   "detail.webdemo.viewRepo": "查看代码仓库 ›",
-  "detail.webdemo.tryDemo": "试用 Web Demo ›"
+  "detail.webdemo.tryDemo": "试用 Web Demo ›",
+  
+  "settings.title": "设置 — Liquid Glass",
+  "settings.eyebrow": "设置",
+  "settings.h1": "玻璃设置",
+  "settings.tagline": "实时调整玻璃效果，改动自动保存。",
+  "settings.reset": "重置",
+  "settings.export": "导出 CSS",
+  "settings.preview": "预览",
+  "settings.previewCard": "这是一个玻璃卡片。把鼠标移到我上面。",
+  "settings.previewBtn": "玻璃按钮"
 }

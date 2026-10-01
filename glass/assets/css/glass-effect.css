@@ -1,0 +1,263 @@
+/* ============================================
+   Buttons
+   ============================================ */
+.btn-primary {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 400;
+  border: none;
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  text-decoration: none;
+
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 2px 8px rgba(var(--accent-rgb), 0.35);
+
+  transition:
+    transform var(--dur-slow) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-apple);
+  will-change: transform;
+
+  /* 按钮：更细更白的高光 */
+  --wg-light-angle: -90;
+  --wg-bezel: 0.25;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.08;
+  --wg-specular-back: 0.35;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  background: rgba(var(--glass-rgb), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: none;
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  text-decoration: none;
+  font-size: 17px;
+
+  box-shadow:
+    inset 0 0 0 1.5px var(--divider),
+    inset 0 1px 0 var(--glass-ring),
+    var(--shadow-sm),
+    var(--shadow-md);
+
+  transition:
+    transform var(--dur-slow) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-apple);
+  will-change: transform;
+
+  --wg-light-angle: -90;
+  --wg-bezel: 0.25;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.08;
+  --wg-specular-back: 0.35;
+}
+
+.btn-secondary:hover {
+  background: rgba(var(--glass-rgb), var(--glass-opacity-hover));
+  color: var(--accent-deep);
+  text-decoration: none;
+}
+
+.btn-secondary.btn-inline { padding: 8px 18px; font-size: 15px; }
+
+/* ============================================
+   玻璃链接 a.glass
+   ============================================ */
+.project-body .links a.glass,
+.detail-body a.glass,
+.back-link.glass,
+.elsewhere-links a.glass {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  background: rgba(var(--glass-rgb), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: none;
+  position: relative;
+  isolation: isolate;
+  touch-action: manipulation;
+  user-select: none;
+  text-decoration: none;
+
+  box-shadow:
+    inset 0 0 0 1.5px var(--glass-ring),
+    inset 0 1px 0 var(--glass-ring),
+    var(--shadow-sm);
+
+  transition: background var(--dur-fast) var(--ease-apple), color var(--dur-fast) var(--ease-apple);
+
+  --wg-light-angle: -90;
+  --wg-bezel: 0.25;
+  --wg-specular-strength: 1.0;
+  --wg-specular-width: 0.08;
+  --wg-specular-back: 0.35;
+}
+
+.project-body .links a.glass:hover,
+.detail-body a.glass:hover,
+.back-link.glass:hover,
+.elsewhere-links a.glass:hover {
+  color: var(--accent-deep);
+  text-decoration: none;
+  background: rgba(var(--glass-rgb), var(--glass-opacity-hover));
+}
+
+/* ============================================
+   液态玻璃光效 —— 鼠标跟随高光
+   ============================================ */
+.global-nav,
+.nav-burger,
+.nav-dropdown,
+.glass-project,
+.detail-specs,
+.download-row,
+.btn-primary,
+.btn-secondary,
+.project-body .links a.glass,
+.detail-body a.glass,
+.back-link.glass,
+.elsewhere-links a.glass {
+  position: relative;
+  isolation: isolate;
+}
+
+.global-nav::after,
+.nav-burger::after,
+.nav-dropdown::after,
+.glass-project::after,
+.detail-specs::after,
+.download-row::after,
+.btn-primary::after,
+.btn-secondary::after,
+.project-body .links a.glass::after,
+.detail-body a.glass::after,
+.back-link.glass::after,
+.elsewhere-links a.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle var(--sheen-size) at var(--mx, 50%) var(--my, 50%),
+    var(--sheen-color),
+    var(--sheen-color-edge) var(--sheen-stop)
+  );
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-apple);
+  z-index: 3;
+}
+
+.global-nav:hover::after,
+.nav-burger:hover::after,
+.nav-dropdown:hover::after,
+.glass-project:hover::after,
+.detail-specs:hover::after,
+.download-row:hover::after,
+.btn-primary:hover::after,
+.btn-secondary:hover::after,
+.project-body .links a.glass:hover::after,
+.detail-body a.glass:hover::after,
+.back-link.glass:hover::after,
+.elsewhere-links a.glass:hover::after {
+  opacity: 1;
+}
+
+.global-nav-inner,
+.nav-burger span,
+.nav-dropdown-inner,
+.glass-project > *,
+.detail-specs > *,
+.download-row > *,
+.btn-primary > *,
+.btn-secondary > * {
+  position: relative;
+  z-index: 4;
+}
+
+/* ============================================
+   触控 / 拖动
+   ============================================ */
+.global-nav,
+.nav-burger,
+.btn-primary,
+.btn-secondary,
+.project-body .links a.glass,
+.detail-body a.glass,
+.back-link.glass,
+.elsewhere-links a.glass {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.glass-project,
+.detail-specs,
+.download-row {
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+
+.glass-project:active,
+.detail-specs:active,
+.download-row:active {
+  cursor: grabbing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-nav::after,
+  .nav-burger::after,
+  .nav-dropdown::after,
+  .glass-project::after,
+  .detail-specs::after,
+  .download-row::after,
+  .btn-primary::after,
+  .btn-secondary::after,
+  .project-body .links a.glass::after,
+  .detail-body a.glass::after,
+  .back-link.glass::after,
+  .elsewhere-links a.glass::after {
+    display: none;
+  }
+  .glass-project,
+  .btn-primary,
+  .btn-secondary {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+@media (hover: none) {
+  .desktop-nav a:hover { opacity: 0.8; }
+  .nav-burger:hover { background: rgba(var(--glass-rgb), var(--glass-opacity)); }
+  .nav-burger:hover span { opacity: 1; }
+  .mega-item:hover { color: var(--text); }
+  .mega-col a:hover { opacity: 0.9; color: var(--text); }
+  .mobile-drawer-close:hover { opacity: 1; }
+}
