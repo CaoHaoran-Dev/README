@@ -1,12 +1,6 @@
 /* nav.js — glass 版导航，i18n 版
  * 站点根：/README/glass/
  * 文案与主站共用 /README/locales/
- *
- * DOM 结构（匹配 main.css 的定位）：
- *   .nav-shell
- *     .global-nav
- *     .nav-dropdown    ← 相对 .nav-shell absolute
- *   .mobile-drawer      ← 独立 fixed
  */
 (function () {
   var path  = window.location.pathname;
@@ -23,7 +17,8 @@
 
     var big = [
       { label: t("nav.swiftZip"),   href: GLASS + "projects/swift-zip-manager.html" },
-      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" }
+      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" },
+      { label: t("nav.processSH"),  href: GLASS + "projects/processsh.html" }
     ];
     var cols = [
       { title: t("nav.inDev"), links: [
@@ -38,6 +33,7 @@
       { title: t("nav.source"), links: [
         { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
         { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+        { label: t("nav.repoProcessSH"),  href: "https://github.com/CaoHaoran-Dev/ProcessSH" },
         { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
         { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
       ]}
@@ -88,7 +84,8 @@
   function buildDrawer(t) {
     var big = [
       { label: t("nav.swiftZip"),   href: GLASS + "projects/swift-zip-manager.html" },
-      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" }
+      { label: t("nav.runprocess"), href: GLASS + "projects/runprocess.html" },
+      { label: t("nav.processSH"),  href: GLASS + "projects/processsh.html" }
     ];
     var cols = [
       { title: t("nav.inDev"), links: [
@@ -103,6 +100,7 @@
       { title: t("nav.source"), links: [
         { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
         { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+        { label: t("nav.repoProcessSH"),  href: "https://github.com/CaoHaoran-Dev/ProcessSH" },
         { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
         { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
       ]}
@@ -157,7 +155,6 @@
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
 
-    /* ---------- 桌面下拉 ---------- */
     if (dropdown) {
       var closeTimer = null;
 
@@ -222,7 +219,6 @@
       }
     }
 
-    /* ---------- 移动抽屉 ---------- */
     if (drawer) {
       var closeDrawer = function () {
         drawer.classList.remove('is-open');
@@ -251,7 +247,6 @@
       });
     }
 
-    /* ---------- 视口变化复位 ---------- */
     window.addEventListener('resize', function () {
       if (isMobile()) {
         if (dropdown) dropdown.classList.remove('is-open');

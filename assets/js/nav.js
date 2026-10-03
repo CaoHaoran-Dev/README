@@ -1,10 +1,10 @@
 /* nav.js — 主站导航，i18n 版
- * 站点根从路径动态推导，兼容 /README/ 与 /README/zh-Hans/
+ * 站点根从路径动态推导，兼容 /README/
  */
 (function () {
   var path = window.location.pathname;
   var BASE = "/README/";
-  var SITE = (path.indexOf(BASE + "zh-Hans/") === 0) ? (BASE + "zh-Hans/") : BASE;
+  var SITE = BASE;
 
   function buildHTML(t) {
     var T = {
@@ -19,7 +19,8 @@
       heading: t("nav.allProjects"),
       big: [
         { label: t("nav.swiftZip"),   href: SITE + "projects/swift-zip-manager.html" },
-        { label: t("nav.runprocess"), href: SITE + "projects/runprocess.html" }
+        { label: t("nav.runprocess"), href: SITE + "projects/runprocess.html" },
+        { label: t("nav.processSH"),  href: SITE + "projects/processsh.html" }
       ],
       cols: [
         { title: t("nav.inDev"), links: [
@@ -33,6 +34,7 @@
         { title: t("nav.source"), links: [
           { label: t("nav.repoSwiftZip"),   href: "https://github.com/CaoHaoran-Dev/Swift-Zip-Manager" },
           { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
+          { label: t("nav.repoProcessSH"),  href: "https://github.com/CaoHaoran-Dev/ProcessSH" },
           { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
           { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
         ]}

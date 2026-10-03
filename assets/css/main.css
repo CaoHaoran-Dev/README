@@ -15,14 +15,6 @@
   --max-width: 980px;
   --nav-height: 48px;
 
-  --wg-render: true;
-  --wg-refraction: 1.45;
-  --wg-bezel: 0.28;
-  --wg-blur: 10;
-  --wg-light-angle: -55;
-  --wg-specular-strength: 0.65;
-  --wg-bg-opacity: 0.25;
-
   --radius-lg: 22px;
   --radius-md: 18px;
   --radius-sm: 14px;
@@ -554,14 +546,14 @@ body.drawer-open {
 /* ============================================
    Stack Grid
    ============================================ */
-.stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.stack-grid { display: flex; flex-wrap: wrap; gap: 14px; }
 .stack-grid span {
   font-size: 14px;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   color: var(--text);
   background: var(--bg);
   border: 1px solid var(--divider);
-  padding: 8px 16px;
+  padding: 10px 18px;
   border-radius: 999px;
 }
 
@@ -575,7 +567,12 @@ body.drawer-open {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+/* stack 区卡片之间的间距 */
+#stack .glass-project + .glass-project {
+  margin-top: 20px;
 }
 
 /* ============================================
