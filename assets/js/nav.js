@@ -1,9 +1,9 @@
 /* nav.js — 主站导航，i18n 版
- * 站点根从路径动态推导，兼容 /README/
+ * 站点根自动推导：/README/ 或 /
  */
 (function () {
   var path = window.location.pathname;
-  var BASE = "/README/";
+  var BASE = /^\/README\//.test(path) ? "/README/" : "/";
   var SITE = BASE;
 
   function buildHTML(t) {

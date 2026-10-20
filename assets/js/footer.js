@@ -1,6 +1,8 @@
-/* footer.js — 主站页脚（Liquid Glass 入口 + 语言切换，i18n 版） */
+/* footer.js — 主站页脚（Liquid Glass 入口 + 语言切换，i18n 版）
+ * 站点根自动推导：/README/ 或 /
+ */
 (function () {
-  var BASE  = "/README/";
+  var BASE  = /^\/README\//.test(window.location.pathname) ? "/README/" : "/";
   var GLASS = BASE + "glass/";
   var YEAR  = new Date().getFullYear();
 
@@ -8,7 +10,6 @@
     window.i18n.ready(function (t) {
       var isZh = window.i18n.lang === "zh-Hans";
 
-      // Liquid Glass 入口带上当前语言，点过去语言保持一致
       var glassHref = GLASS + "?lang=" + window.i18n.lang;
 
       var linksHTML =
@@ -32,7 +33,6 @@
 
       document.body.insertAdjacentHTML("beforeend", html);
 
-      // 语言切换
       document.querySelectorAll('.lang-switch-footer a[data-lang]').forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();

@@ -1,10 +1,10 @@
 /* nav.js — glass 版导航，i18n 版
- * 站点根：/README/glass/
- * 文案与主站共用 /README/locales/
+ * 站点根：/README/glass/ 或 /glass/
+ * 文案与主站共用 locales/
  */
 (function () {
   var path  = window.location.pathname;
-  var BASE  = "/README/";
+  var BASE  = /^\/README\//.test(path) ? "/README/" : "/";
   var GLASS = BASE + "glass/";
   var MAIN  = BASE;
 

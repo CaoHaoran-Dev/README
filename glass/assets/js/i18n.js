@@ -1,18 +1,8 @@
 /* i18n.js — 运行时本地化，Xcode 风格（glass 版与主站共用）
- * 目录约定：
- *   locales/en.json
- *   locales/zh-Hans.json
- *
- * 语言优先级：
- *   1) URL 参数 ?lang=zh-Hans
- *   2) localStorage.lang
- *   3) navigator.language
- *
- * 切换方式：footer 里点链接 → localStorage.setItem + 加 ?lang= 刷新
- * 不依赖 /README/zh-Hans/ 目录，只维护一份 HTML。
+ * 站点根自动推导：/README/ 或 /
  */
 (function () {
-  var BASE = "/README/";
+  var BASE = /^\/README\//.test(window.location.pathname) ? "/README/" : "/";
   var SUPPORTED = ["en", "zh-Hans"];
   var FALLBACK = "en";
 
@@ -39,12 +29,10 @@
       try { localStorage.setItem("lang", q); } catch (e) {}
       return q;
     }
-
     try {
       var saved = localStorage.getItem("lang");
       if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
     } catch (e) {}
-
     return normalize(navigator.language);
   }
 
@@ -124,9 +112,7 @@
   function switchTo(lang) {
     if (SUPPORTED.indexOf(lang) === -1) lang = FALLBACK;
     if (lang === current) return;
-
     try { localStorage.setItem("lang", lang); } catch (e) {}
-
     var url = new URL(window.location.href);
     url.searchParams.set("lang", lang);
     window.location.href = url.toString();

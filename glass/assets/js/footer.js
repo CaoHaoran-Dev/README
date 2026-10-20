@@ -1,10 +1,10 @@
 /* footer.js — glass 版页脚
- * base 从当前路径推导：/README/glass/...
+ * 站点根自动推导：/README/ 或 /
  * 语言切换保留 /glass/ 前缀
  */
 (function () {
   var path = window.location.pathname;
-  var BASE = "/README/";
+  var BASE = /^\/README\//.test(path) ? "/README/" : "/";
   var GLASS = BASE + "glass/";
   var MAIN = BASE;
 
