@@ -15,7 +15,7 @@ Mostly for the Mac, occasionally for Windows and the web.
 - [Swift Zip Manager](https://github.com/CaoHaoran-Dev/Swift-Zip-Manager) — A native macOS archive manager.
 - [RunProcess](https://github.com/CaoHaoran-Dev/RunProcess) — A Spotlight-style command launcher for macOS.
 - [ProcessSH](https://github.com/CaoHaoran-Dev/ProcessSH) — RunProcess, ported to Windows.
-- [RunProcess Web Demo](https://github.com/CaoHaoran-Dev/RunProcess-WebDemo) — RunProcess, in your browser.
+- [Process-WebHub](https://github.com/CaoHaoran-Dev/RunProcess-WebDemo) — RunProcess, in your browser.
 - [TaskView](https://github.com/CaoHaoran-Dev/TaskView) — A macOS process management tool. *(in development)*
 
 ---

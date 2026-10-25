@@ -8,8 +8,7 @@
  *   2) localStorage.lang
  *   3) navigator.language
  *
- * 切换方式：footer 里点链接 → localStorage.setItem + 加 ?lang= 刷新
- * 不依赖 /README/zh-Hans/ 目录，只维护一份 HTML。
+ * 优化：只在当前语言不是 fallback 时才额外加载 fallback 字典。
  */
 (function () {
   var BASE = /^\/README\//.test(window.location.pathname) ? "/README/" : "/";
@@ -103,15 +102,18 @@
     }
     document.documentElement.lang = lang;
 
-    return Promise.all([loadDict(lang), loadDict(FALLBACK)])
-      .then(function (res) {
-        dict = res[0];
-        fallbackDict = res[1];
-        ready = true;
-        apply();
-        pending.forEach(function (fn) { fn(t); });
-        pending = [];
-      });
+    /* 优化：当前语言 === fallback 时只发一个请求 */
+    var jobs = [loadDict(lang)];
+    if (lang !== FALLBACK) jobs.push(loadDict(FALLBACK));
+
+    return Promise.all(jobs).then(function (res) {
+      dict = res[0] || {};
+      fallbackDict = res[1] || {};
+      ready = true;
+      apply();
+      pending.forEach(function (fn) { fn(t); });
+      pending = [];
+    });
   }
 
   function ready_(fn) {

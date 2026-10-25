@@ -1,5 +1,6 @@
 /* nav.js — 主站导航，i18n 版
  * 站点根自动推导：/README/ 或 /
+ * 优化：先插入轻量骨架，i18n 就绪后替换为完整 nav。
  */
 (function () {
   var path = window.location.pathname;
@@ -36,7 +37,7 @@
           { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
           { label: t("nav.repoProcessSH"),  href: "https://github.com/CaoHaoran-Dev/ProcessSH" },
           { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
-          { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
+          { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/Process-WebHub" }
         ]}
       ],
       drawer: { title: t("nav.menu"), close: t("nav.close") }
@@ -245,9 +246,28 @@
   }
 
   function inject() {
+    /* 首屏骨架：品牌 + burger，不依赖 i18n */
+    document.body.insertAdjacentHTML("afterbegin",
+      '<div class="nav-shell">' +
+        '<header class="global-nav">' +
+          '<div class="global-nav-inner">' +
+            '<a href="' + SITE + '" class="brand">Haoran Cao</a>' +
+            '<button class="nav-burger" aria-label="Menu" aria-expanded="false">' +
+              '<span></span><span></span>' +
+            '</button>' +
+          '</div>' +
+        '</header>' +
+      '</div>' +
+      '<div class="nav-backdrop"></div>'
+    );
+
+    /* 文案就绪后：移除骨架，插入完整 nav */
     window.i18n.ready(function (t) {
+      var shell = document.querySelector('.nav-shell');
+      if (shell) shell.remove();
       document.body.insertAdjacentHTML("afterbegin", buildHTML(t));
       bindEvents();
+      document.dispatchEvent(new CustomEvent('nav:ready'));
     });
   }
 
