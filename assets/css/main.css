@@ -226,8 +226,7 @@ body.drawer-open {
 
 .mega-cols {
   display: grid;
-  /* 自动适应，最小宽度 100px，放不下自动换行，最大化利用空间 */
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
 }
 

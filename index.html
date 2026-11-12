@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home — Haoran Cao</title>
-<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
 
@@ -13,8 +13,6 @@
     <div class="eyebrow" data-i18n="home.eyebrow"></div>
     <h1 data-i18n="home.h1"></h1>
     <p class="subhead" data-i18n="home.subhead"></p>
-    <p class="intro" data-i18n="home.intro1"></p>
-    <p class="intro" data-i18n="home.intro2"></p>
     <div class="hero-links">
       <a class="btn-primary glass" href="projects/" data-i18n="home.ctaProjects"></a>
       <a class="btn-secondary glass" href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener" data-i18n="home.ctaGithub"></a>
@@ -22,158 +20,106 @@
   </div>
 </section>
 
-<section class="section" id="featured">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="eyebrow" data-i18n="home.featured.eyebrow"></div>
-      <h2 data-i18n="home.featured.h2"></h2>
-      <p class="subhead" data-i18n="home.featured.subhead"></p>
+<section class="section">
+  <!-- 标题容器，底部会带一条延展全屏的线 -->
+  <div class="section-title-wrap">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 data-i18n="home.featured.h2"></h2>
+      </div>
     </div>
-
-    <!-- 1. RunProcess -->
-    <div class="glass-project glass">
-      <article class="project">
-        <div class="project-meta">
+  </div>
+  
+  <!-- 网格容器 -->
+  <div class="bento-grid">
+    
+    <!-- 1. RunProcess (全宽，没有竖线) -->
+    <div class="bento-card span-2 force-dark">
+      <div class="bento-inner span-2-inner">
+        <div class="bento-content">
           <h3 data-i18n="project.runprocess.title"></h3>
           <p class="tagline" data-i18n="project.runprocess.tagline"></p>
-        </div>
-        <div class="project-body">
-          <p data-i18n="project.runprocess.body1"></p>
-          <p data-i18n="project.runprocess.body2"></p>
-          <p class="stack" data-i18n="project.runprocess.stack"></p>
-          <div class="links">
-            <a class="glass" href="projects/runprocess.html" data-i18n="project.runprocess.learn"></a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/RunProcess/releases" data-i18n="project.runprocess.download"></a>
-            <a class="glass" href="https://CaoHaoran-Dev.github.io/Process-WebHub/runprocess" data-i18n="project.runprocess.demo"></a>
+          <div class="bento-links">
+            <a class="btn-primary" href="projects/runprocess.html" data-i18n="project.runprocess.learn"></a>
+            <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev/RunProcess/releases" data-i18n="project.runprocess.download"></a>
           </div>
         </div>
-      </article>
+        <div class="bento-image">
+          <img src="assets/images/RunProcessDemo-Dark.png" alt="RunProcess UI">
+        </div>
+      </div>
     </div>
 
-    <!-- 2. ProcessSH -->
-    <div class="glass-project glass">
-      <article class="project">
-        <div class="project-meta">
+    <!-- 2. ProcessSH (左列) -->
+    <div class="bento-card force-light">
+      <div class="bento-inner">
+        <div class="bento-content">
           <h3 data-i18n="project.processSH.title"></h3>
           <p class="tagline" data-i18n="project.processSH.tagline"></p>
-        </div>
-        <div class="project-body">
-          <p data-i18n="project.processSH.body1"></p>
-          <p data-i18n="project.processSH.body2"></p>
-          <p class="stack" data-i18n="project.processSH.stack"></p>
-          <div class="links">
-            <a class="glass" href="projects/processsh.html" data-i18n="project.processSH.learn"></a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/ProcessSH/releases" data-i18n="project.processSH.download"></a>
+          <div class="bento-links">
+            <a class="btn-primary" href="projects/processsh.html" data-i18n="project.processSH.learn"></a>
+            <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev/ProcessSH/releases" data-i18n="project.processSH.download"></a>
           </div>
         </div>
-      </article>
+        <div class="bento-image">
+          <img src="assets/images/ProcessSHDemo-Light.png" alt="ProcessSH UI">
+        </div>
+      </div>
     </div>
 
-    <!-- 3. Swift Zip Manager -->
-    <div class="glass-project glass">
-      <article class="project">
-        <div class="project-meta">
+    <!-- 3. FuckLang (右列) -->
+    <div class="bento-card force-light">
+      <div class="bento-inner">
+        <div class="bento-content">
+          <h3 data-i18n="project.fucklang.title"></h3>
+          <p class="tagline" data-i18n="project.fucklang.tagline"></p>
+          <div class="bento-links">
+            <a class="btn-primary" href="projects/fucklang.html" data-i18n="project.fucklang.learn"></a>
+            <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev/FuckLang" data-i18n="project.fucklang.repo"></a>
+          </div>
+        </div>
+        <div class="bento-image">
+          <img src="assets/images/FuckLangDemo-Light.png" alt="FuckLang REPL">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Swift Zip Manager (左列，半高) -->
+    <div class="bento-card auto-theme short-card">
+      <div class="bento-inner">
+        <div class="bento-content">
           <h3 data-i18n="project.swiftZip.title"></h3>
           <p class="tagline" data-i18n="project.swiftZip.tagline"></p>
-        </div>
-        <div class="project-body">
-          <p data-i18n="project.swiftZip.body1"></p>
-          <p class="stack" data-i18n="project.swiftZip.stack"></p>
-          <div class="links">
-            <a class="glass" href="projects/swift-zip-manager.html" data-i18n="project.swiftZip.learn"></a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases" data-i18n="project.swiftZip.download"></a>
+          <div class="bento-links">
+            <a class="btn-primary" href="projects/swift-zip-manager.html" data-i18n="project.swiftZip.learn"></a>
+            <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev/Swift-Zip-Manager/releases" data-i18n="project.swiftZip.download"></a>
           </div>
         </div>
-      </article>
+      </div>
     </div>
 
-    <!-- 4. RemoteLinkKit -->
-    <div class="glass-project glass">
-      <article class="project">
-        <div class="project-meta">
+    <!-- 5. RemoteLinkKit (右列，半高) -->
+    <div class="bento-card auto-theme short-card">
+      <div class="bento-inner">
+        <div class="bento-content">
           <h3 data-i18n="project.remotelinkkit.title"></h3>
           <p class="tagline" data-i18n="project.remotelinkkit.tagline"></p>
-        </div>
-        <div class="project-body">
-          <p data-i18n="project.remotelinkkit.body1"></p>
-          <p class="stack" data-i18n="project.remotelinkkit.stack"></p>
-          <div class="links">
-            <a class="glass" href="projects/remotelinkkit.html" data-i18n="project.remotelinkkit.learn"></a>
-            <a class="glass" href="https://github.com/CaoHaoran-Dev/RemoteLinkKit" data-i18n="project.remotelinkkit.repo"></a>
+          <div class="bento-links">
+            <a class="btn-primary" href="projects/remotelinkkit.html" data-i18n="project.remotelinkkit.learn"></a>
+            <a class="btn-secondary" href="https://github.com/CaoHaoran-Dev/RemoteLinkKit" data-i18n="project.remotelinkkit.repo"></a>
           </div>
         </div>
-      </article>
-    </div>
-
-  </div>
-</section>
-
-<section class="section" id="stack">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="eyebrow" data-i18n="home.stack.eyebrow"></div>
-      <h2 data-i18n="home.stack.h2"></h2>
-    </div>
-
-    <div class="glass-project glass">
-      <div class="stack-group">
-        <div class="stack-group-label" data-i18n="home.stack.languages"></div>
-        <div class="stack-grid">
-          <span>Swift</span><span>C#</span><span>JavaScript</span><span>HTML</span><span>CSS</span><span>Go</span>
-        </div>
       </div>
     </div>
 
-    <div class="glass-project glass">
-      <div class="stack-group">
-        <div class="stack-group-label" data-i18n="home.stack.frameworks"></div>
-        <div class="stack-grid">
-          <span>SwiftUI</span><span>AppKit</span><span>CryptoKit</span><span>WinUI 3</span><span>Network.framework</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="glass-project glass">
-      <div class="stack-group">
-        <div class="stack-group-label" data-i18n="home.stack.platforms"></div>
-        <div class="stack-grid">
-          <span>macOS</span><span>iOS</span><span>Windows</span><span>Linux</span><span>Xcode</span><span>VS Code</span><span>Git</span>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <section class="section alt" id="about">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="eyebrow" data-i18n="home.about.eyebrow"></div>
-      <h2 data-i18n="home.about.h2"></h2>
-    </div>
-    <div class="glass-project glass">
-      <div class="about-preview">
-        <p data-i18n="home.about.p1"></p>
-        <p data-i18n="home.about.p2"></p>
-        <p><a class="btn-secondary btn-inline glass" href="about/" data-i18n="home.about.more"></a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="elsewhere">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="eyebrow" data-i18n="home.elsewhere.eyebrow"></div>
-      <h2 data-i18n="home.elsewhere.h2"></h2>
-    </div>
-    <div class="glass-project glass">
-      <div class="elsewhere-links">
-        <a href="https://github.com/CaoHaoran-Dev" target="_blank" rel="noopener">
-          <span class="elsewhere-name">GitHub</span>
-          <span class="elsewhere-handle">@CaoHaoran-Dev</span>
-        </a>
-      </div>
-    </div>
+    <h2 data-i18n="home.about.h2"></h2>
+    <p data-i18n="home.about.p1"></p>
+    <a class="btn-secondary" href="about/" data-i18n="home.about.more"></a>
   </div>
 </section>
 
