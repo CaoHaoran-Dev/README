@@ -1,6 +1,4 @@
-/* nav.js — 主站导航，i18n 版
- * 站点根自动推导：/README/ 或 /
- */
+/* nav.js — 主站导航，i18n 版 */
 (function () {
   var path = window.location.pathname;
   var BASE = /^\/README\//.test(path) ? "/README/" : "/";
@@ -18,13 +16,17 @@
       eyebrow: t("nav.explore"),
       heading: t("nav.allProjects"),
       big: [
-        { label: t("nav.swiftZip"),   href: SITE + "projects/swift-zip-manager.html" },
         { label: t("nav.runprocess"), href: SITE + "projects/runprocess.html" },
-        { label: t("nav.processSH"),  href: SITE + "projects/processsh.html" }
+        { label: t("nav.processSH"),  href: SITE + "projects/processsh.html" },
+        { label: t("nav.swiftZip"),   href: SITE + "projects/swift-zip-manager.html" }
       ],
       cols: [
         { title: t("nav.inDev"), links: [
-          { label: t("nav.taskview"), href: SITE + "projects/taskview.html" }
+          { label: t("nav.taskview"), href: SITE + "projects/taskview.html" },
+          { label: t("nav.remoteLinkKit"), href: SITE + "projects/remotelinkkit.html" }
+        ]},
+        { title: t("nav.other"), links: [
+          { label: t("nav.fucklang"), href: SITE + "projects/fucklang.html" }
         ]},
         { title: t("nav.more"), links: [
           { label: t("nav.allProjectsLink"), href: SITE + "projects/" },
@@ -36,6 +38,7 @@
           { label: t("nav.repoRunprocess"), href: "https://github.com/CaoHaoran-Dev/RunProcess" },
           { label: t("nav.repoProcessSH"),  href: "https://github.com/CaoHaoran-Dev/ProcessSH" },
           { label: t("nav.repoTaskview"),   href: "https://github.com/CaoHaoran-Dev/TaskView" },
+          { label: t("nav.repoRemote"),     href: "https://github.com/CaoHaoran-Dev/RemoteLinkKit" },
           { label: t("nav.repoDemo"),       href: "https://github.com/CaoHaoran-Dev/RunProcess-WebDemo" }
         ]}
       ],
@@ -114,8 +117,7 @@
                  '<a href="' + SITE + '" class="brand">' + T.brand + '</a>' +
                  '<nav class="desktop-nav">' + linksHTML + '</nav>' +
                  '<button class="nav-burger" aria-label="' + T.drawer.title + '" aria-expanded="false">' +
-                   '<span></span>' +
-                   '<span></span>' +
+                   '<span></span><span></span>' +
                  '</button>' +
                '</div>' +
              '</header>' +
