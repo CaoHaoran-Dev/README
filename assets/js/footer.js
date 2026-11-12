@@ -1,22 +1,17 @@
-/* footer.js — 主站页脚（Liquid Glass 入口 + 语言切换，i18n 版）
+/* footer.js — 主站页脚（语言切换，i18n 版）
  * 站点根自动推导：/README/ 或 /
+ * 注意：已移除 /glass/ 入口，glass 站仅可通过地址栏直接访问。
  */
 (function () {
-  var BASE  = /^\/README\//.test(window.location.pathname) ? "/README/" : "/";
-  var GLASS = BASE + "glass/";
-  var YEAR  = new Date().getFullYear();
+  var BASE = /^\/README\//.test(window.location.pathname) ? "/README/" : "/";
+  var YEAR = new Date().getFullYear();
 
   function inject() {
     window.i18n.ready(function (t) {
       var isZh = window.i18n.lang === "zh-Hans";
 
-      var glassHref = GLASS + "?lang=" + window.i18n.lang;
-
       var linksHTML =
         '<div class="footer-links">' +
-          '<span class="glass-switch-footer">' +
-            '<a href="' + glassHref + '">' + t("footer.glass") + '</a>' +
-          '</span>' +
           '<span class="lang-switch-footer">' +
             '<span class="lang-label">' + t("footer.language") + '</span>' +
             '<a href="#" data-lang="en"'      + (!isZh ? ' class="active"' : '') + '>' + t("footer.english") + '</a>' +
