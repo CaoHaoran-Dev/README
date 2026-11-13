@@ -1,6 +1,6 @@
 /* nav.js — 主站导航，Apple.com 2023 风格
  * 桌面端：导航链接直接显示，仅汉堡按钮悬停打开 mega dropdown
- * 移动端：汉堡点击打开右上角圆角面板
+ * 移动端：汉堡点击打开顶栏下方全宽面板
  * 断点统一 834px，与 CSS 一致
  */
 (function () {
@@ -68,12 +68,14 @@
 
     var megaHTML =
       '<div class="nav-dropdown">' +
-        '<div class="nav-dropdown-inner">' +
-          '<div class="mega-eyebrow">' + T.eyebrow + '</div>' +
-          '<div class="mega-heading">' + T.heading + '</div>' +
-          '<div class="mega-grid">' +
-            '<div class="mega-big">' + bigLinksHTML + '</div>' +
-            '<div class="mega-cols">' + columnsHTML + '</div>' +
+        '<div class="nav-dropdown-wrap">' +
+          '<div class="nav-dropdown-inner">' +
+            '<div class="mega-eyebrow">' + T.eyebrow + '</div>' +
+            '<div class="mega-heading">' + T.heading + '</div>' +
+            '<div class="mega-grid">' +
+              '<div class="mega-big">' + bigLinksHTML + '</div>' +
+              '<div class="mega-cols">' + columnsHTML + '</div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -115,7 +117,7 @@
         '</div>' +
       '</div>';
 
-    // 【关键修改】：将 megaHTML 放到 nav-shell 内部
+    // megaHTML 被完全移出 nav-shell，避免 backdrop-filter 父级包含块干扰
     return '<div class="nav-shell">' +
              '<header class="global-nav">' +
                '<div class="global-nav-inner">' +
@@ -126,8 +128,8 @@
                  '</button>' +
                '</div>' +
              '</header>' +
-             megaHTML + 
            '</div>' +
+           megaHTML +
            '<div class="nav-backdrop"></div>' +
            drawerHTML;
   }

@@ -1,5 +1,5 @@
 /* ============================================
-   Tokens — Apple.com inspired
+   Tokens
    ============================================ */
 :root {
   --bg: #FFFFFF;
@@ -66,7 +66,7 @@ a:hover { text-decoration: underline; }
 body.drawer-open { overflow: hidden; touch-action: none; }
 
 /* ============================================
-   Nav Shell — Apple.com global nav
+   Nav Shell
    ============================================ */
 .nav-shell {
   position: sticky;
@@ -151,38 +151,37 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .nav-burger:hover span { opacity: 0.6; }
 
 /* ============================================
-   Mega Dropdown — 桌面端，悬停汉堡展开
+   Mega Dropdown — 终极修复版
    ============================================ */
 .nav-dropdown {
-  position: absolute; /* 改为 absolute，相对于 nav-shell */
-  top: 100%;          /* 贴在顶栏正下方 */
+  position: fixed;
+  top: var(--nav-height);
   left: 0;
   right: 0;
+  z-index: 3;
   
+  /* 核心毛玻璃 */
   background: rgba(251, 251, 253, 0.75) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
   
   border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
   
-  max-height: 0;
+  /* 使用 Grid 动画，绝不破坏 GPU 层 */
+  display: grid;
+  grid-template-rows: 0fr;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px);
   visibility: hidden;
-  transition:
-    max-height 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-    transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
-    visibility 0.45s;
-  z-index: 3;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              opacity 0.3s ease, 
+              visibility 0.4s ease;
 }
 
 .nav-dropdown.is-open {
-  max-height: 540px;
+  grid-template-rows: 1fr;
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
   visibility: visible;
 }
@@ -193,12 +192,16 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   }
 }
 
+/* Grid 动画必须配 overflow: hidden 的包裹层 */
+.nav-dropdown-wrap {
+  overflow: hidden;
+  min-height: 0;
+}
+
 .nav-dropdown-inner {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 44px 22px 52px;
-  position: relative;
-  z-index: 4;
 }
 
 .mega-eyebrow {
@@ -206,7 +209,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   color: var(--secondary);
   opacity: 0.8;
   margin-bottom: 12px;
-  letter-spacing: 0;
 }
 
 .mega-heading {
@@ -271,12 +273,12 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-  z-index: 1; 
+  z-index: 2; 
 }
 .nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
 
 /* ============================================
-   Mobile Drawer — 顶栏下方面板
+   Mobile Drawer
    ============================================ */
 .mobile-drawer {
   display: flex;
@@ -285,27 +287,20 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   top: var(--nav-height);
   left: 0;
   right: 0;
-  max-height: calc(100vh - var(--nav-height));
+  bottom: 0;
   z-index: 200;
   margin: 0;
   border-radius: 0;
-  overflow: hidden;
   
   background: rgba(251, 251, 253, 0.75); 
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   
-  border-left: 1px solid var(--glass-border);
-  border-right: 1px solid var(--glass-border);
-  border-bottom: 1px solid var(--glass-border);
   border-top: none;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-6px);
-  transition:
-    opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
-    transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -317,7 +312,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .mobile-drawer.is-open {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
 }
 
 .mobile-drawer-header {
