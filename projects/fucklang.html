@@ -19,6 +19,25 @@
 
   <p data-i18n="detail.fucklang.p1"></p>
 
+  <!-- 下载区域 -->
+  <div class="download-container">
+    <div style="font-weight: 600; font-size: 16px; margin-bottom: 16px;" data-i18n="detail.fucklang.h2.downloads"></div>
+    
+    <div class="split-download-group">
+      <!-- 左侧主下载 -->
+      <a class="btn-primary split-btn-main" id="fucklang-detail-dl" href="https://github.com/CaoHaoran-Dev/FuckLang/releases">
+        <span data-i18n="detail.fucklang.recommended">Download</span>
+      </a>
+      
+      <!-- 右侧下拉触发按钮 -->
+      <div class="split-btn-dropdown">
+        <button class="btn-primary split-btn-toggle" id="fucklang-dropdown-toggle" aria-label="Other architectures">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="detail-specs glass">
     <div class="row"><span class="label" data-i18n="detail.specs.language"></span><span class="value">Go 1.21+</span></div>
     <div class="row"><span class="label" data-i18n="detail.specs.platform"></span><span class="value">macOS · Linux · Windows</span></div>
@@ -41,9 +60,22 @@
   </div>
 </div>
 
+<!-- 下拉菜单直接挂在 Body 下，彻底摆脱父级干扰 -->
+<div class="split-dropdown-menu" id="fucklang-dropdown-menu">
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-darwin-arm64">macOS (Apple Silicon)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-darwin-amd64">macOS (Intel)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-linux-arm64">Linux (ARM64)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-linux-amd64">Linux (x86_64)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-linux-riscv64">Linux (RISC-V)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-linux-loong64">Linux (LoongArch64)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-windows-arm64.exe">Windows (ARM64)</a>
+  <a href="https://github.com/CaoHaoran-Dev/FuckLang/releases/latest/download/fucklang-windows-amd64.exe">Windows (x64)</a>
+</div>
+
 <script src="../assets/js/reveal.js" defer></script>
 <script src="../assets/js/i18n.js" defer></script>
 <script src="../assets/js/nav.js" defer></script>
+<script src="../assets/js/download.js" defer></script>
 <script src="../assets/js/footer.js" defer></script>
 </body>
 </html>

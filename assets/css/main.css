@@ -779,3 +779,171 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 
   .mobile-drawer { max-width: none; left: 0; right: 0; }
 }
+
+/* ============================================
+   Split Download Button (复合下载按钮 + 完美毛玻璃)
+   ============================================ */
+.download-container {
+  position: relative;
+  z-index: 10;
+  margin: 32px 0;
+}
+
+/* 按钮主容器 */
+.split-download-group {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 980px;
+  background: var(--accent);
+  /* 移除外层的复杂阴影，防止破坏内部元素的图层渲染 */
+  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+  position: relative;
+}
+
+/* 左侧主下载按钮 */
+.split-btn-main {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 12px 20px 12px 24px !important;
+  white-space: nowrap;
+  color: #FFFFFF !important;
+}
+
+/* 右侧下拉触发区 */
+.split-btn-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* 下拉箭头按钮 */
+.split-btn-toggle {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 16px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  color: #FFFFFF !important;
+}
+
+/* 悬停变深 */
+.split-download-group:hover {
+  background: var(--accent-hover) !important;
+}
+
+/* ============================================
+   Split Download Button (完整按钮 + 完美毛玻璃)
+   ============================================ */
+.download-container {
+  position: relative;
+  z-index: 10;
+  margin: 32px 0;
+}
+
+/* 按钮组 */
+.split-download-group {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 980px;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+}
+
+.split-btn-main {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 12px 20px 12px 24px !important;
+  white-space: nowrap;
+  color: #FFFFFF !important;
+}
+
+.split-btn-dropdown {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.split-btn-toggle {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 16px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  color: #FFFFFF !important;
+}
+
+.split-download-group:hover {
+  background: var(--accent-hover) !important;
+}
+
+/* ============================================
+   下拉菜单 (悬浮在顶层，绝对定位)
+   ============================================ */
+.split-dropdown-menu {
+  position: fixed; /* 使用 fixed，完全脱离文档流，不受任何父级裁剪 */
+  z-index: 99999 !important;
+  
+  background: rgba(251, 251, 253, 0.7) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 8px 0;
+  min-width: 240px;
+  white-space: nowrap;
+  
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.split-dropdown-menu.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.split-dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.split-dropdown-menu a:hover {
+  background: var(--accent) !important;
+  color: #FFFFFF !important;
+}
+
+/* 暗色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .split-dropdown-menu {
+    background: rgba(29, 29, 31, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}

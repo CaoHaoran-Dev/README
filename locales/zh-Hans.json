@@ -102,6 +102,7 @@
   "project.taskview.repo": "代码仓库 ›",
 
   "project.fucklang.title": "FuckLang",
+  "project.fucklang.download": "下载 ›",
   "project.fucklang.tagline": "使用非常规关键字集的图灵完备脚本语言",
   "project.fucklang.body1": "一个轻量的跨平台解释型语言。它去除了不必要的标点符号，证明了编写一门语言并不需要一个庞大的生态系统就能充满乐趣。它支持变量、控制流、一等函数和闭包。",
   "project.fucklang.body2": "用 Go 编写，编译为单个无依赖的二进制文件。提供多行 REPL、带有光标定位的严格错误处理，以及全自动的黑盒测试套件。",
@@ -289,6 +290,9 @@
   "detail.fucklang.p.testing": "项目有两层测试：求值器逻辑测试和黑盒测试（逐字节对比 stdout 与预期文件）。GitHub Actions 在 Ubuntu 上运行完整测试套件，然后为 x86_64、ARM64、RISC-V 和 LoongArch64 交叉编译二进制文件。",
   "detail.fucklang.viewRepo": "查看代码仓库 ›",
   "detail.fucklang.h2.links": "链接",
+  "detail.fucklang.h2.downloads": "下载",
+  "detail.fucklang.recommended": "下载",
+  "detail.fucklang.goToReleases": "前往 Releases",
 
   "detail.remotelinkkit.title": "RemoteLinkKit — 项目",
   "detail.remotelinkkit.eyebrow": "macOS & iOS 库",

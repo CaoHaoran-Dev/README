@@ -102,6 +102,7 @@
   "project.taskview.repo": "Repository ›",
 
   "project.fucklang.title": "FuckLang",
+  "project.fucklang.download": "Download ›",
   "project.fucklang.tagline": "A Turing-complete scripting language with an unconventional keyword set.",
   "project.fucklang.body1": "A lightweight, cross-platform interpreted language. It strips away unnecessary punctuation, proving that a language doesn't need a massive ecosystem to be fun to write. It supports variables, control flow, first-class functions, and closures.",
   "project.fucklang.body2": "Written in Go, it compiles to a single dependency-free binary. It features a multi-line REPL, strict error handling with caret pointing, and a fully automated black-box test suite.",
@@ -289,6 +290,9 @@
   "detail.fucklang.p.testing": "The project has two layers of tests: evaluator logic tests and black-box tests that compare byte-for-byte stdout against expected files. GitHub Actions runs the full test suite on Ubuntu, then cross-compiles binaries for x86_64, ARM64, RISC-V, and LoongArch64.",
   "detail.fucklang.viewRepo": "View Repository ›",
   "detail.fucklang.h2.links": "Links",
+  "detail.fucklang.h2.downloads": "Downloads",
+  "detail.fucklang.recommended": "Download",
+  "detail.fucklang.goToReleases": "Go to Releases",
 
   "detail.remotelinkkit.title": "RemoteLinkKit — Projects",
   "detail.remotelinkkit.eyebrow": "macOS & iOS Library",
