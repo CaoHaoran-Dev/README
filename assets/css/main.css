@@ -1,5 +1,5 @@
 /* ============================================
-   Tokens
+   Tokens — Apple.com inspired
    ============================================ */
 :root {
   --bg: #FFFFFF;
@@ -13,17 +13,17 @@
   --divider: #D2D2D7;
   --link: #06C;
   --max-width: 980px;
-  --nav-height: 48px;
+  --nav-height: 44px;
 
   --radius-lg: 22px;
   --radius-md: 18px;
   --radius-sm: 14px;
 
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-blur: saturate(180%) blur(30px);
+  --glass-bg: rgba(251, 251, 253, 0.8);
+  --glass-blur: saturate(180%) blur(20px);
   --glass-border: rgba(0, 0, 0, 0.08);
 
-  --dropdown-bg: #FFFFFF;
+  --dropdown-bg: rgba(251, 251, 253, 0.75);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,10 +39,10 @@
     --divider: #424245;
     --link: #2997FF;
 
-    --glass-bg: rgba(0, 0, 0, 0.72);
+    --glass-bg: rgba(29, 29, 31, 0.8);
     --glass-border: rgba(255, 255, 255, 0.08);
 
-    --dropdown-bg: #000000;
+    --dropdown-bg: rgba(29, 29, 31, 0.75);
   }
 }
 
@@ -63,13 +63,10 @@ body {
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-body.drawer-open {
-  overflow: hidden;
-  touch-action: none;
-}
+body.drawer-open { overflow: hidden; touch-action: none; }
 
 /* ============================================
-   Nav Shell
+   Nav Shell — Apple.com global nav
    ============================================ */
 .nav-shell {
   position: sticky;
@@ -100,8 +97,9 @@ body.drawer-open {
   color: var(--text);
   text-decoration: none;
   flex-shrink: 0;
+  opacity: 0.9;
 }
-.global-nav .brand:hover { text-decoration: none; opacity: 0.7; }
+.global-nav .brand:hover { text-decoration: none; opacity: 1; }
 
 .desktop-nav {
   display: flex;
@@ -112,10 +110,12 @@ body.drawer-open {
 }
 .desktop-nav a {
   font-size: 12px;
+  font-weight: 400;
   color: var(--text);
   opacity: 0.8;
   text-decoration: none;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: opacity 0.2s;
+  white-space: nowrap;
 }
 .desktop-nav a:hover { opacity: 1; text-decoration: none; }
 .desktop-nav a.active { opacity: 1; font-weight: 500; }
@@ -151,48 +151,61 @@ body.drawer-open {
 .nav-burger:hover span { opacity: 0.6; }
 
 /* ============================================
-   Mega Dropdown — 纯色背景
+   Mega Dropdown — 桌面端，悬停汉堡展开
    ============================================ */
 .nav-dropdown {
-  position: fixed;
-  top: calc(var(--nav-height) - 1px);
-  padding-top: 1px;
+  position: absolute; /* 改为 absolute，相对于 nav-shell */
+  top: 100%;          /* 贴在顶栏正下方 */
   left: 0;
   right: 0;
-
-  background: var(--dropdown-bg);
+  
+  background: rgba(251, 251, 253, 0.75) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  
   border-bottom: 1px solid var(--glass-border);
-
-  overflow: hidden;
+  
   max-height: 0;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
+  visibility: hidden;
   transition:
-    max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+    max-height 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
     opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    visibility 0.45s;
   z-index: 3;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
 }
 
 .nav-dropdown.is-open {
-  max-height: 520px;
+  max-height: 540px;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  visibility: visible;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-dropdown {
+    background: rgba(29, 29, 31, 0.75) !important;
+  }
 }
 
 .nav-dropdown-inner {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 44px 22px 52px;
+  position: relative;
+  z-index: 4;
 }
 
 .mega-eyebrow {
   font-size: 12px;
   color: var(--secondary);
   opacity: 0.8;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   letter-spacing: 0;
 }
 
@@ -201,21 +214,21 @@ body.drawer-open {
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 }
 
 .mega-grid {
   display: grid;
-  grid-template-columns: 1.3fr 2fr;
-  gap: 60px;
+  grid-template-columns: 1fr 3fr; 
+  gap: 48px;
 }
 
 .mega-big { display: flex; flex-direction: column; }
 
 .mega-item {
   display: block;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
   text-decoration: none;
@@ -226,8 +239,9 @@ body.drawer-open {
 
 .mega-cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: start;
 }
 
 .mega-col-title {
@@ -253,95 +267,127 @@ body.drawer-open {
   position: fixed;
   inset: 0;
   top: var(--nav-height);
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.15);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  z-index: 1;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  z-index: 1; 
 }
 .nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
 
 /* ============================================
-   移动端抽屉
+   Mobile Drawer — 顶栏下方面板
    ============================================ */
 .mobile-drawer {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: calc(var(--nav-height) + 8px);
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--nav-height));
   z-index: 200;
-  max-width: 640px;
-  margin: 0 auto;
-  border-radius: 22px;
+  margin: 0;
+  border-radius: 0;
   overflow: hidden;
-  background: var(--dropdown-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  
+  background: rgba(251, 251, 253, 0.75); 
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  border-top: none;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   transition:
-    opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-.mobile-drawer.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+@media (prefers-color-scheme: dark) {
+  .mobile-drawer {
+    background: rgba(29, 29, 31, 0.75);
+  }
+}
+
+.mobile-drawer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 
 .mobile-drawer-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0 20px;
+  height: 48px;
+  padding: 0 18px;
   border-bottom: 1px solid var(--divider);
+  flex-shrink: 0;
 }
-.mobile-drawer-title { font-size: 14px; font-weight: 500; }
+.mobile-drawer-title { font-size: 13px; font-weight: 500; color: var(--secondary); }
 .mobile-drawer-close {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   background: transparent;
   border: none;
   color: var(--text);
   cursor: pointer;
+  opacity: 0.6;
 }
+.mobile-drawer-close:hover { opacity: 1; }
+
 .mobile-drawer-body {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 24px 20px 40px;
+  padding: 20px 18px 28px;
 }
 
-.drawer-big { display: flex; flex-direction: column; margin-bottom: 32px; }
+.drawer-big { display: flex; flex-direction: column; margin-bottom: 24px; }
 .drawer-big a {
   display: block;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--text);
-  padding: 10px 0;
+  padding: 9px 0;
   text-decoration: none;
 }
-.drawer-cols { display: flex; flex-direction: column; gap: 24px; }
-.drawer-group-title { font-size: 12px; font-weight: 500; color: var(--secondary); margin-bottom: 10px; }
+.drawer-big a:hover { color: var(--accent); text-decoration: none; }
+
+.drawer-cols { display: flex; flex-direction: column; gap: 22px; }
+.drawer-group-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
 .drawer-group ul { list-style: none; padding: 0; margin: 0; }
-.drawer-group li { margin-bottom: 8px; }
-.drawer-group a { font-size: 14px; color: var(--text); opacity: 0.9; text-decoration: none; }
+.drawer-group li { margin-bottom: 6px; }
+.drawer-group a {
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.85;
+  text-decoration: none;
+}
 .drawer-group a:hover { opacity: 1; text-decoration: none; }
 
 /* ============================================
    Hero
    ============================================ */
 .hero { text-align: center; padding: 100px 22px 80px; background: var(--bg); }
-
 .hero-inner { max-width: 640px; margin: 0 auto; }
-
 .hero .eyebrow { font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 12px; }
-
 .hero h1 {
   font-size: 64px;
   font-weight: 700;
@@ -349,7 +395,6 @@ body.drawer-open {
   line-height: 1.05;
   margin-bottom: 18px;
 }
-
 .hero .subhead {
   font-size: 28px;
   font-weight: 400;
@@ -357,14 +402,12 @@ body.drawer-open {
   color: var(--secondary);
   margin-bottom: 32px;
 }
-
 .hero .intro {
   font-size: 17px;
   color: var(--secondary);
   max-width: 560px;
   margin: 0 auto 12px;
 }
-
 .hero-links {
   margin-top: 40px;
   display: flex;
@@ -374,34 +417,27 @@ body.drawer-open {
   flex-wrap: wrap;
 }
 .hero-links a { font-size: 17px; color: var(--accent); }
-
 .hero-links a.btn-primary { color: #FFFFFF; }
-.hero-links a.btn-primary:hover { color: #FFFFFF; }
 
 /* ============================================
    Section
    ============================================ */
 .section { padding: 80px 22px; border-top: 1px solid var(--divider); }
 .section.alt { background: var(--bg-alt); }
-
 .section-inner { max-width: var(--max-width); margin: 0 auto; }
-
 .section-header { margin-bottom: 48px; }
-
 .section-header .eyebrow {
   font-size: 14px;
   font-weight: 500;
   color: var(--accent);
   margin-bottom: 8px;
 }
-
 .section-header h2 {
   font-size: 48px;
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.08;
 }
-
 .section-header .subhead {
   font-size: 21px;
   font-weight: 400;
@@ -422,7 +458,6 @@ body.drawer-open {
   transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .project:first-child { border-top: none; padding-top: 0; }
-
 .project:hover { transform: translateY(-2px); }
 
 .project-meta h3 {
@@ -431,26 +466,22 @@ body.drawer-open {
   letter-spacing: -0.015em;
   margin-bottom: 8px;
 }
-
 .project-meta .tagline {
   font-size: 17px;
   color: var(--secondary);
   font-style: italic;
 }
-
 .project-body p {
   font-size: 15px;
   line-height: 1.6;
   color: var(--text);
   margin-bottom: 16px;
 }
-
 .project-body .spec {
   font-size: 13px;
   color: var(--secondary);
   margin-bottom: 8px;
 }
-
 .project-body .spec code {
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 12px;
@@ -458,7 +489,6 @@ body.drawer-open {
   padding: 2px 7px;
   border-radius: 5px;
 }
-
 .project-body .stack {
   font-size: 13px;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
@@ -466,7 +496,6 @@ body.drawer-open {
   margin-bottom: 20px;
   line-height: 1.8;
 }
-
 .project-body .links {
   display: flex;
   gap: 24px;
@@ -498,26 +527,18 @@ body.drawer-open {
   max-width: 600px;
   margin: 0 auto;
 }
-
 .detail-body {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 22px 80px;
 }
-
-.detail-body p {
-  font-size: 17px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
+.detail-body p { font-size: 17px; line-height: 1.6; margin-bottom: 20px; }
 .detail-body h2 {
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.015em;
   margin: 48px 0 16px;
 }
-
 .detail-body h3 {
   font-size: 19px;
   font-weight: 600;
@@ -556,9 +577,7 @@ body.drawer-open {
   padding: 10px 18px;
   border-radius: 999px;
 }
-
 .section.alt .stack-grid span { background: var(--bg); }
-
 .stack-group { margin-bottom: 32px; }
 .stack-group:last-child { margin-bottom: 0; }
 .stack-group-label {
@@ -569,11 +588,7 @@ body.drawer-open {
   color: var(--secondary);
   margin-bottom: 20px;
 }
-
-/* stack 区卡片之间的间距 */
-#stack .glass-project + .glass-project {
-  margin-top: 20px;
-}
+#stack .glass-project + .glass-project { margin-top: 20px; }
 
 /* ============================================
    Back Link
@@ -599,24 +614,18 @@ body.drawer-open {
   text-decoration: none;
   transition: background 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-
 .btn-primary:hover {
   background: var(--accent-hover);
   text-decoration: none;
   color: #FFFFFF;
 }
-
 .btn-secondary {
   display: inline-block;
   font-size: 17px;
   color: var(--accent);
   padding: 12px 0;
 }
-
-.btn-secondary.btn-inline {
-  padding: 8px 18px;
-  font-size: 15px;
-}
+.btn-secondary.btn-inline { padding: 8px 18px; font-size: 15px; }
 
 .download-row {
   display: flex;
@@ -625,7 +634,6 @@ body.drawer-open {
   flex-wrap: wrap;
   margin: 32px 0;
 }
-
 .download-note { font-size: 13px; color: var(--secondary); }
 
 /* ============================================
@@ -642,7 +650,6 @@ body.drawer-open {
    Elsewhere
    ============================================ */
 .elsewhere-links { display: flex; flex-direction: column; }
-
 .elsewhere-links a {
   display: flex;
   justify-content: space-between;
@@ -654,7 +661,6 @@ body.drawer-open {
 }
 .elsewhere-links a:hover { text-decoration: none; opacity: 0.7; }
 .elsewhere-links a:first-child { border-top: none; }
-
 .elsewhere-name { font-size: 17px; color: var(--text); font-weight: 500; }
 .elsewhere-handle {
   font-size: 14px;
@@ -677,8 +683,6 @@ body.drawer-open {
   max-width: var(--max-width);
   margin: 0 auto;
 }
-
-/* ---------- Footer links（Liquid Glass + 语言）—— 非蓝色 ---------- */
 .site-footer .footer-links {
   margin-top: 14px;
   display: flex;
@@ -689,7 +693,6 @@ body.drawer-open {
   font-size: 12px;
   color: var(--secondary);
 }
-
 .site-footer .glass-switch-footer,
 .site-footer .lang-switch-footer {
   display: inline-flex;
@@ -698,7 +701,6 @@ body.drawer-open {
   font-size: 12px;
   color: var(--secondary);
 }
-
 .site-footer .glass-switch-footer a,
 .site-footer .lang-switch-footer a {
   font-size: 12px;
@@ -707,33 +709,29 @@ body.drawer-open {
   text-decoration: none;
   transition: opacity 0.2s;
 }
-
 .site-footer .glass-switch-footer a:hover,
 .site-footer .lang-switch-footer a:hover {
   opacity: 1;
   text-decoration: underline;
   color: var(--secondary) !important;
 }
-
 .site-footer .lang-switch-footer a.active {
   opacity: 1;
   font-weight: 500;
   color: var(--text) !important;
 }
-
 .site-footer .lang-switch-footer .lang-label {
   color: var(--secondary);
   opacity: 0.7;
   margin-right: 2px;
 }
-
 .site-footer .lang-switch-footer .lang-sep {
   color: var(--divider);
   font-size: 12px;
 }
 
 /* ============================================
-   Motion — Apple style
+   Motion
    ============================================ */
 .reveal {
   opacity: 0;
@@ -743,12 +741,7 @@ body.drawer-open {
     transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   will-change: opacity, transform;
 }
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
 .project.reveal:nth-child(2) { transition-delay: 0.08s; }
 .project.reveal:nth-child(3) { transition-delay: 0.16s; }
 .project.reveal:nth-child(4) { transition-delay: 0.24s; }
@@ -759,7 +752,6 @@ body.drawer-open {
 .hero .intro {
   animation: heroFadeUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) both;
 }
-
 .hero .eyebrow   { animation-delay: 0s; }
 .hero h1         { animation-delay: 0.05s; }
 .hero .subhead   { animation-delay: 0.12s; }
@@ -790,7 +782,7 @@ body.drawer-open {
 /* ============================================
    Responsive
    ============================================ */
-@media (max-width: 734px) {
+@media (max-width: 834px) {
   .hero { padding: 64px 22px 48px; }
   .hero h1 { font-size: 40px; }
   .hero .subhead { font-size: 21px; }
@@ -809,9 +801,5 @@ body.drawer-open {
   .desktop-nav { display: none; }
   .nav-dropdown { display: none; }
 
-  .nav-dropdown-inner { padding: 28px 22px 36px; }
-  .mega-heading { font-size: 22px; margin-bottom: 24px; }
-  .mega-grid { grid-template-columns: 1fr; gap: 32px; }
-  .mega-item { font-size: 20px; }
-  .mega-cols { grid-template-columns: 1fr; gap: 24px; }
+  .mobile-drawer { max-width: none; left: 0; right: 0; }
 }

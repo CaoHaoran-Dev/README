@@ -1,4 +1,8 @@
-/* nav.js — 主站导航，i18n 版 */
+/* nav.js — 主站导航，Apple.com 2023 风格
+ * 桌面端：导航链接直接显示，仅汉堡按钮悬停打开 mega dropdown
+ * 移动端：汉堡点击打开右上角圆角面板
+ * 断点统一 834px，与 CSS 一致
+ */
 (function () {
   var path = window.location.pathname;
   var BASE = /^\/README\//.test(path) ? "/README/" : "/";
@@ -111,6 +115,7 @@
         '</div>' +
       '</div>';
 
+    // 【关键修改】：将 megaHTML 放到 nav-shell 内部
     return '<div class="nav-shell">' +
              '<header class="global-nav">' +
                '<div class="global-nav-inner">' +
@@ -121,7 +126,7 @@
                  '</button>' +
                '</div>' +
              '</header>' +
-             megaHTML +
+             megaHTML + 
            '</div>' +
            '<div class="nav-backdrop"></div>' +
            drawerHTML;
@@ -136,7 +141,7 @@
     var closeBtn = document.querySelector('.mobile-drawer-close');
 
     var isMobile = function () {
-      return window.matchMedia('(max-width: 734px)').matches;
+      return window.matchMedia('(max-width: 834px)').matches;
     };
 
     var setExpanded = function (open) {
@@ -154,7 +159,7 @@
       };
 
       var closeDD = function (delay) {
-        if (closeTimer) { clearTimeout(closeTimer); }
+        if (closeTimer) clearTimeout(closeTimer);
         closeTimer = setTimeout(function () {
           dropdown.classList.remove('is-open');
           if (backdrop) backdrop.classList.remove('is-open');
@@ -187,10 +192,7 @@
       burger.addEventListener('click', function (e) {
         e.preventDefault();
         if (isMobile()) {
-          if (drawer) {
-            drawer.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-          }
+          if (drawer) drawer.classList.add('is-open');
           return;
         }
         toggleDD();
@@ -216,7 +218,6 @@
     if (drawer) {
       var closeDrawer = function () {
         drawer.classList.remove('is-open');
-        document.body.style.overflow = '';
       };
 
       if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
@@ -241,7 +242,6 @@
         setExpanded(false);
       } else {
         if (drawer) drawer.classList.remove('is-open');
-        document.body.style.overflow = '';
       }
     }, { passive: true });
   }
