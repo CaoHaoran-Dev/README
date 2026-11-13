@@ -26,6 +26,13 @@
   "nav.repoFuckLang": "FuckLang Repo",
   "nav.repoRemote": "RemoteLinkKit Repo",
   "nav.repoDemo": "Process WebHub Repo",
+  "nav.community": "Comments",
+
+  "community.title": "Comments — Haoran Cao",
+  "community.h1": "Comments",
+  "community.subhead": "Read what others are saying, or join the conversation.",
+  "community.cta": "Start a discussion on GitHub →",
+  "community.viewAll": "View all discussions on GitHub →",
 
   "footer.rights": "© {year} Haoran Cao. All rights reserved.",
   "footer.language": "Language",

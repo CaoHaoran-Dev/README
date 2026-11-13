@@ -26,6 +26,13 @@
   "nav.repoFuckLang": "FuckLang 仓库",
   "nav.repoRemote": "RemoteLinkKit 仓库",
   "nav.repoDemo": "Process WebHub 仓库",
+  "nav.community": "评论",
+
+  "community.title": "评论 — Haoran Cao",
+  "community.h1": "评论",
+  "community.subhead": "看看大家在聊什么，或者在下方留言。",
+  "community.cta": "在 GitHub 发起新讨论 →",
+  "community.viewAll": "在 GitHub 查看所有讨论 →",
 
   "footer.rights": "© {year} Haoran Cao. 保留所有权利。",
   "footer.language": "语言",

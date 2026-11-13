@@ -1,6 +1,7 @@
 /* 引入 Inter 字体 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=VT323&display=swap');
+
 /* ============================================
    Tokens — Apple.com inspired
    ============================================ */
@@ -30,7 +31,11 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { 
+  scroll-behavior: smooth; 
+  -webkit-text-size-adjust: 100%; 
+  color-scheme: light !important; /* 强制亮色 */
+}
 
 body {
   /* 优先使用苹果系统字体，非苹果设备回退到 Inter */
@@ -165,25 +170,12 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   visibility: visible;
 }
 
-/* 暗色模式适配 */
-@media (prefers-color-scheme: dark) {
-  .nav-dropdown {
-    background: rgba(29, 29, 31, 0.85) !important;
-  }
-}
-
 .nav-dropdown-inner {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 44px 22px 52px;
   position: relative;
   z-index: 2; /* 保证内容在玻璃上方 */
-}
-
-.nav-dropdown-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 44px 22px 52px;
 }
 
 .mega-eyebrow {
@@ -283,12 +275,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  .mobile-drawer {
-    background: rgba(29, 29, 31, 0.75);
-  }
 }
 
 .mobile-drawer.is-open {
@@ -531,7 +517,9 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .detail-specs .row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  align-items: flex-start; /* 防止单边过高时居中导致不齐 */
+  gap: 16px; /* 增加左右间距 */
+  padding: 10px 0;
   font-size: 14px;
 }
 .detail-specs .row .value {
@@ -539,6 +527,20 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   font-size: 13px;
   font-weight: 500;
   color: var(--text);
+  text-align: right;
+  word-break: break-word; /* 允许长文本换行 */
+}
+
+/* 窄屏下的适配 */
+@media (max-width: 600px) {
+  .detail-specs .row {
+    flex-direction: column; /* 变成上下堆叠 */
+    gap: 4px;
+    padding: 12px 0;
+  }
+  .detail-specs .row .value {
+    text-align: left; /* 左对齐更好看 */
+  }
 }
 
 /* ============================================

@@ -12,6 +12,7 @@
 
       var linksHTML =
         '<div class="footer-links">' +
+          '<a href="' + BASE + 'comments/">' + t("nav.community") + '</a>' + // 路径改为 comments/
           '<span class="lang-switch-footer">' +
             '<span class="lang-label">' + t("footer.language") + '</span>' +
             '<a href="#" data-lang="en"'      + (!isZh ? ' class="active"' : '') + '>' + t("footer.english") + '</a>' +

@@ -33,6 +33,7 @@
           { label: t("nav.fucklang"), href: SITE + "projects/fucklang.html" }
         ]},
         { title: t("nav.more"), links: [
+          { label: t("nav.community"),       href: SITE + "comments/" }, // 路径改为 comments/
           { label: t("nav.allProjectsLink"), href: SITE + "projects/" },
           { label: t("nav.stack"),           href: SITE + "#stack" },
           { label: t("nav.about"),           href: SITE + "about/" }
