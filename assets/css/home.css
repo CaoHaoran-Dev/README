@@ -230,6 +230,31 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .bento-image { width: 100%; line-height: 0; overflow: hidden; }
 .bento-image img { width: 100%; display: block; object-fit: cover; box-shadow: none !important; border-radius: 0 !important; }
 
+/* ============================================
+   Stack 模块专用样式
+   ============================================ */
+#stack .bento-card {
+  padding: 60px 40px;
+}
+#stack .bento-card h3 {
+  font-size: 28px;
+  margin-bottom: 0;
+}
+.stack-grid { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 14px; 
+}
+.stack-grid span {
+  font-size: 14px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  color: var(--text);
+  background: #FFFFFF;
+  border: 1px solid var(--divider);
+  padding: 10px 18px;
+  border-radius: 999px;
+}
+
 /* 特色卡片 */
 .force-navy {
   background: linear-gradient(145deg, #0d1526 0%, #060a14 100%) !important;
@@ -306,6 +331,9 @@ a.btn-primary, a.btn-secondary, a.btn-secondary-dark, a.glass, a.btn-dark {
   .desktop-nav, .nav-dropdown { display: none; }
   .mega-grid { grid-template-columns: 1fr; gap: 48px; }
   .mobile-drawer { max-width: none; left: 0; right: 0; }
+  
+  #stack .bento-card { padding: 40px 20px; }
+  #stack .bento-card h3 { font-size: 24px; margin-bottom: 16px; }
 }
 
 /* 关于我 */
