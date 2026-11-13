@@ -782,68 +782,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 }
 
 /* ============================================
-   Split Download Button (复合下载按钮 + 完美毛玻璃)
-   ============================================ */
-.download-container {
-  position: relative;
-  z-index: 10;
-  margin: 32px 0;
-}
-
-/* 按钮主容器 */
-.split-download-group {
-  display: inline-flex;
-  align-items: stretch;
-  border-radius: 980px;
-  background: var(--accent);
-  /* 移除外层的复杂阴影，防止破坏内部元素的图层渲染 */
-  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
-  position: relative;
-}
-
-/* 左侧主下载按钮 */
-.split-btn-main {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 12px 20px 12px 24px !important;
-  white-space: nowrap;
-  color: #FFFFFF !important;
-}
-
-/* 右侧下拉触发区 */
-.split-btn-dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* 下拉箭头按钮 */
-.split-btn-toggle {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 16px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  cursor: pointer;
-  color: #FFFFFF !important;
-}
-
-/* 悬停变深 */
-.split-download-group:hover {
-  background: var(--accent-hover) !important;
-}
-
-/* ============================================
-   复合下载按钮 + 原生选择框
+   复合下载按钮 + 原生选择框 (强制完美适配)
    ============================================ */
 .download-container {
   position: relative;
@@ -857,6 +796,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   border-radius: 980px;
   background: var(--accent);
   box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+  position: relative; /* 确保内部绝对定位准确 */
 }
 
 .split-btn-main {
@@ -868,7 +808,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   padding: 12px 20px 12px 24px !important;
   white-space: nowrap;
   color: #FFFFFF !important;
-  min-width: 200px; /* 防止左侧文字太短显得窄 */
+  min-width: 200px;
   text-align: center;
 }
 
@@ -877,49 +817,48 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-left: 1px solid rgba(255, 255, 255, 0.25);
   border-top-right-radius: 980px;
   border-bottom-right-radius: 980px;
   overflow: hidden;
   width: 48px;
+  min-width: 48px;
+  background: transparent;
 }
 
 .split-btn-dropdown:hover {
   background: var(--accent-hover) !important;
 }
 
-/* 原生 Select 伪装成透明按钮 */
+/* 原生 Select 彻底透明，覆盖在整个方块上 */
 .native-select {
-  appearance: none;
-  -webkit-appearance: none;
-  background: transparent;
-  border: none;
-  color: transparent; /* 隐藏外层文字 */
-  padding: 0;
-  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  opacity: 0; /* 彻底隐藏原生样式，包括文字和边框 */
   cursor: pointer;
-  outline: none;
-  font-size: 17px;
+  font-size: 16px; /* 防止 iOS 缩放 */
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  z-index: 2; /* 确保在箭头之上，可以点击 */
 }
 
-.native-select option {
-  color: var(--text); 
-  background: var(--bg);
-}
-
-/* 自己画一个白色的下拉小箭头 */
+/* 用 CSS 画的纯白下拉箭头（不受系统影响） */
 .split-btn-dropdown::after {
   content: '';
   position: absolute;
-  right: 16px;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 12px;
   height: 12px;
   background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
-  pointer-events: none;
+  pointer-events: none; /* 箭头不阻挡点击 */
+  z-index: 1; /* 在透明的 select 之下 */
 }
