@@ -133,51 +133,51 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .nav-burger:hover span { opacity: 0.6; }
 
 /* ============================================
-   Mega Dropdown — 终极修复版
+   Mega Dropdown — 修复毛玻璃与渲染层级
    ============================================ */
 .nav-dropdown {
   position: fixed;
-  top: var(--nav-height);
+  top: var(--nav-height); /* 贴在导航栏下方 */
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 9999; /* 确保在遮罩层之上 */
   
-  /* 核心毛玻璃 */
-  background: rgba(251, 251, 253, 0.75) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  /* 强制毛玻璃核心：半透明白底 + 高饱和模糊 */
+  background: rgba(251, 251, 253, 0.85) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
   
   border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
   
-  /* 使用 Grid 动画，绝不破坏 GPU 层 */
-  display: grid;
-  grid-template-rows: 0fr;
+  /* 使用 clip-path 做展开动画，绝不破坏 backdrop-filter */
+  clip-path: inset(0 0 100% 0);
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), 
-              opacity 0.3s ease, 
-              visibility 0.4s ease;
+  transition: clip-path 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.3s ease, visibility 0.4s ease;
 }
 
 .nav-dropdown.is-open {
-  grid-template-rows: 1fr;
+  clip-path: inset(0 0 0 0); /* 完全展开 */
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
 }
 
+/* 暗色模式适配 */
 @media (prefers-color-scheme: dark) {
   .nav-dropdown {
-    background: rgba(29, 29, 31, 0.75) !important;
+    background: rgba(29, 29, 31, 0.85) !important;
   }
 }
 
-/* Grid 动画必须配 overflow: hidden 的包裹层 */
-.nav-dropdown-wrap {
-  overflow: hidden;
-  min-height: 0;
+.nav-dropdown-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 44px 22px 52px;
+  position: relative;
+  z-index: 2; /* 保证内容在玻璃上方 */
 }
 
 .nav-dropdown-inner {
@@ -534,10 +534,11 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   padding: 8px 0;
   font-size: 14px;
 }
-.detail-specs .row .label { color: var(--secondary); }
 .detail-specs .row .value {
-  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-family: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace, Menlo, Consolas, monospace;
   font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
 }
 
 /* ============================================
@@ -842,7 +843,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 }
 
 /* ============================================
-   Split Download Button (完整按钮 + 完美毛玻璃)
+   复合下载按钮 + 原生选择框
    ============================================ */
 .download-container {
   position: relative;
@@ -850,7 +851,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   margin: 32px 0;
 }
 
-/* 按钮组 */
 .split-download-group {
   display: inline-flex;
   align-items: stretch;
@@ -868,82 +868,58 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   padding: 12px 20px 12px 24px !important;
   white-space: nowrap;
   color: #FFFFFF !important;
+  min-width: 200px; /* 防止左侧文字太短显得窄 */
+  text-align: center;
 }
 
+/* 右侧选择器容器 */
 .split-btn-dropdown {
+  position: relative;
   display: flex;
   align-items: center;
   border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-top-right-radius: 980px;
+  border-bottom-right-radius: 980px;
+  overflow: hidden;
+  width: 48px;
 }
 
-.split-btn-toggle {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 16px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  cursor: pointer;
-  color: #FFFFFF !important;
-}
-
-.split-download-group:hover {
+.split-btn-dropdown:hover {
   background: var(--accent-hover) !important;
 }
 
-/* ============================================
-   下拉菜单 (悬浮在顶层，绝对定位)
-   ============================================ */
-.split-dropdown-menu {
-  position: fixed; /* 使用 fixed，完全脱离文档流，不受任何父级裁剪 */
-  z-index: 99999 !important;
-  
-  background: rgba(251, 251, 253, 0.7) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 14px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-  padding: 8px 0;
-  min-width: 240px;
-  white-space: nowrap;
-  
-  opacity: 0;
+/* 原生 Select 伪装成透明按钮 */
+.native-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  color: transparent; /* 隐藏外层文字 */
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  font-size: 17px;
+}
+
+.native-select option {
+  color: var(--text); 
+  background: var(--bg);
+}
+
+/* 自己画一个白色的下拉小箭头 */
+.split-btn-dropdown::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s;
-}
-
-.split-dropdown-menu.is-open {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.split-dropdown-menu a {
-  display: block;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text);
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-
-.split-dropdown-menu a:hover {
-  background: var(--accent) !important;
-  color: #FFFFFF !important;
-}
-
-/* 暗色模式适配 */
-@media (prefers-color-scheme: dark) {
-  .split-dropdown-menu {
-    background: rgba(29, 29, 31, 0.7) !important;
-    border-color: rgba(255, 255, 255, 0.1);
-  }
 }
