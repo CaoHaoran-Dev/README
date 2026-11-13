@@ -1,5 +1,8 @@
+/* 引入 Inter 字体 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=VT323&display=swap');
 /* ============================================
-   Tokens
+   Tokens — Apple.com inspired
    ============================================ */
 :root {
   --bg: #FFFFFF;
@@ -26,33 +29,12 @@
   --dropdown-bg: rgba(251, 251, 253, 0.75);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #000000;
-    --bg-alt: #1D1D1F;
-    --text: #F5F5F7;
-    --secondary: #86868B;
-    --accent: #2997FF;
-    --accent-rgb: 41, 151, 255;
-    --accent-hover: #47A9FF;
-    --accent-deep: #6FBCFF;
-    --divider: #424245;
-    --link: #2997FF;
-
-    --glass-bg: rgba(29, 29, 31, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.08);
-
-    --dropdown-bg: rgba(29, 29, 31, 0.75);
-  }
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* 优先使用苹果系统字体，非苹果设备回退到 Inter */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.47059;
