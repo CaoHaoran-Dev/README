@@ -1,38 +1,23 @@
 /* ============================================
-   Home Only — Apple Infinity Grid
+   Home Only — Apple Light Mode Locked
    ============================================ */
 :root {
-  --bg: #ffffff;
-  --bg-alt: #f5f5f7;
-  --text: #1d1d1f;
-  --secondary: #86868b;
-  --accent: #0071e3;
+  --bg: #FBFBFD;          
+  --bg-card: #FFFFFF;     
+  --text: #1D1D1F;        
+  --secondary: #6E6E73;   
+  --accent: #0071E3;
   --accent-rgb: 0, 113, 227;
-  --accent-hover: #0077ed;
-  --divider: #d2d2d7;
+  --accent-hover: #0077ED;
+  --divider: rgba(0, 0, 0, 0.08); 
+  
   --max-width: 1040px;
   --nav-height: 48px;
   --radius-pill: 980px;
-  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg: rgba(251, 251, 253, 0.85);
   --glass-blur: saturate(180%) blur(20px);
-  --glass-border: rgba(0, 0, 0, 0.05);
-  --dropdown-bg: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #000000;
-    --bg-alt: #1d1d1f;
-    --text: #f5f5f7;
-    --secondary: #86868b;
-    --accent: #2997ff;
-    --accent-rgb: 41, 151, 255;
-    --accent-hover: #47a9ff;
-    --divider: #424245;
-    --glass-bg: rgba(0, 0, 0, 0.72);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --dropdown-bg: #1d1d1f;
-  }
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --dropdown-bg: rgba(255, 255, 255, 0.98);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -91,7 +76,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
 
 /* 抽屉 */
-.mobile-drawer { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200; background: var(--bg); opacity: 0; pointer-events: none; transform: translateY(-10px); transition: opacity 0.4s, transform 0.4s; }
+.mobile-drawer { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200; background: #FFFFFF; opacity: 0; pointer-events: none; transform: translateY(-10px); transition: opacity 0.4s, transform 0.4s; }
 .mobile-drawer.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .mobile-drawer-header { display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 22px; border-bottom: 1px solid var(--divider); }
 .mobile-drawer-title { font-size: 14px; font-weight: 600; }
@@ -140,7 +125,7 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   z-index: 1;
 }
 
-/* 🔴 网格容器（移除绝对定位的中轴线，用真实的边框） */
+/* 🔴 网格容器 */
 .bento-grid { 
   display: grid; 
   grid-template-columns: repeat(2, 1fr); 
@@ -151,21 +136,23 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 /* 跨两列 */
 .span-2 { grid-column: span 2; }
 
-/* 卡片基础 */
+/* 🔴 卡片基础 */
 .bento-card {
   padding: 100px 40px; 
   display: flex; 
   justify-content: center;
   position: relative;
-  background: var(--bg);
-  /* 给底部加上边框线 */
+  background: var(--bg-card); 
+  /* 默认给所有卡片加上下边框和右边框 */
   border-bottom: 1px solid var(--divider);
-}
-
-/* 左列有右边框，右列没有 */
-.bento-card:nth-child(odd):not(.span-2) {
   border-right: 1px solid var(--divider);
 }
+
+/* 🔴 关键修复：剔除最右侧卡片的右边框 */
+/* 单列（全宽）不需要右边框 */
+.bento-card.span-2 { border-right: none; }
+/* 双列中的右列（偶数项）不需要右边框 */
+.bento-card:not(.span-2):nth-child(even) { border-right: none; }
 
 /* 最后一行不画底线 */
 .bento-card:nth-last-child(-n+2) { border-bottom: none; }
@@ -183,8 +170,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   pointer-events: none;
   z-index: 1;
 }
-
-/* 最后一行去掉无限延展线 */
 .bento-card:nth-last-child(-n+2)::before { display: none; }
 
 /* 卡片内部容器 */
@@ -217,38 +202,144 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .bento-image {
   width: 100%;
   line-height: 0;
+  overflow: hidden; 
 }
 .bento-image img {
   width: 100%;
   display: block;
   object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-}
-@media (prefers-color-scheme: dark) {
-  .bento-image img { box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+  box-shadow: none !important;
+  border-radius: 0 !important; 
 }
 
-/* --- 主题控制 --- */
-.force-dark { background: #000000 !important; color: #ffffff !important; }
-.force-dark h3, .force-dark .tagline { color: #ffffff !important; }
-.force-dark .btn-secondary { background: rgba(255, 255, 255, 0.15) !important; color: #ffffff !important; }
+/* ============================================
+   🔴 特色内容块
+   ============================================ */
 
-.force-light { background: #f5f5f7 !important; }
-.force-light h3, .force-light .tagline { color: #1d1d1f !important; }
+/* 1. RunProcess：极暗海军蓝 + 光效 */
+.force-navy { 
+  background: linear-gradient(145deg, #0d1526 0%, #060a14 100%) !important; 
+  color: #F5F5F7 !important; 
+  position: relative;
+  overflow: hidden; 
+  border: 1px solid rgba(255, 255, 255, 0.05) !important; 
+}
+.force-navy::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 80%; height: 150%;
+  background: radial-gradient(circle, rgba(56, 118, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.force-navy::after {
+  content: '';
+  position: absolute;
+  bottom: -50%; right: -20%;
+  width: 80%; height: 150%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.force-navy .bento-inner { position: relative; z-index: 2; }
+.force-navy h3, .force-navy .tagline { color: #F5F5F7 !important; }
 
-.auto-theme { background: var(--bg-alt) !important; }
+/* 2. FuckLang：深空灰 */
+.force-dark { 
+  background: #161617 !important; 
+  color: #F5F5F7 !important; 
+}
+.force-dark h3, .force-dark .tagline { color: #F5F5F7 !important; }
 
-/* --- 移动端适配 --- */
+/* 3. ProcessSH：浅灰 */
+.force-light { 
+  background: #F5F5F7 !important; 
+  color: #1D1D1F !important; 
+}
+.force-light h3, .force-light .tagline { color: #1D1D1F !important; }
+
+/* 4. Swift Zip & RemoteLinkKit：纯白 */
+.auto-theme { 
+  background: #FFFFFF !important; 
+}
+
+
+/* ============================================
+   🔴 终极苹果按钮体系 (完美锁死)
+   ============================================ */
+
+/* 统一基本形态 */
+.btn-primary, .btn-secondary, .btn-secondary-dark, .glass, .btn-dark, a.btn-primary, a.btn-secondary, a.btn-secondary-dark, a.glass, a.btn-dark {
+  display: inline-flex !important; 
+  align-items: center; 
+  justify-content: center;
+  padding: 12px 24px !important; 
+  border-radius: var(--radius-pill) !important;
+  font-size: 17px !important; 
+  font-weight: 400 !important; 
+  text-decoration: none !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s !important; 
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 1. 实心蓝主按钮 (See Projects / 进一步了解) */
+.btn-primary, a.btn-primary, .btn-dark, a.btn-dark { 
+  background-color: #0071E3 !important; 
+  color: #FFFFFF !important; 
+  border: 1px solid #0071E3 !important; 
+}
+.btn-primary:hover, a.btn-primary:hover, .btn-dark:hover, a.btn-dark:hover { 
+  background-color: #0077ED !important; 
+  border-color: #0077ED !important;
+  text-decoration: none !important;
+}
+
+/* 2. 空心蓝次按钮 (GitHub / 白色背景中的其他按钮) */
+.btn-secondary, a.btn-secondary, .glass, a.glass { 
+  background-color: transparent !important; 
+  color: #0071E3 !important; 
+  border: 1px solid #0071E3 !important; 
+}
+/* 悬停：填满蓝色 */
+.btn-secondary:hover, a.btn-secondary:hover, .glass:hover, a.glass:hover { 
+  background-color: #0071E3 !important; 
+  color: #FFFFFF !important; 
+  text-decoration: none !important;
+}
+
+/* 3. 深色背景专属空心按钮 (RunProcess 深蓝块中的"下载") */
+.btn-secondary-dark, a.btn-secondary-dark {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+/* 悬停：直接变主按钮同款亮蓝 */
+.btn-secondary-dark:hover, a.btn-secondary-dark:hover {
+  background-color: #0071E3 !important;
+  border-color: #0071E3 !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+/* ============================================
+   移动端适配
+   ============================================ */
 @media (max-width: 834px) {
-  .hero h1 { font-size: 56px; } .hero .subhead { font-size: 24px; }
+  .hero { padding: 100px 22px 60px; }
+  .hero h1 { font-size: 56px; } 
+  .hero .subhead { font-size: 24px; }
+  .section-header { padding: 40px 22px 20px; }
+  .section-header h2 { font-size: 36px; }
+  
   .bento-grid { grid-template-columns: 1fr; }
   
-  /* 移动端隐藏延展线，去掉右边框 */
   .section-title-wrap::after,
   .bento-card::before { display: none; }
   
-  .bento-card:nth-child(odd):not(.span-2) { border-right: none; }
+  /* 移动端所有卡片取消右边框 */
+  .bento-card, .bento-card.span-2, .bento-card:not(.span-2):nth-child(even) { border-right: none; }
   
   .span-2, .bento-inner, .span-2-inner { grid-column: span 1; max-width: 100%; }
   
@@ -259,6 +350,9 @@ body.drawer-open { overflow: hidden; touch-action: none; }
   .bento-card:last-child { border-bottom: none; }
   
   .bento-card h3 { font-size: 32px; }
+  .bento-card .tagline { font-size: 17px; }
+  .bento-content { margin-bottom: 32px; }
+
   .desktop-nav, .nav-dropdown { display: none; }
   .mega-grid { grid-template-columns: 1fr; gap: 48px; }
 }
@@ -267,18 +361,6 @@ body.drawer-open { overflow: hidden; touch-action: none; }
 .section.alt .section-inner { text-align: center; max-width: 680px; }
 .section.alt h2 { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 24px; }
 .section.alt p { font-size: 21px; color: var(--secondary); line-height: 1.5; margin-bottom: 40px; }
-
-/* --- 全局按钮 --- */
-.btn-primary, .btn-secondary, .glass, .btn-dark, a.btn-primary, a.btn-secondary, a.glass, a.btn-dark {
-  display: inline-flex !important; align-items: center; justify-content: center;
-  padding: 12px 24px !important; border-radius: var(--radius-pill) !important;
-  font-size: 17px !important; font-weight: 500 !important; text-decoration: none !important;
-  border: none !important; box-shadow: none !important; transition: background 0.3s, transform 0.2s; cursor: pointer;
-}
-.btn-primary, a.btn-primary, .btn-dark, a.btn-dark { background: var(--accent) !important; color: #ffffff !important; }
-.btn-primary:hover, a.btn-primary:hover, .btn-dark:hover, a.btn-dark:hover { background: var(--accent-hover) !important; transform: scale(1.02); }
-.btn-secondary, a.btn-secondary, .glass, a.glass { background: rgba(var(--accent-rgb), 0.1) !important; color: var(--accent) !important; }
-.btn-secondary:hover, a.btn-secondary:hover, .glass:hover, a.glass:hover { background: rgba(var(--accent-rgb), 0.2) !important; transform: scale(1.02); }
 
 /* --- Footer --- */
 .site-footer { background: var(--bg-alt); border-top: 1px solid var(--divider); padding: 64px 22px; text-align: center; }
